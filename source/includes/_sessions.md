@@ -51,5 +51,5 @@ Remember — don't forget to include your API key in the `Authorization` header!
 ```python
 import python
 
-python.magic()
+print python.magic()
 ```
