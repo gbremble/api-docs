@@ -228,12 +228,20 @@
             <a href="#sessions" class="toc-h1 toc-link" data-title="Sessions">Sessions</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#updating-sessions" class="toc-h2 toc-link" data-title="Sessions">Updating Sessions</a>
+                    <a href="#get-all-sessions-for-your-guide" class="toc-h2 toc-link" data-title="Sessions">Get All Sessions for your Guide</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-specific-session" class="toc-h2 toc-link" data-title="Sessions">Get a Specific Session</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#custom-lists" class="toc-h1 toc-link" data-title="Custom Lists">Custom Lists</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-custom-lists-for-your-guide" class="toc-h2 toc-link" data-title="Custom Lists">Get All Custom Lists for your Guide</a>
+                  </li>
+              </ul>
           </li>
       </div>
         <ul class="toc-footer">
@@ -251,77 +259,72 @@
 <p>To authorize, use this code:</p>
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/'</span>
-<span class="n">api</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span><span class="p">)</span>
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/example_api/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'JWT API_KEY'</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
 </code></pre>
 <blockquote>
-<p>Insert warning message here.</p>
+<p>You must replace <code>JWT API_KEY</code> with your personal API key.</p>
 </blockquote>
 
-<p>Guidebook offers an REST API to easily manager your data.  Once you have your API key, all API calls need to have the API key included in a header that looks like the following:</p>
+<p>Guidebook offers an REST API to easily manage your data.  Once you have your API key, all API calls need to have the API key included in a header that looks like the following:</p>
 
 <p><code>Authorization: JWT API_KEY</code></p>
 
 <aside class="notice">
 You must replace <code>JWT API_KEY</code> with your personal API key.
 </aside>
-<h1 id='sessions'>Sessions</h1><h2 id='updating-sessions'>Updating Sessions</h2><h1 id='errors'>Errors</h1>
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+<h1 id='sessions'>Sessions</h1><h2 id='get-all-sessions-for-your-guide'>Get All Sessions for your Guide</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<p>The Kittn API uses the following error codes:</p>
-
+<span class="n">some_fake_python</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session_url</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Interesting Session"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This session is awesome"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-09"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datetime string"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Interesting Session #2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This session is even better"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-09"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datetime string"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all sessions.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://builder.guidebook.com/open-api/v1/sessions</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request sucks.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>guide_id</td>
+<td>yes</td>
+<td>integer</td>
+<td>The specific guide you want to fetch session data for</td>
 </tr>
 </tbody></table>
 
+<aside class="success">
+Remember — don't forget to include your API key in the `Authorization` header!
+</aside>
+<h2 id='get-a-specific-session'>Get a Specific Session</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">python</span>
+
+<span class="n">python</span><span class="o">.</span><span class="n">magic</span><span class="p">()</span>
+</code></pre><h1 id='custom-lists'>Custom Lists</h1><h2 id='get-all-custom-lists-for-your-guide'>Get All Custom Lists for your Guide</h2>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
