@@ -18,4 +18,4 @@ search: true
 
 # Introduction
 
-Welcome to the Guidebook Open Api!  This is where you can learn how to leverage our API to import your data.
+Welcome to the Guidebook Open Api!  This is where you can learn how to leverage our API to import your data. CZ
