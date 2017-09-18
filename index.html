@@ -228,10 +228,7 @@
             <a href="#sessions" class="toc-h1 toc-link" data-title="Sessions">Sessions</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-sessions-for-your-guide" class="toc-h2 toc-link" data-title="Sessions">Get All Sessions for your Guide</a>
-                  </li>
-                  <li>
-                    <a href="#get-a-specific-session" class="toc-h2 toc-link" data-title="Sessions">Get a Specific Session</a>
+                    <a href="#how-to-create-a-session" class="toc-h2 toc-link" data-title="Sessions">How to Create a Session</a>
                   </li>
               </ul>
           </li>
@@ -239,7 +236,7 @@
             <a href="#custom-lists" class="toc-h1 toc-link" data-title="Custom Lists">Custom Lists</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-custom-lists-for-your-guide" class="toc-h2 toc-link" data-title="Custom Lists">Get All Custom Lists for your Guide</a>
+                    <a href="#fetch-all-custom-lists-for-your-guide" class="toc-h2 toc-link" data-title="Custom Lists">Fetch All Custom Lists for your guide</a>
                   </li>
               </ul>
           </li>
@@ -274,57 +271,57 @@
 <aside class="notice">
 You must replace <code>JWT API_KEY</code> with your personal API key.
 </aside>
-<h1 id='sessions'>Sessions</h1><h2 id='get-all-sessions-for-your-guide'>Get All Sessions for your Guide</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h1 id='sessions'>Sessions</h1><h2 id='how-to-create-a-session'>How to Create a Session</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">some_fake_python</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session_url</span><span class="p">)</span>
+<span class="n">session_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/session/'</span>
+<span class="n">post_data</span> <span class="o">=</span>
+<span class="p">{</span>
+    <span class="s">"start_time"</span><span class="p">:</span> <span class="s">"2017-09-18T16:00:00"</span><span class="p">,</span>
+    <span class="s">"end_time"</span><span class="p">:</span> <span class="s">"2017-09-18T17:00:00"</span><span class="p">,</span>
+    <span class="s">"guide"</span><span class="p">:</span> <span class="s">"1"</span><span class="p">,</span>
+    <span class="s">"description_html"</span><span class="p">:</span> <span class="s">"&lt;p&gt;This is a description field that supports basical HTML&lt;/p&gt;"</span><span class="p">,</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"Test Session Created via Open API"</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">session_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Interesting Session"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This session is awesome"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-09"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datetime string"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Interesting Session #2"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This session is even better"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-09"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datetime string"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all sessions.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://builder.guidebook.com/open-api/v1/sessions</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>guide_id</td>
-<td>yes</td>
-<td>integer</td>
-<td>The specific guide you want to fetch session data for</td>
-</tr>
-</tbody></table>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">106</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:13:25.766623+0000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:13:25.766653+0000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T16:00:00.000000+0000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T17:00:00.000000+0000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"all_day"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Session Created via Open API"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;This is a description field that supports basical HTML&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"add_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="err">```</span><span class="w">
 
-<aside class="success">
-Remember — don't forget to include your API key in the `Authorization` header!
-</aside>
-<h2 id='get-a-specific-session'>Get a Specific Session</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">python</span>
+</span><span class="err">This</span><span class="w"> </span><span class="err">endpoint</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">create</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">session</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">your</span><span class="w"> </span><span class="err">guide.</span><span class="w">
 
-<span class="k">print</span> <span class="n">python</span><span class="o">.</span><span class="n">magic</span><span class="p">()</span>
-</code></pre><h1 id='custom-lists'>Custom Lists</h1><h2 id='get-all-custom-lists-for-your-guide'>Get All Custom Lists for your Guide</h2>
+</span><span class="err">###</span><span class="w"> </span><span class="err">HTTP</span><span class="w"> </span><span class="err">Request</span><span class="w">
+
+</span><span class="err">`POST</span><span class="w"> </span><span class="err">http</span><span class="p">:</span><span class="err">//builder.guidebook.com/open-api/v</span><span class="mi">1</span><span class="err">/session/`</span><span class="w">
+
+</span><span class="err">###</span><span class="w"> </span><span class="err">Model</span><span class="w"> </span><span class="err">Fields</span><span class="w">
+
+</span><span class="err">Parameter</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Required</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Type</span><span class="w">    </span><span class="err">|</span><span class="w"> </span><span class="err">Description</span><span class="w">
+</span><span class="err">---------</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">--------</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">-------</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">-----------</span><span class="w">
+</span><span class="err">guide_id</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="err">yes</span><span class="w">      </span><span class="err">|</span><span class="w"> </span><span class="err">integer</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">specific</span><span class="w"> </span><span class="err">guide</span><span class="w"> </span><span class="err">your</span><span class="w"> </span><span class="err">session</span><span class="w"> </span><span class="err">belongs</span><span class="w"> </span><span class="err">to</span><span class="w">
+
+</span><span class="err">&lt;aside</span><span class="w"> </span><span class="err">class=</span><span class="s2">"success"</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">Remember</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="err">don't</span><span class="w"> </span><span class="err">forget</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">include</span><span class="w"> </span><span class="err">your</span><span class="w"> </span><span class="err">API</span><span class="w"> </span><span class="err">key</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">`Authorization`</span><span class="w"> </span><span class="err">header!</span><span class="w">
+</span><span class="err">&lt;/aside&gt;</span><span class="w">
+</span></code></pre><h1 id='custom-lists'>Custom Lists</h1><h2 id='fetch-all-custom-lists-for-your-guide'>Fetch All Custom Lists for your guide</h2>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
