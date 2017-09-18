@@ -1,3 +1,3 @@
 # Custom Lists
 
-## Get All Custom Lists for your Guide
+## Fetch All Custom Lists for your guide
