@@ -42,6 +42,8 @@ response = request.post(session_url, data=post_data)
 }
 ```
 
+
+
 This endpoint will create a session for your guide.
 
 ### HTTP Request
