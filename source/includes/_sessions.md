@@ -55,6 +55,8 @@ This endpoint will create a session for your guide.
 Parameter | Required | Type    | Description
 --------- | -------- | ------- | -----------
 guide_id  | yes      | integer | The specific guide your session belongs to
+name      | yes      | string  | The title of your session
+description_html| yest | string | A text description of the session.  This field supports basic HTML.
 
 <aside class="success">
 Remember — don't forget to include your API key in the `Authorization` header!
