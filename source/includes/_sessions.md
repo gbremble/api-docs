@@ -16,6 +16,7 @@ post_data =
 	"name": "Test Session Created via Open API"
 }
 response = request.post(session_url, data=post_data)
+
 ```
 
 > The above command returns JSON structured like this:
@@ -38,7 +39,8 @@ response = request.post(session_url, data=post_data)
 	"guide": 1,
 	"schedule_tracks": [],
 	"locations": []
-}```
+}
+```
 
 This endpoint will create a session for your guide.
 
