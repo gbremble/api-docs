@@ -52,12 +52,28 @@ This endpoint will create a session for your guide.
 
 ### Model Fields
 
-Parameter | Required | Type    | Description
---------- | -------- | ------- | -----------
-guide_id  | yes      | integer | The specific guide your session belongs to
-name      | yes      | string  | The title of your session
-description_html| yest | string | A text description of the session.  This field supports basic HTML.
+Parameter       | Required  | Type    | Description
+---------       | --------  | ------- | -----------
+guide           | yes | integer  | The specific guide your session belongs to
+name            | yes | string   | The title of your session
+description_html| yes | string   | A text description of the session.  This field supports basic HTML.
+start_time      | yes | datetime | The start time of the event
+end_time        | no  | datetime | The end time of the event.  Optional.  Leave blank for all day events
+all_day         | no  | boolean  | A boolean value indicating if a session runs for the entire day
+allow_rating    | no  | boolean  |
 
 <aside class="success">
 Remember — don't forget to include your API key in the `Authorization` header!
 </aside>
+
+
+
+
+	"image": null,
+	"thumbnail": null,
+	"import_id": null,
+	"allow_rating": false,
+	"add_to_schedule": false,
+	"guide": 1,
+	"schedule_tracks": [],
+	"locations": []
