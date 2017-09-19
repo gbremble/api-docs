@@ -236,7 +236,7 @@
             <a href="#custom-lists" class="toc-h1 toc-link" data-title="Custom Lists">Custom Lists</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#fetch-all-custom-lists-for-your-guide" class="toc-h2 toc-link" data-title="Custom Lists">Fetch All Custom Lists for your guide</a>
+                    <a href="#how-to-create-a-custom-list" class="toc-h2 toc-link" data-title="Custom Lists">How to Create a Custom List</a>
                   </li>
               </ul>
           </li>
@@ -320,7 +320,7 @@ You must replace <code>JWT API_KEY</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>guide_id</td>
+<td>guide</td>
 <td>yes</td>
 <td>integer</td>
 <td>The specific guide your session belongs to</td>
@@ -333,21 +333,49 @@ You must replace <code>JWT API_KEY</code> with your personal API key.
 </tr>
 <tr>
 <td>description_html</td>
-<td>yest</td>
+<td>yes</td>
 <td>string</td>
 <td>A text description of the session.  This field supports basic HTML.</td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>yes</td>
+<td>datetime</td>
+<td>The start time of the event</td>
+</tr>
+<tr>
+<td>end_time</td>
+<td>no</td>
+<td>datetime</td>
+<td>The end time of the event.  Optional.  Leave blank for all day events</td>
+</tr>
+<tr>
+<td>all_day</td>
+<td>no</td>
+<td>boolean</td>
+<td>A boolean value indicating if a session runs for the entire day</td>
+</tr>
+<tr>
+<td>allow_rating</td>
+<td>no</td>
+<td>boolean</td>
+<td></td>
 </tr>
 </tbody></table>
 
 <aside class="success">
 Remember — don't forget to include your API key in the `Authorization` header!
 </aside>
-<h1 id='custom-lists'>Custom Lists</h1><h2 id='fetch-all-custom-lists-for-your-guide'>Fetch All Custom Lists for your guide</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://google.com'</span><span class="p">)</span>
-</code></pre>
-<p>Regular text</p>
-
+<p>&quot;image&quot;: null,
+    &quot;thumbnail&quot;: null,
+    &quot;import_id&quot;: null,
+    &quot;allow_rating&quot;: false,
+    &quot;add_to_schedule&quot;: false,
+    &quot;guide&quot;: 1,
+    &quot;schedule_tracks&quot;: [],
+    &quot;locations&quot;: []</p>
+<h1 id='custom-lists'>Custom Lists</h1><h2 id='how-to-create-a-custom-list'>How to Create a Custom List</h2>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
