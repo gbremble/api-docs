@@ -77,7 +77,7 @@ main() {
   enable_expanded_output
 
   echo 'HELLLOOOOOOOOO'
-  echo $CURRENT_VERSION
+  echo '$deploy_directory/$CURRENT_VERSION.html'
   echo 'HELLLOOOOOOOOO'
 
 
