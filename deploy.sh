@@ -81,8 +81,6 @@ main() {
     cp "$deploy_directory"/"$CURRENT_VERSION".html "$deploy_directory"/index.html
   fi
 
-  return 1
-
   enable_expanded_output
 
   if ! git diff --exit-code --quiet --cached; then
