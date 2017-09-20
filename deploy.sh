@@ -78,8 +78,7 @@ main() {
     echo 'Deploying a versioned html file only...'
   else
     echo 'Deploying a versioned html file and also updating the current index.html'
-    echo "$deploy_directory"/"$CURRENT_VERSION".html
-    echo 'HELLLOOOOOOOOO'
+    cp "$deploy_directory"/"$CURRENT_VERSION".html "$deploy_directory"/index.html
   fi
 
   return 1
