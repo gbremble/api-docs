@@ -77,8 +77,8 @@ main() {
   if [ -z "$CURRENT_VERSION" ]; then
     echo 'Deploying a versioned html file only...'
   else
-    echo 'Deploying a versioned html file only and also updating the current index.html'
-    echo "'$deploy_directory'/'$CURRENT_VERSION'.html"
+    echo 'Deploying a versioned html file and also updating the current index.html'
+    echo "$deploy_directory"/"$CURRENT_VERSION".html
     echo 'HELLLOOOOOOOOO'
   fi
 
