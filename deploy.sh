@@ -74,12 +74,13 @@ parse_args() {
 main() {
   parse_args "$@"
 
+  if $CURRENT_VERSION; then
+    echo 'HELLLOOOOOOOOO'
+    echo "'$deploy_directory'/'$CURRENT_VERSION'.html"
+    echo 'HELLLOOOOOOOOO'
+  fi
+
   enable_expanded_output
-
-  echo 'HELLLOOOOOOOOO'
-  echo "'$deploy_directory'/'$CURRENT_VERSION'.html"
-  echo 'HELLLOOOOOOOOO'
-
 
   if ! git diff --exit-code --quiet --cached; then
     echo Aborting due to uncommitted changes in the index >&2
