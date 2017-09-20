@@ -74,11 +74,15 @@ parse_args() {
 main() {
   parse_args "$@"
 
-  if $CURRENT_VERSION; then
-    echo 'HELLLOOOOOOOOO'
+  if [ -z "$CURRENT_VERSION" ]; then
+    echo 'Deploying a versioned html file only...'
+  else
+    echo 'Deploying a versioned html file only and also updating the current index.html'
     echo "'$deploy_directory'/'$CURRENT_VERSION'.html"
     echo 'HELLLOOOOOOOOO'
   fi
+
+  return 1
 
   enable_expanded_output
 
