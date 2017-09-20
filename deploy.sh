@@ -15,6 +15,7 @@ Options:
                            deploy branch.
   -n, --no-hash            Don't append the source commit's hash to the deploy
                            commit's message.
+  --version                Specify Version
 "
 
 bundle exec middleman build --clean
@@ -44,6 +45,9 @@ parse_args() {
     elif [[ $1 = "-n" || $1 = "--no-hash" ]]; then
       GIT_DEPLOY_APPEND_HASH=false
       shift
+    elif [[ $1 = "--version" && -n $2 ]]; then
+      VERSION=$2
+      shift 2
     else
       break
     fi
@@ -71,6 +75,9 @@ main() {
   parse_args "$@"
 
   enable_expanded_output
+
+  echo 'hello'
+  echo $VERSION
 
   if ! git diff --exit-code --quiet --cached; then
     echo Aborting due to uncommitted changes in the index >&2
