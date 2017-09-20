@@ -45,8 +45,8 @@ parse_args() {
     elif [[ $1 = "-n" || $1 = "--no-hash" ]]; then
       GIT_DEPLOY_APPEND_HASH=false
       shift
-    elif [[ $1 = "--version" && -n $2 ]]; then
-      VERSION=$2
+    elif [[ ( $1 = "-c" || $1 = "--current" ) && -n $2 ]]; then
+      CURRENT_VERSION=$2
       shift 2
     else
       break
@@ -76,8 +76,10 @@ main() {
 
   enable_expanded_output
 
-  echo 'hello'
-  echo $VERSION
+  echo 'HELLLOOOOOOOOO'
+  echo $CURRENT_VERSION
+  echo 'HELLLOOOOOOOOO'
+
 
   if ! git diff --exit-code --quiet --cached; then
     echo Aborting due to uncommitted changes in the index >&2

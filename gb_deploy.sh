@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
-message=${0}
+VERSION=${1}
 git pull
 git add -A
-git commit -m "$message"
+git commit -m "Updating Documentation"
 git push
-./deploy.sh
+
+
+#!/usr/bin/env bash
+version=${1}
+if [ -z "$version" ]; then
+	./deploy.sh
+else
+	./deploy.sh --current $version
+fi
+
+
+
