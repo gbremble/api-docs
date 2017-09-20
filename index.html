@@ -278,9 +278,9 @@ You must replace <code>JWT API_KEY</code> with your personal API key.
 <span class="p">{</span>
     <span class="s">"start_time"</span><span class="p">:</span> <span class="s">"2017-09-18T16:00:00"</span><span class="p">,</span>
     <span class="s">"end_time"</span><span class="p">:</span> <span class="s">"2017-09-18T17:00:00"</span><span class="p">,</span>
-    <span class="s">"guide"</span><span class="p">:</span> <span class="s">"1"</span><span class="p">,</span>
-    <span class="s">"description_html"</span><span class="p">:</span> <span class="s">"&lt;p&gt;This is a description field that supports basical HTML&lt;/p&gt;"</span><span class="p">,</span>
-    <span class="s">"name"</span><span class="p">:</span> <span class="s">"Test Session Created via Open API"</span>
+    <span class="s">"guide"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"description_html"</span><span class="p">:</span> <span class="s">"&lt;p&gt;This is a description field that supports basic HTML&lt;/p&gt;"</span><span class="p">,</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"Test Session Created via the Open API"</span>
 <span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">session_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
 
@@ -295,8 +295,8 @@ You must replace <code>JWT API_KEY</code> with your personal API key.
     </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T16:00:00.000000+0000"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T17:00:00.000000+0000"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"all_day"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Session Created via Open API"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;This is a description field that supports basical HTML&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Session Created via the Open API"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;This is a description field that supports basic HTML&lt;/p&gt;"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -347,7 +347,7 @@ You must replace <code>JWT API_KEY</code> with your personal API key.
 <td>end_time</td>
 <td>no</td>
 <td>datetime</td>
-<td>The end time of the event.  Optional.  Leave blank for all day events</td>
+<td>The end time of the event.  Leave blank for all day events</td>
 </tr>
 <tr>
 <td>all_day</td>
@@ -359,22 +359,49 @@ You must replace <code>JWT API_KEY</code> with your personal API key.
 <td>allow_rating</td>
 <td>no</td>
 <td>boolean</td>
-<td></td>
+<td>A boolean value indicating if end-users can rate this session</td>
+</tr>
+<tr>
+<td>add_to_schedule</td>
+<td>no</td>
+<td>boolean</td>
+<td>A boolean</td>
+</tr>
+<tr>
+<td>image</td>
+<td>no</td>
+<td>image file</td>
+<td>Image file displayed above the session descripion in the app</td>
+</tr>
+<tr>
+<td>thumbnail</td>
+<td>no</td>
+<td>image file</td>
+<td>Image file displayed in list views of the schedule</td>
+</tr>
+<tr>
+<td>import_id</td>
+<td>no</td>
+<td>string</td>
+<td>Used for stuff</td>
+</tr>
+<tr>
+<td>schedule_tracks</td>
+<td>no</td>
+<td>list of integers</td>
+<td>Stuff</td>
+</tr>
+<tr>
+<td>locations</td>
+<td>non</td>
+<td>list of integers</td>
+<td>Stuff</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
 Remember — don't forget to include your API key in the `Authorization` header!
 </aside>
-
-<p>&quot;image&quot;: null,
-    &quot;thumbnail&quot;: null,
-    &quot;import_id&quot;: null,
-    &quot;allow_rating&quot;: false,
-    &quot;add_to_schedule&quot;: false,
-    &quot;guide&quot;: 1,
-    &quot;schedule_tracks&quot;: [],
-    &quot;locations&quot;: []</p>
 <h1 id='custom-lists'>Custom Lists</h1><h2 id='how-to-create-a-custom-list'>How to Create a Custom List</h2>
       </div>
       <div class="dark-box">
