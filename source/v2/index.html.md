@@ -18,6 +18,6 @@ search: true
 
 # Introduction
 
-Welcome to the Guidebook Open API!
+Welcome to the Guidebook Open API! THIS IS V2 of the INDEX API
 
 
