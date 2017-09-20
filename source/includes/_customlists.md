@@ -1,3 +1,13 @@
 # Custom Lists
 
-## How to Create a Custom List
+## Fetch All Custom Lists for your guide
+
+
+```python
+import requests
+
+requests.get('https://google.com')
+```
+
+Regular text
+
