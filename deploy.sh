@@ -15,7 +15,7 @@ Options:
                            deploy branch.
   -n, --no-hash            Don't append the source commit's hash to the deploy
                            commit's message.
-  --version                Specify Version
+  -c, --current            Specify Current version for index.html
 "
 
 bundle exec middleman build --clean
