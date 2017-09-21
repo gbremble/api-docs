@@ -1,14 +1,5 @@
 # Pagination
 
-If a resource supports listing, a data structure will be returned with several key attributes:
-
-Attribute Name  | Type      | Description
----------       | --------  | -------
-count           | integer   | Total number of available resources
-next            | string    | URL to retrieve the next page of resources
-previous        | string    | URL to retrieve the previous page of resources   
-results         | array     | Representation of the resources in this page
-
 
 ```
 {
@@ -29,3 +20,13 @@ results         | array     | Representation of the resources in this page
   ]
 }
 ```
+
+
+If a resource supports listing, a data structure will be returned with several key attributes:
+
+Attribute Name  | Type      | Description
+---------       | --------  | -------
+count           | integer   | Total number of available resources
+next            | string    | URL to retrieve the next page of resources
+previous        | string    | URL to retrieve the previous page of resources   
+results         | array     | Representation of the resources in this page
