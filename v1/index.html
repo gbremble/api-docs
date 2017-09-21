@@ -263,16 +263,45 @@
 
 <p>Here are, for example, some typical response codes you might encounter:</p>
 
-<p>Code     |            | Description
----------             | --------<br>
-200                   | OK. Request received and processed successfully
-201                   | Created. The request has been fulfilled and has resulted in one or more new resources being created
-400                   | Bad request. The request is malformed and has not been accepted
-401                   | Unauthorized. Your API Key was rejected
-403                   | Forbidden. You do not have permission to perform that action
-404                   | Not found. The requested URL is not found on the server
-429                   | Too many requests. You have hit the Open API too quickly
-500, 502, 503, 504    | Server error. Ooops, something is wrong at Guidebook. Please try again later</p>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Request received and processed successfully</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created. The request has been fulfilled and has resulted in one or more new resources being created</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request. The request is malformed and has not been accepted</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized. Your API Key was rejected</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden. You do not have permission to perform that action</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not found. The requested URL is not found on the server</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too many requests. You have hit the Open API too quickly</td>
+</tr>
+<tr>
+<td>500, 502, 503, 504</td>
+<td>Server error. Something is wrong on Guidebook&#39;s end. Please try again later</td>
+</tr>
+</tbody></table>
 <h1 id='versioning'>Versioning</h1>
 <p>New versions of the Guidebook Open API will be released when Guidebook makes backwards incompatible changes to how resources are manipulated or represented. New versions of the Guidebook Open API will include new urls for accessing resources; for example in v1 (&quot;version 1&quot;) <code>Session</code> objects are accessed at <code>https://builder.guidebook.com/open-api/v1/sessions/</code>, but in v2 <code>Session</code> objects <em>might</em> be accessed at a url like <code>https://builder.guidebook.com/open-api/v2/sessions/</code>.</p>
 
