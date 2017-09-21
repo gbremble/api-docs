@@ -231,6 +231,9 @@
             <a href="#pagination" class="toc-h1 toc-link" data-title="Pagination">Pagination</a>
           </li>
           <li>
+            <a href="#guides" class="toc-h1 toc-link" data-title="Guides">Guides</a>
+          </li>
+          <li>
             <a href="#sessions" class="toc-h1 toc-link" data-title="Sessions">Sessions</a>
               <ul class="toc-list-h2">
                   <li>
@@ -271,13 +274,13 @@
 </ul>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
-<p>Example request that includes authentication</p>
+<p>Example request that includes authentication:</p>
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/sessions/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
-<span class="n">api_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">)</span>
+<span class="n">api_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 </code></pre>
 <blockquote>
 <p>You must replace the value assigned to <code>api_key</code> with your personal API key.</p>
@@ -312,7 +315,7 @@ You must replace <code>API_KEY</code> with your personal API key.
   ]
 }
 </code></pre>
-<p>If a resource supports listing, a data structure will be returned with several key attributes:</p>
+<p>If a resource supports listing itself, a data structure will be returned with several key attributes related to pagination:</p>
 
 <table><thead>
 <tr>
@@ -342,6 +345,12 @@ You must replace <code>API_KEY</code> with your personal API key.
 <td>Representation of the resources in this page</td>
 </tr>
 </tbody></table>
+
+<p><code>next</code> will be <code>null</code> if no additional resources are available (you have reached the last page).</p>
+<h1 id='guides'>Guides</h1>
+<p>Many of the resources exposed by the Guidebook Open API relate to a class of objects called <code>Guide</code>. <code>Guide</code> objects, typically, are containers for the set of data related to an event like a conference. For example, if you were hosting a conference called, &quot;Programmer Summit 2017&quot; you would likely have one <code>Guide</code> object that contained the schedule for the conference, a list of speakers for that conference, and a list of users who you expect to attend the conference.</p>
+
+<p>As of right now, <code>Guide</code> objects themselves are primarily managed via the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a> (and not via the Open API). Resources exposed by the Open API, however, will contain references to the id of <code>Guide</code> objects they belong to. For example, every <code>Session</code> object returned in the Open API will report the id of the one <code>Guide</code> that <code>Session</code> belongs to (e.g. <code>&quot;guide&quot;: 1</code>). In general, resources cannot be transferred or otherwise shared amongst more than one <code>Guide</code> -- once a <code>Session</code> is created under a given <code>Guide</code> object, it lives under that <code>Guide</code> permanently and cannot be moved to a different <code>Guide</code>.</p>
 <h1 id='sessions'>Sessions</h1><h2 id='how-to-create-a-session'>How to Create a Session</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">session_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/session/'</span>
