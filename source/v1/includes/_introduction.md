@@ -4,7 +4,7 @@ Guidebook offers a REST API to manage a subset of the resources available in the
 
 Here are, for example, some typical response codes you might encounter:
 
-Code     |            | Description
+Code                  | Description
 ---------             | --------  
 200                   | OK. Request received and processed successfully
 201                   | Created. The request has been fulfilled and has resulted in one or more new resources being created
@@ -13,4 +13,4 @@ Code     |            | Description
 403                   | Forbidden. You do not have permission to perform that action
 404                   | Not found. The requested URL is not found on the server
 429                   | Too many requests. You have hit the Open API too quickly
-500, 502, 503, 504    | Server error. Ooops, something is wrong at Guidebook. Please try again later
+500, 502, 503, 504    | Server error. Something is wrong on Guidebook's end. Please try again later
