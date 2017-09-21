@@ -222,7 +222,13 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#versioning" class="toc-h1 toc-link" data-title="Versioning">Versioning</a>
+          </li>
+          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#pagination" class="toc-h1 toc-link" data-title="Pagination">Pagination</a>
           </li>
           <li>
             <a href="#sessions" class="toc-h1 toc-link" data-title="Sessions">Sessions</a>
@@ -250,28 +256,92 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Guidebook Open API!</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/example_api/'</span>
-<span class="n">api_key</span> <span class="o">=</span> <span class="s">'JWT API_KEY'</span>
-<span class="n">api</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
-</code></pre>
-<blockquote>
-<p>You must replace <code>JWT API_KEY</code> with your personal API key.</p>
-</blockquote>
+<p>Guidebook offers a REST API to manage a subset of the resources available in the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a>. Our Open API uses resource-oriented urls, standard HTTP response codes to indicate errors, and HTTP verbs to segment different types of requests.</p>
+<h1 id='versioning'>Versioning</h1>
+<p>New versions of the Guidebook Open API will be released when Guidebook makes backwards incompatible changes to how resources are manipulated. New versions of the Guidebook Open API will include new urls for accessing resources; for example in v1 <code>Session</code> objects are accessed at <code>https://builder.guidebook.com/open-api/v1/sessions/</code>, but in v2 <code>Session</code> objects <em>might</em> be accessed at a url like <code>https://builder.guidebook.com/open-api/v2/sessions/</code>.</p>
 
-<p>Guidebook offers an REST API to easily manage your data.  Once you have your API key, all API calls need to have the API key included in a header that looks like the following:</p>
+<p>Guidebook reserves the right, however, to make backwards-compatible changes to the Open API <strong>without</strong> releasing a new Open API version. Here are some examples of backwards-compatible changes:</p>
+
+<ul>
+<li>Adding additional Open API resources</li>
+<li>Adding optional request parameters to existing routes</li>
+<li>Adding new properties to existing responses</li>
+<li>Changing the order of properties in existing API responses</li>
+<li>Changing the length or format of object IDs or other opaque strings.</li>
+</ul>
+<h1 id='authentication'>Authentication</h1>
+<p>To access Guidebook&#39;s Open API, you&#39;ll need to include an API Key with your requests. You can manage your API Keys in the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a>. Your API Keys grant significant access to resources related to your account, so keep them secret! Do not share your API Keys with anyone, and do not place API Keys in publicly accessible areas like GitHub or client-side code.</p>
+
+<p>All requests to the Guidebook Open API need to have an API Key included in a header that looks something like:</p>
 
 <p><code>Authorization: JWT API_KEY</code></p>
 
 <aside class="notice">
-You must replace <code>JWT API_KEY</code> with your personal API key.
+You must replace <code>API_KEY</code> with your personal API key.
 </aside>
-<h1 id='sessions'>Sessions</h1><h2 id='how-to-create-a-session'>How to Create a Session</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<blockquote>
+<p>Example request that includes authentication</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/sessions/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">api_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>You must replace the value assigned to <code>api_key</code> with your personal API key.
+Note that the sample python code sample in this documentation uses the python <code>requests</code> package. Installation instructions for <code>requests</code> can be found <a href="http://docs.python-requests.org/en/master/">here</a>; alternatively, for the more eager, you can run <code>pip install requests</code>.</p>
+</blockquote>
+<h1 id='pagination'>Pagination</h1>
+<p>If a resource supports listing, a data structure will be returned with several key attributes:</p>
+
+<table><thead>
+<tr>
+<th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>count</td>
+<td>integer</td>
+<td>Total number of available resources</td>
+</tr>
+<tr>
+<td>next</td>
+<td>string</td>
+<td>URL to retrieve the next page of resources</td>
+</tr>
+<tr>
+<td>previous</td>
+<td>string</td>
+<td>URL to retrieve the previous page of resources</td>
+</tr>
+<tr>
+<td>results</td>
+<td>array</td>
+<td>Representation of the resources in this page</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>{
+  "count": 85,
+  "next": "https://builder.guidebook.com/open-api/v1/pagination-example/?page=2",
+  "previous": null,
+  "results": [
+      {
+        "property_1": "value-a",
+        "property_2": "value-b"
+      },
+      {
+        "property_1": "value-c",
+        "property_2": "value-d"
+      },
+
+      ... etc.
+  ]
+}
+</code></pre><h1 id='sessions'>Sessions</h1><h2 id='how-to-create-a-session'>How to Create a Session</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">session_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/session/'</span>
 <span class="n">post_data</span> <span class="o">=</span>
