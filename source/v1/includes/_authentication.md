@@ -1,19 +1,25 @@
 # Authentication
 
-> To authorize, use this code:
+To access Guidebook's Open API, you'll need to include an API Key with your requests. You can manage your API Keys in the [Guidebook Builder CMS](https://builder.guidebook.com). Your API Keys grant significant access to resources related to your account, so keep them secret! Do not share your API Keys with anyone, and do not place API Keys in publicly accessible areas like GitHub or client-side code.
 
-```python
-import requests
-api_url = 'https://builder.guidebook.com/example_api/'
-api_key = 'JWT API_KEY'
-api = requests.get(api_url, headers={'Authorization': api_key})
-```
-> You must replace `JWT API_KEY` with your personal API key.
-
-Guidebook offers an REST API to easily manage your data.  Once you have your API key, all API calls need to have the API key included in a header that looks like the following:
+All requests to the Guidebook Open API need to have an API Key included in a header that looks something like:
 
 `Authorization: JWT API_KEY`
 
 <aside class="notice">
-You must replace <code>JWT API_KEY</code> with your personal API key.
+You must replace <code>API_KEY</code> with your personal API key.
 </aside>
+
+
+> Example request that includes authentication
+
+```python
+import requests
+
+api_url = 'https://builder.guidebook.com/open-api/v1/sessions/'
+api_key = 'API_KEY'
+api_response = requests.get(api_url, headers={'Authorization': 'JWT ' + api_key)
+```
+
+> You must replace the value assigned to `api_key` with your personal API key.
+> Note that the sample python code sample in this documentation uses the python `requests` package. Installation instructions for `requests` can be found [here](http://docs.python-requests.org/en/master/); alternatively, for the more eager, you can run `pip install requests`.
