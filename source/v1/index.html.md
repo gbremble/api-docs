@@ -13,6 +13,7 @@ includes:
   - versioning
   - authentication
   - pagination
+  - guides
   - sessions
   - customlists
 

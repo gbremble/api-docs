@@ -1,14 +1,14 @@
 # Authentication
 
 
-> Example request that includes authentication
+> Example request that includes authentication:
 
 ```python
 import requests
 
 api_url = 'https://builder.guidebook.com/open-api/v1/sessions/'
 api_key = 'API_KEY'
-api_response = requests.get(api_url, headers={'Authorization': 'JWT ' + api_key)
+api_response = requests.get(api_url, headers={'Authorization': 'JWT ' + api_key})
 ```
 
 > You must replace the value assigned to `api_key` with your personal API key.
