@@ -232,11 +232,6 @@
           </li>
           <li>
             <a href="#guides" class="toc-h1 toc-link" data-title="Guides">Guides</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#listing-guides" class="toc-h2 toc-link" data-title="Guides">Listing Guides</a>
-                  </li>
-              </ul>
           </li>
           <li>
             <a href="#sessions" class="toc-h1 toc-link" data-title="Sessions">Sessions</a>
@@ -398,62 +393,6 @@ You must replace <code>API_KEY</code> with your personal API key.
 <p>Many of the resources exposed by the Guidebook Open API relate to a class of objects called <code>Guide</code>. <code>Guide</code> objects are typically containers for the set of data related to an event like a conference. For example, if you were hosting a conference called, &quot;Programmer Summit 2017&quot; you would likely have one <code>Guide</code> object that contained the schedule for the conference, a list of speakers for that conference, and a list of users who you expect to attend the conference.</p>
 
 <p>As of right now, <code>Guide</code> objects themselves are primarily managed via the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a> (and not via the Open API). Resources exposed by the Open API, however, will contain references to the id of <code>Guide</code> objects they belong to. For example, every <code>Session</code> object returned in the Open API will report the id of the one <code>Guide</code> that <code>Session</code> belongs to (e.g. <code>&quot;guide&quot;: 1</code>). In general, resources cannot be transferred or otherwise shared amongst more than one <code>Guide</code> -- once a <code>Session</code> is created under a given <code>Guide</code> object, it lives under that <code>Guide</code> permanently and cannot be moved to a different <code>Guide</code>.</p>
-<h2 id='listing-guides'>Listing Guides</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">guides_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/guides/'</span>
-<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">guides_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.429989+0000"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Programmer Summit 2017"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.436433+0000"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Programmer Summit 2018"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://builder.guidebook.com/open-api/v1/guides/</code></p>
-<h3 id='guide-properties'>Guide Properties</h3>
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>int</td>
-<td>ID of the Guide object</td>
-</tr>
-<tr>
-<td>created_at</td>
-<td>datetime</td>
-<td>Time when Guide was created</td>
-</tr>
-<tr>
-<td>name</td>
-<td>str</td>
-<td>Name of the Guide</td>
-</tr>
-</tbody></table>
-<h3 id='filtering-by-id'>Filtering By id</h3>
-<p>To filter the listing for one <code>Guide</code> in particular you can issue a request with a query parameter <code>id</code>. The following request, for examples, filters for <code>Guide</code> with <code>id</code> 21.</p>
-
-<p><code>GET https://builder.guidebook.com/open-api/v1/guides/?id=21</code></p>
 <h1 id='sessions'>Sessions</h1><h2 id='how-to-create-a-session'>How to Create a Session</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">session_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/session/'</span>
@@ -465,6 +404,11 @@ You must replace <code>API_KEY</code> with your personal API key.
     <span class="s">"description_html"</span><span class="p">:</span> <span class="s">"&lt;p&gt;This is a description field that supports basic HTML&lt;/p&gt;"</span><span class="p">,</span>
     <span class="s">"name"</span><span class="p">:</span> <span class="s">"Test Session Created via the Open API"</span>
 <span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">session_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
+
+
+<span class="n">post_data</span> <span class="o">=</span>
+
 <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">session_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
 
 </code></pre>
@@ -486,9 +430,9 @@ You must replace <code>API_KEY</code> with your personal API key.
     </span><span class="s2">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"add_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-    </span><span class="s2">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <p>This endpoint will create a session for your guide.</p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -506,79 +450,73 @@ You must replace <code>API_KEY</code> with your personal API key.
 <td>guide</td>
 <td>yes</td>
 <td>integer</td>
-<td>The specific guide your session belongs to</td>
+<td>The specific guide your session belongs to.  See section on Guides for more info.</td>
 </tr>
 <tr>
 <td>name</td>
 <td>yes</td>
 <td>string</td>
-<td>The title of your session</td>
+<td>The title of your session.</td>
 </tr>
 <tr>
 <td>description_html</td>
 <td>yes</td>
 <td>string</td>
-<td>A text description of the session.  This field supports basic HTML.</td>
+<td>A text description of the session. This field supports basic HTML.</td>
 </tr>
 <tr>
 <td>start_time</td>
 <td>yes</td>
 <td>datetime</td>
-<td>The start time of the event</td>
+<td>The start time of the event,</td>
 </tr>
 <tr>
 <td>end_time</td>
 <td>no</td>
 <td>datetime</td>
-<td>The end time of the event.  Leave blank for all day events</td>
+<td>The end time of the event.  Leave blank for all day events.</td>
 </tr>
 <tr>
 <td>all_day</td>
 <td>no</td>
 <td>boolean</td>
-<td>A boolean value indicating if a session runs for the entire day</td>
+<td>A boolean value indicating if a session runs for the entire day.</td>
 </tr>
 <tr>
 <td>allow_rating</td>
 <td>no</td>
 <td>boolean</td>
-<td>A boolean value indicating if end-users can rate this session</td>
+<td>A boolean value indicating if end-users can rate this session.</td>
 </tr>
 <tr>
 <td>add_to_schedule</td>
 <td>no</td>
 <td>boolean</td>
-<td>A boolean</td>
+<td>A boolean value indicating if end-users can add this session to their personal schedule.</td>
 </tr>
 <tr>
 <td>image</td>
 <td>no</td>
 <td>image file</td>
-<td>Image file displayed above the session descripion in the app</td>
+<td>Image file displayed above the session description in the app.</td>
 </tr>
 <tr>
 <td>thumbnail</td>
 <td>no</td>
 <td>image file</td>
-<td>Image file displayed in list views of the schedule</td>
+<td>Image file displayed in list views of the schedule.</td>
 </tr>
 <tr>
 <td>import_id</td>
 <td>no</td>
 <td>string</td>
-<td>Used for stuff</td>
+<td>A string field you can used to input your own identifier.  This is for when you have your own IDs for sessions in your data store.</td>
 </tr>
 <tr>
 <td>schedule_tracks</td>
 <td>no</td>
 <td>list of integers</td>
-<td>Stuff</td>
-</tr>
-<tr>
-<td>locations</td>
-<td>non</td>
-<td>list of integers</td>
-<td>Stuff</td>
+<td>List of IDs of Schedule Tracks this session should belong to.  See section on Schedule Tracks.</td>
 </tr>
 </tbody></table>
 
