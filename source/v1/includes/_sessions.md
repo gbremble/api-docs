@@ -17,7 +17,7 @@ post_data =
 }
 response = request.post(session_url, data=post_data)
 
-# example with schedule tracks
+\# example with schedule tracks
 post_data =
 {
 	"start_time": "2017-09-18T16:00:00",
@@ -51,7 +51,7 @@ response = request.post(session_url, data=post_data)
 	"guide": 1,
 	"schedule_tracks": []
 }
-# example with schedule tracks
+\# example with schedule tracks
 {
 	"id": 106,
 	"created_at": "2017-09-18T22:13:25.766623+0000",
