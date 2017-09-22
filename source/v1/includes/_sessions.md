@@ -6,7 +6,8 @@
 ```python
 import requests
 
-session_url =  'http://builder.guidebook.com/open-api/v1/session/'
+session_url =  'http://builder.guidebook.com/open-api/v1/sessions/'
+api_key = 'API_KEY'
 post_data =
 {
 	"start_time": "2017-09-18T16:00:00",
@@ -15,7 +16,7 @@ post_data =
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
 	"name": "Test Session Created via the Open API"
 }
-response = request.post(session_url, data=post_data)
+response_1 = request.post(session_url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
 
 # example with schedule tracks
 post_data =
@@ -27,11 +28,11 @@ post_data =
 	"name": "Test Session Created via the Open API",
 	"schedule_tracks": [3,42,47,101]
 }
-response = request.post(session_url, data=post_data)
+response_2 = request.post(session_url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
 
 ```
 
-> The above command returns JSON structured like this:
+> The above commands return JSON structured like this:
 
 ```json
 {
@@ -43,14 +44,13 @@ response = request.post(session_url, data=post_data)
 	"all_day": false,
 	"name": "Test Session Created via the Open API",
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
-	"image": null,
-	"thumbnail": null,
 	"import_id": null,
 	"allow_rating": false,
 	"add_to_schedule": false,
 	"guide": 1,
 	"schedule_tracks": []
 }
+
 # example with schedule tracks
 {
 	"id": 106,
@@ -61,14 +61,13 @@ response = request.post(session_url, data=post_data)
 	"all_day": false,
 	"name": "Test Session Created via the Open API",
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
-	"image": null,
-	"thumbnail": null,
 	"import_id": null,
 	"allow_rating": false,
 	"add_to_schedule": false,
 	"guide": 1,
 	"schedule_tracks": [3,42,47,101]
 }
+
 ```
 
 
@@ -76,24 +75,22 @@ This endpoint will create a session for your guide.
 
 ### HTTP Request
 
-`POST http://builder.guidebook.com/open-api/v1/session/`
+`POST http://builder.guidebook.com/open-api/v1/sessions/`
 
 ### Model Fields
 
 Parameter       | Required  | Type    | Description
 ---------       | --------  | ------- | -----------
-guide           | yes | integer  | The specific guide your session belongs to.  See section on Guides for more info.
-name            | yes | string   | The title of your session.
-description_html| yes | string   | A text description of the session. This field supports basic HTML.
+guide           | yes | integer  | The specific guide your Session belongs to.  See section on Guides for more info.
+name            | yes | string   | The title of your Session.
+description_html| yes | string   | A text description of the Session. This field supports basic HTML.
 start_time      | yes | datetime | The start time of the event,
 end_time        | no  | datetime | The end time of the event.  Leave blank for all day events.
-all_day         | no  | boolean  | A boolean value indicating if a session runs for the entire day.
-allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this session.
-add_to_schedule | no  | boolean  | A boolean value indicating if end-users can add this session to their personal schedule.
-image           | no  | image file | Image file displayed above the session description in the app.
-thumbnail       | no  | image file | Image file displayed in list views of the schedule.
-import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for sessions in your data store.
-schedule_tracks | no  | list of integers | List of IDs of Schedule Tracks this session should belong to.  See section on Schedule Tracks.
+all_day         | no  | boolean  | A boolean value indicating if a Session runs for the entire day.
+allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this Session.
+add_to_schedule | no  | boolean  | A boolean value indicating if end-users can add this Session to their personal schedule.
+import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for Sessions in your data store.
+schedule_tracks | no  | array of integers | Array of IDs of Schedule Tracks this Session should belong to.  See section on Schedule Tracks.
 
 
 <aside class="success">
@@ -101,28 +98,28 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </aside>
 
 
-## How to Fetch Data on a Session
+## How to Fetch Data on Sessions
 
 
 ```python
 import requests
 
-session_url =  'http://builder.guidebook.com/open-api/v1/session/'
+session_url =  'http://builder.guidebook.com/open-api/v1/sessions/'
 
 # This will return all sessions you have access to
-response = request.get(session_url, data=post_data)
+response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 
-# This will return all sessions for a guide you have access to. Guide 47 in this example
+# This will return all Sessions for a guide you have access to. Guide 47 in this example
 
-response = request.get('{}guide=47'.format(session_url), data=post_data)
+response = request.get('{}guide=47'.format(session_url), headers={'Authorization': 'JWT ' + api_key})
 
-# This will return a specific session.  Session number 8348 in this example
-response = request.get('{}8348/'.format(session_url), data=post_data)
+# This will return a specific Session.  Session number 8348 in this example
+response = request.get('{}8348/'.format(session_url), headers={'Authorization': 'JWT ' + api_key})
 
 
 ```
 
-> The above command returns JSON structured like this:
+> The above commands return JSON structured like this:
 
 ```json
 {
@@ -139,8 +136,6 @@ response = request.get('{}8348/'.format(session_url), data=post_data)
 			"all_day": false,
 			"name": "Test Session 1",
 			"description_html": null,
-			"image": null,
-			"thumbnail": null,
 			"import_id": null,
 			"allow_rating": true,
 			"add_to_schedule": true,
@@ -156,8 +151,6 @@ response = request.get('{}8348/'.format(session_url), data=post_data)
 			"all_day": false,
 			"name": "Test Session 2",
 			"description_html": null,
-			"image": null,
-			"thumbnail": null,
 			"import_id": null,
 			"allow_rating": true,
 			"add_to_schedule": true,
@@ -173,8 +166,6 @@ response = request.get('{}8348/'.format(session_url), data=post_data)
 			"all_day": false,
 			"name": "Test Session 3",
 			"description_html": null,
-			"image": null,
-			"thumbnail": null,
 			"import_id": null,
 			"allow_rating": true,
 			"add_to_schedule": true,
@@ -190,8 +181,6 @@ response = request.get('{}8348/'.format(session_url), data=post_data)
 			"all_day": false,
 			"name": "Test Session 4, Different Guide",
 			"description_html": null,
-			"image": null,
-			"thumbnail": null,
 			"import_id": null,
 			"allow_rating": true,
 			"add_to_schedule": true,
@@ -200,14 +189,15 @@ response = request.get('{}8348/'.format(session_url), data=post_data)
 		}
 	]
 }
+
 ```
 
 
-This endpoint can also be used to read data on sessions.
+This endpoint can also be used to read data on Sessions.
 
 ### HTTP Request
 
-`GET http://builder.guidebook.com/open-api/v1/session/`
+`GET http://builder.guidebook.com/open-api/v1/sessions/`
 
 ### Model Fields
 

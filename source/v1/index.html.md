@@ -14,7 +14,7 @@ includes:
   - pagination
   - guides
   - sessions
-  - customlists
+  - schedule_tracks
   - versioning
 
 search: true
