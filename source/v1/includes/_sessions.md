@@ -99,3 +99,116 @@ schedule_tracks | no  | list of integers | List of IDs of Schedule Tracks this s
 <aside class="success">
 Remember — don't forget to include your API key in the `Authorization` header!
 </aside>
+
+
+## How to Fetch Data on a Session
+
+
+```python
+import requests
+
+session_url =  'http://builder.guidebook.com/open-api/v1/session/'
+
+# This will return all sessions you have access to
+response = request.get(session_url, data=post_data)
+
+# This will return all sessions for a guide you have access to. Guide 47 in this example
+
+response = request.get('{}guide=47'.format(session_url), data=post_data)
+
+# This will return a specific session.  Session number 8348 in this example
+response = request.get('{}8348/'.format(session_url), data=post_data)
+
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+	"count": 4,
+	"next": null,
+	"previous": null,
+	"results": [
+		{
+			"id": 21,
+			"created_at": "2017-09-18T21:28:35.429989+0000",
+			"last_updated": "2017-09-18T21:28:35.430011+0000",
+			"start_time": "2017-09-18T21:28:35.428248+0000",
+			"end_time": "2017-09-18T22:28:35.428257+0000",
+			"all_day": false,
+			"name": "Test Session 1",
+			"description_html": null,
+			"image": null,
+			"thumbnail": null,
+			"import_id": null,
+			"allow_rating": true,
+			"add_to_schedule": true,
+			"guide": 42,
+			"schedule_tracks": []
+		},
+		{
+			"id": 22,
+			"created_at": "2017-09-18T21:28:35.432366+0000",
+			"last_updated": "2017-09-18T21:28:35.432388+0000",
+			"start_time": "2017-09-18T21:28:35.431034+0000",
+			"end_time": "2017-09-18T22:28:35.431042+0000",
+			"all_day": false,
+			"name": "Test Session 2",
+			"description_html": null,
+			"image": null,
+			"thumbnail": null,
+			"import_id": null,
+			"allow_rating": true,
+			"add_to_schedule": true,
+			"guide": 42,
+			"schedule_tracks": []
+		},
+		{
+			"id": 23,
+			"created_at": "2017-09-18T21:28:35.434402+0000",
+			"last_updated": "2017-09-18T21:28:35.434422+0000",
+			"start_time": "2017-09-18T21:28:35.433197+0000",
+			"end_time": "2017-09-18T22:28:35.433205+0000",
+			"all_day": false,
+			"name": "Test Session 3",
+			"description_html": null,
+			"image": null,
+			"thumbnail": null,
+			"import_id": null,
+			"allow_rating": true,
+			"add_to_schedule": true,
+			"guide": 42,
+			"schedule_tracks": []
+		},
+		{
+			"id": 24,
+			"created_at": "2017-09-18T21:28:35.436433+0000",
+			"last_updated": "2017-09-18T21:28:35.436452+0000",
+			"start_time": "2017-09-18T21:28:35.435265+0000",
+			"end_time": "2017-09-18T22:28:35.435273+0000",
+			"all_day": false,
+			"name": "Test Session 4, Different Guide",
+			"description_html": null,
+			"image": null,
+			"thumbnail": null,
+			"import_id": null,
+			"allow_rating": true,
+			"add_to_schedule": true,
+			"guide": 43,
+			"schedule_tracks": []
+		}
+	]
+}
+```
+
+
+This endpoint can also be used to read data on sessions.
+
+### HTTP Request
+
+`GET http://builder.guidebook.com/open-api/v1/session/`
+
+### Model Fields
+
+Same as the fields used in creation.
