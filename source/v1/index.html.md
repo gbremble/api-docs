@@ -9,15 +9,13 @@ toc_footers:
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - authentication # md files in the '/docs/' folder to include. must be all lowercase no spaces
+  - introduction  # md files in the '/docs/' folder to include. must be all lowercase no spaces
+  - versioning
+  - authentication
+  - pagination
+  - guides
   - sessions
   - customlists
 
 search: true
 ---
-
-# Introduction
-
-Welcome to the Guidebook Open API!
-
-

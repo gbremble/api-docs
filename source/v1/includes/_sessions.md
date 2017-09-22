@@ -17,6 +17,11 @@ post_data =
 }
 response = request.post(session_url, data=post_data)
 
+
+post_data =
+
+response = request.post(session_url, data=post_data)
+
 ```
 
 > The above command returns JSON structured like this:
@@ -37,9 +42,9 @@ response = request.post(session_url, data=post_data)
 	"allow_rating": false,
 	"add_to_schedule": false,
 	"guide": 1,
-	"schedule_tracks": [],
-	"locations": []
+	"schedule_tracks": []
 }
+
 ```
 
 
@@ -53,19 +58,18 @@ This endpoint will create a session for your guide.
 
 Parameter       | Required  | Type    | Description
 ---------       | --------  | ------- | -----------
-guide           | yes | integer  | The specific guide your session belongs to
-name            | yes | string   | The title of your session
-description_html| yes | string   | A text description of the session.  This field supports basic HTML.
-start_time      | yes | datetime | The start time of the event
-end_time        | no  | datetime | The end time of the event.  Leave blank for all day events
-all_day         | no  | boolean  | A boolean value indicating if a session runs for the entire day
-allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this session
-add_to_schedule | no  | boolean  | A boolean
-image           | no  | image file | Image file displayed above the session descripion in the app
-thumbnail       | no  | image file | Image file displayed in list views of the schedule
-import_id       | no  | string     | Used for stuff
-schedule_tracks | no  | list of integers | Stuff
-locations       | non | list of integers | Stuff
+guide           | yes | integer  | The specific guide your session belongs to.  See section on Guides for more info.
+name            | yes | string   | The title of your session.
+description_html| yes | string   | A text description of the session. This field supports basic HTML.
+start_time      | yes | datetime | The start time of the event,
+end_time        | no  | datetime | The end time of the event.  Leave blank for all day events.
+all_day         | no  | boolean  | A boolean value indicating if a session runs for the entire day.
+allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this session.
+add_to_schedule | no  | boolean  | A boolean value indicating if end-users can add this session to their personal schedule.
+image           | no  | image file | Image file displayed above the session description in the app.
+thumbnail       | no  | image file | Image file displayed in list views of the schedule.
+import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for sessions in your data store.
+schedule_tracks | no  | list of integers | List of IDs of Schedule Tracks this session should belong to.  See section on Schedule Tracks.
 
 
 <aside class="success">
