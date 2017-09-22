@@ -222,9 +222,6 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#versioning" class="toc-h1 toc-link" data-title="Versioning">Versioning</a>
-          </li>
-          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
@@ -251,6 +248,9 @@
                     <a href="#how-to-create-a-custom-list" class="toc-h2 toc-link" data-title="Custom Lists">How to Create a Custom List</a>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#versioning" class="toc-h1 toc-link" data-title="Versioning">Versioning</a>
           </li>
       </div>
         <ul class="toc-footer">
@@ -305,18 +305,6 @@
 <td>Server error. Something is wrong on Guidebook&#39;s end. Please try again later</td>
 </tr>
 </tbody></table>
-<h1 id='versioning'>Versioning</h1>
-<p>New versions of the Guidebook Open API will be released when Guidebook makes backwards incompatible changes to how resources are manipulated or represented. New versions of the Guidebook Open API will include new urls for accessing resources; for example in <code>v1</code> (&quot;version 1&quot;) <code>Session</code> objects are accessed at <code>https://builder.guidebook.com/open-api/v1/sessions/</code>, but in v2 <code>Session</code> objects <em>might</em> be accessed at a url like <code>https://builder.guidebook.com/open-api/v2/sessions/</code>.</p>
-
-<p>Guidebook reserves the right, however, to make backwards-compatible changes to the Open API <strong>without</strong> releasing a new Open API version. Here are some examples of backwards-compatible changes:</p>
-
-<ul>
-<li>Adding additional Open API resources</li>
-<li>Adding optional request parameters to existing routes</li>
-<li>Adding new properties to existing responses</li>
-<li>Changing the order of properties in existing API responses</li>
-<li>Changing the length or format of object IDs or other opaque strings.</li>
-</ul>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>Example request that includes authentication:</p>
@@ -650,7 +638,19 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p><code>GET http://builder.guidebook.com/open-api/v1/session/</code></p>
 <h3 id='model-fields-2'>Model Fields</h3>
 <p>Same as the fields used in creation.</p>
-<h1 id='custom-lists'>Custom Lists</h1><h2 id='how-to-create-a-custom-list'>How to Create a Custom List</h2>
+<h1 id='custom-lists'>Custom Lists</h1><h2 id='how-to-create-a-custom-list'>How to Create a Custom List</h2><h1 id='versioning'>Versioning</h1>
+<p>New versions of the Guidebook Open API will be released when Guidebook makes backwards incompatible changes to how resources are manipulated or represented. New versions of the Guidebook Open API will include new urls for accessing resources; for example in <code>v1</code> (&quot;version 1&quot;) <code>Session</code> objects are accessed at <code>https://builder.guidebook.com/open-api/v1/sessions/</code>, but in v2 <code>Session</code> objects <em>might</em> be accessed at a url like <code>https://builder.guidebook.com/open-api/v2/sessions/</code>.</p>
+
+<p>Guidebook reserves the right, however, to make backwards-compatible changes to the Open API <strong>without</strong> releasing a new Open API version. Here are some examples of backwards-compatible changes:</p>
+
+<ul>
+<li>Adding additional Open API resources</li>
+<li>Adding optional request parameters to existing routes</li>
+<li>Adding new properties to existing responses</li>
+<li>Changing the order of properties in existing API responses</li>
+<li>Changing the length or format of object IDs or other opaque strings.</li>
+</ul>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
