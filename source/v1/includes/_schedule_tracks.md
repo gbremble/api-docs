@@ -7,13 +7,14 @@
 import requests
 
 schedule_tracks_url =  'http://builder.guidebook.com/open-api/v1/schedule-tracks/'
+api_key = 'API_KEY'
 post_data =
 {
 	"guide": 1,
 	"name": "Test Schedule Track Created via the Open API",
 	"color": "#000080"
 }
-response = request.post(schedule_tracks_url, data=post_data)
+response = request.post(schedule_tracks_url, data=post_data, headers={'Authorization': 'JWT ' + api_key})
 
 ```
 
@@ -53,16 +54,16 @@ Example: "#000080" for blue.
 import requests
 
 schedule_tracks_url =  'http://builder.guidebook.com/open-api/v1/schedule-tracks/'
+api_key = 'API_KEY'
 
 # This will return all schedule tracks you have access to
-response = request.get(schedule_tracks_url, data=post_data)
+response = request.get(schedule_tracks_url, headers={'Authorization': 'JWT ' + api_key})
 
 # This will return all Schedule Tracks for a guide you have access to. Guide 47 in this example
-
-response = request.get('{}guide=47'.format(schedule_tracks_url), data=post_data)
+response = request.get('{}guide=47'.format(schedule_tracks_url), headers={'Authorization': 'JWT ' + api_key})
 
 # This will return a specific Schedule Track.  Schedule Track number 1234 in this example
-response = request.get('{}1234/'.format(schedule_tracks_url), data=post_data)
+response = request.get('{}1234/'.format(schedule_tracks_url), headers={'Authorization': 'JWT ' + api_key})
 
 
 ```

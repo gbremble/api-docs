@@ -84,8 +84,8 @@ Parameter       | Required  | Type    | Description
 guide           | yes | integer  | The specific guide your Session belongs to.  See section on Guides for more info.
 name            | yes | string   | The title of your Session.
 description_html| yes | string   | A text description of the Session. This field supports basic HTML.
-start_time      | yes | datetime | The start time of the event,
-end_time        | no  | datetime | The end time of the event.  Leave blank for all day events.
+start_time      | yes | datetime | The start time of the event. For consistency, all timestamps are converted to the UTC timezone.
+end_time        | no  | datetime | The end time of the event.  Leave blank for all day events. For consistency, all timestamps are converted to the UTC timezone.
 all_day         | no  | boolean  | A boolean value indicating if a Session runs for the entire day.
 allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this Session.
 add_to_schedule | no  | boolean  | A boolean value indicating if end-users can add this Session to their personal schedule.
@@ -105,12 +105,12 @@ Remember — don't forget to include your API key in the `Authorization` header!
 import requests
 
 session_url =  'http://builder.guidebook.com/open-api/v1/sessions/'
+api_key = 'API_KEY'
 
 # This will return all sessions you have access to
 response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 
 # This will return all Sessions for a guide you have access to. Guide 47 in this example
-
 response = request.get('{}guide=47'.format(session_url), headers={'Authorization': 'JWT ' + api_key})
 
 # This will return a specific Session.  Session number 8348 in this example
