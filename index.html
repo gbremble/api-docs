@@ -391,7 +391,7 @@ You must replace <code>API_KEY</code> with your personal API key.
 <h1 id='guides'>Guides</h1>
 <p>Many of the resources exposed by the Guidebook Open API relate to a class of objects called <code>Guide</code>. <code>Guide</code> objects are typically containers for the set of data related to an event like a conference. For example, if you were hosting a conference called, &quot;Programmer Summit 2017&quot; you would likely have one <code>Guide</code> object that contained the schedule for the conference, a list of speakers for that conference, and a list of users who you expect to attend the conference.</p>
 
-<p>As of right now, <code>Guide</code> objects themselves are primarily managed via the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a> (and not via the Open API). Resources exposed by the Open API, however, will contain references to the id of <code>Guide</code> objects they belong to. For example, every <code>Session</code> object returned in the Open API will report the id of the one <code>Guide</code> that <code>Session</code> belongs to (e.g. <code>&quot;guide&quot;: 1</code>). In general, resources cannot be transferred or otherwise shared amongst more than one <code>Guide</code> -- once a <code>Session</code> is created under a given <code>Guide</code> object, it lives under that <code>Guide</code> permanently and cannot be moved to a different <code>Guide</code>.</p>
+<p>As of now, <code>Guide</code> objects themselves are primarily managed via the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a> (and not via the Open API). Resources exposed by the Open API, however, will contain references to the id of <code>Guide</code> objects they belong to. For example, every <code>Session</code> object returned in the Open API will report the id of the one <code>Guide</code> that <code>Session</code> belongs to (e.g. <code>&quot;guide&quot;: 1</code>). In general, resources cannot be transferred or otherwise shared amongst more than one <code>Guide</code> -- once a <code>Session</code> is created under a given <code>Guide</code> object, it lives under that <code>Guide</code> permanently and cannot be moved to a different <code>Guide</code>.</p>
 <h2 id='listing-guides'>Listing Guides</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">guides_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/guides/'</span>
@@ -431,17 +431,17 @@ You must replace <code>API_KEY</code> with your personal API key.
 <tr>
 <td>id</td>
 <td>int</td>
-<td>id of the Guide object</td>
+<td>id of the Guide object.</td>
 </tr>
 <tr>
 <td>created_at</td>
 <td>datetime</td>
-<td>Time when Guide was created -- in UTC</td>
+<td>Time when Guide was created -- in UTC.</td>
 </tr>
 <tr>
 <td>name</td>
 <td>str</td>
-<td>Name of the Guide</td>
+<td>Name of the Guide.</td>
 </tr>
 </tbody></table>
 <h3 id='filtering-by-id'>Filtering By id</h3>
@@ -546,13 +546,13 @@ You must replace <code>API_KEY</code> with your personal API key.
 <td>start_time</td>
 <td>yes</td>
 <td>datetime</td>
-<td>The start time of the event,</td>
+<td>The start time of the event. For consistency, all timestamps are converted to the UTC timezone.</td>
 </tr>
 <tr>
 <td>end_time</td>
 <td>no</td>
 <td>datetime</td>
-<td>The end time of the event.  Leave blank for all day events.</td>
+<td>The end time of the event.  Leave blank for all day events. For consistency, all timestamps are converted to the UTC timezone.</td>
 </tr>
 <tr>
 <td>all_day</td>
@@ -592,12 +592,12 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <h2 id='how-to-fetch-data-on-sessions'>How to Fetch Data on Sessions</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">session_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/sessions/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 
 <span class="c"># This will return all sessions you have access to</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 
 <span class="c"># This will return all Sessions for a guide you have access to. Guide 47 in this example</span>
-
 <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'{}guide=47'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">session_url</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 
 <span class="c"># This will return a specific Session.  Session number 8348 in this example</span>
@@ -685,13 +685,14 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <h1 id='schedule-tracks'>Schedule Tracks</h1><h2 id='how-to-create-a-schedule-track'>How to Create a Schedule Track</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 <span class="n">post_data</span> <span class="o">=</span>
 <span class="p">{</span>
     <span class="s">"guide"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s">"name"</span><span class="p">:</span> <span class="s">"Test Schedule Track Created via the Open API"</span><span class="p">,</span>
     <span class="s">"color"</span><span class="p">:</span> <span class="s">"#000080"</span>
 <span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 
 </code></pre>
 <blockquote>
@@ -741,16 +742,16 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <h2 id='how-to-fetch-data-on-schedule-tracks'>How to Fetch Data on Schedule Tracks</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 
 <span class="c"># This will return all schedule tracks you have access to</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 
 <span class="c"># This will return all Schedule Tracks for a guide you have access to. Guide 47 in this example</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'{}guide=47'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'{}guide=47'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 
 <span class="c"># This will return a specific Schedule Track.  Schedule Track number 1234 in this example</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'{}1234/'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'{}1234/'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 
 
 </code></pre>
