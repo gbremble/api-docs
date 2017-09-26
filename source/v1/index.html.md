@@ -15,6 +15,7 @@ includes:
   - guides
   - sessions
   - schedule_tracks
+  - custom_list_item_relations
   - versioning
 
 search: true

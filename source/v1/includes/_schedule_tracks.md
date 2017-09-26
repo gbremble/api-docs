@@ -6,7 +6,7 @@
 ```python
 import requests
 
-schedule_tracks_url =  'http://builder.guidebook.com/open-api/v1/schedule-tracks/'
+schedule_tracks_url =  'https://builder.guidebook.com/open-api/v1/schedule-tracks/'
 api_key = 'API_KEY'
 post_data =
 {
@@ -37,7 +37,7 @@ This endpoint will create a Schedule Track for your guide.
 
 ### HTTP Request
 
-`POST http://builder.guidebook.com/open-api/v1/schedule-tracks/`
+`POST https://builder.guidebook.com/open-api/v1/schedule-tracks/`
 
 ### Model Fields
 
@@ -55,7 +55,7 @@ Example: "#000080" for blue.
 ```python
 import requests
 
-schedule_tracks_url =  'http://builder.guidebook.com/open-api/v1/schedule-tracks/'
+schedule_tracks_url =  'https://builder.guidebook.com/open-api/v1/schedule-tracks/'
 api_key = 'API_KEY'
 
 # This will return all schedule tracks you have access to
@@ -107,7 +107,7 @@ This endpoint can also be used to read data on Schedule Tracks.
 
 ### HTTP Request
 
-`GET http://builder.guidebook.com/open-api/v1/schedule-tracks/`
+`GET https://builder.guidebook.com/open-api/v1/schedule-tracks/`
 
 ### Model Fields
 
@@ -117,4 +117,4 @@ Same as the fields used in creation.
 
 Including a query parameter `guide` allows you to filter for all `ScheduleTracks` related to a `Guide` you have access to (`Guide` 47 in the following example):
 
-`GET http://builder.guidebook.com/open-api/v1/schedule-tracks/?guide=47`
+`GET https://builder.guidebook.com/open-api/v1/schedule-tracks/?guide=47`

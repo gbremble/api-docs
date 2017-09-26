@@ -6,7 +6,7 @@
 ```python
 import requests
 
-session_url =  'http://builder.guidebook.com/open-api/v1/sessions/'
+session_url =  'https://builder.guidebook.com/open-api/v1/sessions/'
 api_key = 'API_KEY'
 post_data =
 {
@@ -73,7 +73,7 @@ This endpoint will create a session for your guide.
 
 ### HTTP Request
 
-`POST http://builder.guidebook.com/open-api/v1/sessions/`
+`POST https://builder.guidebook.com/open-api/v1/sessions/`
 
 ### Model Fields
 
@@ -102,7 +102,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 ```python
 import requests
 
-session_url =  'http://builder.guidebook.com/open-api/v1/sessions/'
+session_url =  'https://builder.guidebook.com/open-api/v1/sessions/'
 api_key = 'API_KEY'
 
 # This will return all sessions you have access to
@@ -183,7 +183,7 @@ This endpoint can also be used to read data on Sessions.
 
 ### HTTP Request
 
-`GET http://builder.guidebook.com/open-api/v1/sessions/`
+`GET https://builder.guidebook.com/open-api/v1/sessions/`
 
 ### Model Fields
 
@@ -193,4 +193,4 @@ Same as the fields used in creation.
 
 Including a query parameter `guide` allows you to filter for all `Sessions` related to a `Guide` you have access to (`Guide` 47 in this example):
 
-`GET http://builder.guidebook.com/open-api/v1/sessions/?guide=47`
+`GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47`
