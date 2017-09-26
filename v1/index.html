@@ -481,7 +481,6 @@ You must replace <code>API_KEY</code> with your personal API key.
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">106</span><span class="p">,</span><span class="w">
     </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:13:25.766623+0000"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:13:25.766653+0000"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T16:00:00.000000+0000"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T17:00:00.000000+0000"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"all_day"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -498,7 +497,6 @@ You must replace <code>API_KEY</code> with your personal API key.
 </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">106</span><span class="p">,</span><span class="w">
     </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:13:25.766623+0000"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:13:25.766653+0000"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T16:00:00.000000+0000"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T17:00:00.000000+0000"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"all_day"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -596,17 +594,9 @@ Remember — don't forget to include your API key in the `Authorization` header!
 
 <span class="c"># This will return all sessions you have access to</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
-
-<span class="c"># This will return all Sessions for a guide you have access to. Guide 47 in this example</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'{}guide=47'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">session_url</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
-
-<span class="c"># This will return a specific Session.  Session number 8348 in this example</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'{}8348/'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">session_url</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
-
-
 </code></pre>
 <blockquote>
-<p>The above commands return JSON structured like this:</p>
+<p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
@@ -616,7 +606,6 @@ Remember — don't forget to include your API key in the `Authorization` header!
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
             </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.429989+0000"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.430011+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.428248+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:28:35.428257+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"all_day"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -631,7 +620,6 @@ Remember — don't forget to include your API key in the `Authorization` header!
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
             </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.432366+0000"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.432388+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.431034+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:28:35.431042+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"all_day"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -646,7 +634,6 @@ Remember — don't forget to include your API key in the `Authorization` header!
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
             </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.434402+0000"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.434422+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.433197+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:28:35.433205+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"all_day"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -661,7 +648,6 @@ Remember — don't forget to include your API key in the `Authorization` header!
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
             </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.436433+0000"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.436452+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.435265+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:28:35.435273+0000"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"all_day"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -682,6 +668,10 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p><code>GET http://builder.guidebook.com/open-api/v1/sessions/</code></p>
 <h3 id='model-fields-2'>Model Fields</h3>
 <p>Same as the fields used in creation.</p>
+<h3 id='filtering-by-guide-id'>Filtering By Guide id</h3>
+<p>Including a query parameter <code>guide</code> allows you to filter for all <code>Sessions</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
+
+<p><code>GET http://builder.guidebook.com/open-api/v1/sessions/?guide=47</code></p>
 <h1 id='schedule-tracks'>Schedule Tracks</h1><h2 id='how-to-create-a-schedule-track'>How to Create a Schedule Track</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
@@ -700,10 +690,12 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">234</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">337</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Schedule Track Created via the Open API"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#000080"</span><span class="w">
+    </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#000080"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-21T21:28:35.432366+0000"</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 
 </span></code></pre>
 <p>This endpoint will create a Schedule Track for your guide.</p>
@@ -746,14 +738,6 @@ Remember — don't forget to include your API key in the `Authorization` header!
 
 <span class="c"># This will return all schedule tracks you have access to</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
-
-<span class="c"># This will return all Schedule Tracks for a guide you have access to. Guide 47 in this example</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'{}guide=47'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
-
-<span class="c"># This will return a specific Schedule Track.  Schedule Track number 1234 in this example</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'{}1234/'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
-
-
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -767,7 +751,8 @@ Remember — don't forget to include your API key in the `Authorization` header!
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">210</span><span class="p">,</span><span class="w">
             </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">308</span><span class="p">,</span><span class="w">
             </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Track 1"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-10T21:28:35.432366+0000"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">211</span><span class="p">,</span><span class="w">
@@ -779,22 +764,29 @@ Remember — don't forget to include your API key in the `Authorization` header!
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">212</span><span class="p">,</span><span class="w">
             </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">308</span><span class="p">,</span><span class="w">
             </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Track 3"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-11T21:28:35.432366+0000"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">213</span><span class="p">,</span><span class="w">
             </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">309</span><span class="p">,</span><span class="w">
             </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Track 4, Different Guide"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-12T21:28:35.432366+0000"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <p>This endpoint can also be used to read data on Schedule Tracks.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET http://builder.guidebook.com/open-api/v1/schedule-tracks/</code></p>
 <h3 id='model-fields-2'>Model Fields</h3>
 <p>Same as the fields used in creation.</p>
+<h3 id='filtering-by-guide-id'>Filtering By Guide id</h3>
+<p>Including a query parameter <code>guide</code> allows you to filter for all <code>ScheduleTracks</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
+
+<p><code>GET http://builder.guidebook.com/open-api/v1/schedule-tracks/?guide=47</code></p>
 <h1 id='versioning'>Versioning</h1>
 <p>New versions of the Guidebook Open API will be released when Guidebook makes backwards incompatible changes to how resources are manipulated or represented. New versions of the Guidebook Open API will include new urls for accessing resources; for example in <code>v1</code> (&quot;version 1&quot;) <code>Session</code> objects are accessed at <code>https://builder.guidebook.com/open-api/v1/sessions/</code>, but in v2 <code>Session</code> objects <em>might</em> be accessed at a url like <code>https://builder.guidebook.com/open-api/v2/sessions/</code>.</p>
 
