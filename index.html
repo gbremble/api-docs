@@ -258,6 +258,20 @@
               </ul>
           </li>
           <li>
+            <a href="#customlistitemrelations" class="toc-h1 toc-link" data-title="CustomListItemRelations">CustomListItemRelations</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#listing-customlistitemrelations" class="toc-h2 toc-link" data-title="CustomListItemRelations">Listing CustomListItemRelations</a>
+                  </li>
+                  <li>
+                    <a href="#creating-customlistitemrelations" class="toc-h2 toc-link" data-title="CustomListItemRelations">Creating CustomListItemRelations</a>
+                  </li>
+                  <li>
+                    <a href="#manipulating-individual-customlistitemrelations" class="toc-h2 toc-link" data-title="CustomListItemRelations">Manipulating Individual CustomListItemRelations</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#versioning" class="toc-h1 toc-link" data-title="Versioning">Versioning</a>
           </li>
       </div>
@@ -450,7 +464,7 @@ You must replace <code>API_KEY</code> with your personal API key.
 <p><code>GET https://builder.guidebook.com/open-api/v1/guides/?id=21</code></p>
 <h1 id='sessions'>Sessions</h1><h2 id='how-to-create-a-session'>How to Create a Session</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">session_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/sessions/'</span>
+<span class="n">session_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/sessions/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 <span class="n">post_data</span> <span class="o">=</span>
 <span class="p">{</span>
@@ -512,7 +526,7 @@ You must replace <code>API_KEY</code> with your personal API key.
 </span></code></pre>
 <p>This endpoint will create a session for your guide.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>POST http://builder.guidebook.com/open-api/v1/sessions/</code></p>
+<p><code>POST https://builder.guidebook.com/open-api/v1/sessions/</code></p>
 <h3 id='model-fields'>Model Fields</h3>
 <table><thead>
 <tr>
@@ -589,7 +603,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </aside>
 <h2 id='how-to-fetch-data-on-sessions'>How to Fetch Data on Sessions</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">session_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/sessions/'</span>
+<span class="n">session_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/sessions/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 
 <span class="c"># This will return all sessions you have access to</span>
@@ -665,16 +679,16 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </span></code></pre>
 <p>This endpoint can also be used to read data on Sessions.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://builder.guidebook.com/open-api/v1/sessions/</code></p>
+<p><code>GET https://builder.guidebook.com/open-api/v1/sessions/</code></p>
 <h3 id='model-fields-2'>Model Fields</h3>
 <p>Same as the fields used in creation.</p>
 <h3 id='filtering-by-guide-id'>Filtering By Guide id</h3>
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>Sessions</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
 
-<p><code>GET http://builder.guidebook.com/open-api/v1/sessions/?guide=47</code></p>
+<p><code>GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47</code></p>
 <h1 id='schedule-tracks'>Schedule Tracks</h1><h2 id='how-to-create-a-schedule-track'>How to Create a Schedule Track</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
+<span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 <span class="n">post_data</span> <span class="o">=</span>
 <span class="p">{</span>
@@ -700,7 +714,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </span></code></pre>
 <p>This endpoint will create a Schedule Track for your guide.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>POST http://builder.guidebook.com/open-api/v1/schedule-tracks/</code></p>
+<p><code>POST https://builder.guidebook.com/open-api/v1/schedule-tracks/</code></p>
 <h3 id='model-fields'>Model Fields</h3>
 <table><thead>
 <tr>
@@ -733,7 +747,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p>Example: &quot;#000080&quot; for blue.</p>
 <h2 id='how-to-fetch-data-on-schedule-tracks'>How to Fetch Data on Schedule Tracks</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'http://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
+<span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 
 <span class="c"># This will return all schedule tracks you have access to</span>
@@ -780,13 +794,168 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </span></code></pre>
 <p>This endpoint can also be used to read data on Schedule Tracks.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://builder.guidebook.com/open-api/v1/schedule-tracks/</code></p>
+<p><code>GET https://builder.guidebook.com/open-api/v1/schedule-tracks/</code></p>
 <h3 id='model-fields-2'>Model Fields</h3>
 <p>Same as the fields used in creation.</p>
 <h3 id='filtering-by-guide-id'>Filtering By Guide id</h3>
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>ScheduleTracks</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
 
-<p><code>GET http://builder.guidebook.com/open-api/v1/schedule-tracks/?guide=47</code></p>
+<p><code>GET https://builder.guidebook.com/open-api/v1/schedule-tracks/?guide=47</code></p>
+<h1 id='customlistitemrelations'>CustomListItemRelations</h1>
+<p>The <code>CustomListItemRelation</code> resource is the &quot;through&quot; object that links a <code>CustomListItem</code> to a <code>CustomList</code>. For example, to add a <code>CustomListItem</code> named &quot;Peter Lada&quot; to a <code>CustomList</code> named &quot;Programmer Conference 2017 Speakers&quot;, a new <code>CustomListItemRelation</code> object would be created with the id of the &quot;Peter Lada&quot; <code>CustomListItem</code> and the id of the &quot;Programmer Conference 2017 Speakers&quot; <code>CustomList</code>. When more than one <code>CustomListItem</code> exists inside of a <code>CustomList</code>, display order can be controlled by the <code>rank</code> field on <code>CustomListItemRelation</code>.</p>
+<h2 id='listing-customlistitemrelations'>Listing CustomListItemRelations</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/custom-list-item-relations/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">guides_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"custom_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"custom_list_item"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.25</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-31T20:18:38.174876+0000"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"custom_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"custom_list_item"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.3</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-31T20:19:33.342154+0000"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"custom_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"custom_list_item"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-31T20:19:45.994749+0000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/</code></p>
+<h3 id='customlistitemrelation-properties'>CustomListItemRelation Properties</h3>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>id of the <code>CustomListItemRelation</code> object.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td>Time when this <code>CustomListItemRelation</code> was created - UTC.</td>
+</tr>
+<tr>
+<td>custom_list_item</td>
+<td>integer</td>
+<td>id of the <code>CustomListItem</code> being associated to the <code>CustomList</code> identified by <code>custom_list</code>.</td>
+</tr>
+<tr>
+<td>custom_list</td>
+<td>integer</td>
+<td>id of the <code>CustomList</code> that <code>custom_list_item</code> is being associated to. Note that a given <code>(custom_list_item, custom_list)</code> tuple cannot be repeated on different <code>CustomListItemRelation</code> objects (&quot;you can only associate a given <code>CustomListItem</code> to a given <code>CustomList</code>&quot; once&quot;).</td>
+</tr>
+<tr>
+<td>rank</td>
+<td>float</td>
+<td>Controls the display order of <code>CustomListItems</code> within a <code>CustomList</code> - <code>CustomListItems</code> are displayed in ascending order by rank. Note that a given <code>(custom_list, rank)</code> tuple cannot be repeated on different <code>CustomLIstItemRelation</code> objects (&quot;<code>rank</code> is unique amongst all the <code>CustomListItemRelations</code> associated to a given <code>CustomList</code>&quot;).</td>
+</tr>
+</tbody></table>
+<h3 id='filtering-customlistitemrelations'>Filtering CustomListItemRelations</h3>
+<p>To filter the returned <code>CustomListItemRelations</code> by the related <code>CustomListItem</code> you can include the query parameter <code>custom_list_item</code>. The following request, for examples, filters for <code>CustomListItemRelations</code> related to <code>custom_list_item</code> 5.</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list_item=5</code></p>
+
+<p>To filter the returned <code>CustomListItemRelations</code> by the related <code>CustomList</code> you can include the query parameter <code>custom_list</code>. The following request, for examples, filters for <code>CustomListItemRelations</code> related to <code>custom_list</code> 1.</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list=1</code></p>
+
+<p>You can combine the above two filters to do something like, &quot;find the <code>CustomListItemRelation</code> that associates <code>custom_list_item</code> 5 with <code>custom_list</code> 1:&quot;</p>
+
+<p>https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list_item=5&amp;custom_list=1`</p>
+<h2 id='creating-customlistitemrelations'>Creating CustomListItemRelations</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/custom-list-item-relations/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">post_data</span> <span class="o">=</span>
+<span class="p">{</span>
+  <span class="s">"custom_list"</span><span class="p">:</span> <span class="mi">59</span><span class="p">,</span>
+  <span class="s">"custom_list_item"</span><span class="p">:</span> <span class="mi">369</span><span class="p">,</span>
+  <span class="s">"rank"</span><span class="p">:</span> <span class="mf">15.1</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"custom_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"custom_list_item"</span><span class="p">:</span><span class="w"> </span><span class="mi">369</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mf">15.1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-22T20:18:38.174876+0000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://builder.guidebook.com/open-api/v1/custom-list-item-relations/</code></p>
+
+<p>Note that if you do not include a value in your <code>POST</code> data, <code>rank</code> defaults to to a large negative value that decreases with time.</p>
+<h2 id='manipulating-individual-customlistitemrelations'>Manipulating Individual CustomListItemRelations</h2>
+<blockquote>
+<p>Update the rank of a CustomListItemRelation</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/custom-list-item-relations/1/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">patch_data</span> <span class="o">=</span>
+<span class="p">{</span>
+  <span class="s">"rank"</span><span class="p">:</span> <span class="mf">46.3</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">patch_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>PATCH requests (to update) and GET requests (to retrieve) an individual CustomListItemRelation will return a JSON structure like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"custom_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"custom_list_item"</span><span class="p">:</span><span class="w"> </span><span class="mi">369</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mf">46.3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-22T20:18:38.174876+0000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>To access and manipulate an individual <code>CustomListItemRelation</code> object, use a url that ends with the id of a <code>CustomListItemRelation</code> object:</p>
+
+<p><code>https://builder.guidebook.com/open-api/v1/custom-list-item-relations/&lt;custom_list_item_relation_id&gt;/</code></p>
+
+<p>In the following examples, we will assume that the id of the <code>CustomListItemRelation</code> we&#39;d like to modify is 156.</p>
+<h3 id='retrieving-a-customlistitemrelation'>Retrieving a CustomListItemRelation</h3>
+<p>To retrieve an individual CustomListItemRelation object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/</code></p>
+<h3 id='updating-a-customlistitemrelation'>Updating a CustomListItemRelation</h3>
+<p>The only field that can be updated on <code>CustomListItemRelation</code> is <code>rank</code>. Attempts to modify, for example, the <code>custom_list</code> or <code>custom_list_item</code> fields on a <code>CustomListItemRelation</code> object will be ignored. To update the <code>rank</code> of a  <code>CustomListItemRelation</code>, issue a <code>PATCH</code> request where the request body includes the new <code>rank</code> you&#39;d like the <code>CustomListItemRelation</code> to have.</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/</code></p>
+<h3 id='deleting-a-customlistitemrelation'>Deleting a CustomListItemRelation</h3>
+<p>To delete a particular <code>CustomListItemRelation</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>CustomListItemRelation</code> you&#39;d like deleted:</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/</code></p>
 <h1 id='versioning'>Versioning</h1>
 <p>New versions of the Guidebook Open API will be released when Guidebook makes backwards incompatible changes to how resources are manipulated or represented. New versions of the Guidebook Open API will include new urls for accessing resources; for example in <code>v1</code> (&quot;version 1&quot;) <code>Session</code> objects are accessed at <code>https://builder.guidebook.com/open-api/v1/sessions/</code>, but in v2 <code>Session</code> objects <em>might</em> be accessed at a url like <code>https://builder.guidebook.com/open-api/v2/sessions/</code>.</p>
 
