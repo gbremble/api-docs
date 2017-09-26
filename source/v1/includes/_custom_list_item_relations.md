@@ -109,7 +109,7 @@ response = requests.post(url, data=post_data, headers={'Authorization': 'JWT ' +
 
 `POST https://builder.guidebook.com/open-api/v1/custom-list-item-relations/`
 
-Note that if you do not include a value in your `POST` data, `rank` defaults to to a large negative value that decreases with time.
+Note that if you do not include a `rank` value in your `POST` data, `rank` defaults to to a large negative value that decreases with time.
 
 ## Manipulating Individual CustomListItemRelations
 
@@ -119,7 +119,7 @@ Note that if you do not include a value in your `POST` data, `rank` defaults to 
 ```python
 import requests
 
-url = 'https://builder.guidebook.com/open-api/v1/custom-list-item-relations/1/'
+url = 'https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/'
 api_key = 'API_KEY'
 patch_data =
 {
