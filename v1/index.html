@@ -913,14 +913,14 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </span></code></pre><h3 id='http-request-2'>HTTP Request</h3>
 <p><code>POST https://builder.guidebook.com/open-api/v1/custom-list-item-relations/</code></p>
 
-<p>Note that if you do not include a value in your <code>POST</code> data, <code>rank</code> defaults to to a large negative value that decreases with time.</p>
+<p>Note that if you do not include a <code>rank</code> value in your <code>POST</code> data, <code>rank</code> defaults to to a large negative value that decreases with time.</p>
 <h2 id='manipulating-individual-customlistitemrelations'>Manipulating Individual CustomListItemRelations</h2>
 <blockquote>
 <p>Update the rank of a CustomListItemRelation</p>
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/custom-list-item-relations/1/'</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 <span class="n">patch_data</span> <span class="o">=</span>
 <span class="p">{</span>
