@@ -38,7 +38,6 @@ response_2 = request.post(session_url, data=post_data, headers={'Authorization':
 {
 	"id": 106,
 	"created_at": "2017-09-18T22:13:25.766623+0000",
-	"last_updated": "2017-09-18T22:13:25.766653+0000",
 	"start_time": "2017-09-18T16:00:00.000000+0000",
 	"end_time": "2017-09-18T17:00:00.000000+0000",
 	"all_day": false,
@@ -55,7 +54,6 @@ response_2 = request.post(session_url, data=post_data, headers={'Authorization':
 {
 	"id": 106,
 	"created_at": "2017-09-18T22:13:25.766623+0000",
-	"last_updated": "2017-09-18T22:13:25.766653+0000",
 	"start_time": "2017-09-18T16:00:00.000000+0000",
 	"end_time": "2017-09-18T17:00:00.000000+0000",
 	"all_day": false,
@@ -109,17 +107,9 @@ api_key = 'API_KEY'
 
 # This will return all sessions you have access to
 response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
-
-# This will return all Sessions for a guide you have access to. Guide 47 in this example
-response = request.get('{}guide=47'.format(session_url), headers={'Authorization': 'JWT ' + api_key})
-
-# This will return a specific Session.  Session number 8348 in this example
-response = request.get('{}8348/'.format(session_url), headers={'Authorization': 'JWT ' + api_key})
-
-
 ```
 
-> The above commands return JSON structured like this:
+> The above command returns JSON structured like this:
 
 ```json
 {
@@ -130,7 +120,6 @@ response = request.get('{}8348/'.format(session_url), headers={'Authorization': 
 		{
 			"id": 21,
 			"created_at": "2017-09-18T21:28:35.429989+0000",
-			"last_updated": "2017-09-18T21:28:35.430011+0000",
 			"start_time": "2017-09-18T21:28:35.428248+0000",
 			"end_time": "2017-09-18T22:28:35.428257+0000",
 			"all_day": false,
@@ -145,7 +134,6 @@ response = request.get('{}8348/'.format(session_url), headers={'Authorization': 
 		{
 			"id": 22,
 			"created_at": "2017-09-18T21:28:35.432366+0000",
-			"last_updated": "2017-09-18T21:28:35.432388+0000",
 			"start_time": "2017-09-18T21:28:35.431034+0000",
 			"end_time": "2017-09-18T22:28:35.431042+0000",
 			"all_day": false,
@@ -160,7 +148,6 @@ response = request.get('{}8348/'.format(session_url), headers={'Authorization': 
 		{
 			"id": 23,
 			"created_at": "2017-09-18T21:28:35.434402+0000",
-			"last_updated": "2017-09-18T21:28:35.434422+0000",
 			"start_time": "2017-09-18T21:28:35.433197+0000",
 			"end_time": "2017-09-18T22:28:35.433205+0000",
 			"all_day": false,
@@ -175,7 +162,6 @@ response = request.get('{}8348/'.format(session_url), headers={'Authorization': 
 		{
 			"id": 24,
 			"created_at": "2017-09-18T21:28:35.436433+0000",
-			"last_updated": "2017-09-18T21:28:35.436452+0000",
 			"start_time": "2017-09-18T21:28:35.435265+0000",
 			"end_time": "2017-09-18T22:28:35.435273+0000",
 			"all_day": false,
@@ -202,3 +188,9 @@ This endpoint can also be used to read data on Sessions.
 ### Model Fields
 
 Same as the fields used in creation.
+
+### Filtering By Guide id
+
+Including a query parameter `guide` allows you to filter for all `Sessions` related to a `Guide` you have access to (`Guide` 47 in this example):
+
+`GET http://builder.guidebook.com/open-api/v1/sessions/?guide=47`

@@ -23,10 +23,12 @@ response = request.post(schedule_tracks_url, data=post_data, headers={'Authoriza
 ```json
 {
 	"id": 234,
-	"guide": 337,
+	"guide": 1,
 	"name": "Test Schedule Track Created via the Open API",
-	"color": "#000080"
+	"color": "#000080",
+	"created_at": "2017-09-21T21:28:35.432366+0000"
 }
+
 
 ```
 
@@ -58,14 +60,6 @@ api_key = 'API_KEY'
 
 # This will return all schedule tracks you have access to
 response = request.get(schedule_tracks_url, headers={'Authorization': 'JWT ' + api_key})
-
-# This will return all Schedule Tracks for a guide you have access to. Guide 47 in this example
-response = request.get('{}guide=47'.format(schedule_tracks_url), headers={'Authorization': 'JWT ' + api_key})
-
-# This will return a specific Schedule Track.  Schedule Track number 1234 in this example
-response = request.get('{}1234/'.format(schedule_tracks_url), headers={'Authorization': 'JWT ' + api_key})
-
-
 ```
 
 > The above command returns JSON structured like this:
@@ -80,7 +74,8 @@ response = request.get('{}1234/'.format(schedule_tracks_url), headers={'Authoriz
 			"id": 210,
 			"guide": 308,
 			"name": "Test Track 1",
-			"color": null
+			"color": null,
+			"created_at": "2017-09-10T21:28:35.432366+0000"
 		},
 		{
 			"id": 211,
@@ -92,16 +87,19 @@ response = request.get('{}1234/'.format(schedule_tracks_url), headers={'Authoriz
 			"id": 212,
 			"guide": 308,
 			"name": "Test Track 3",
-			"color": null
+			"color": null,
+			"created_at": "2017-09-11T21:28:35.432366+0000"
 		},
 		{
 			"id": 213,
 			"guide": 309,
 			"name": "Test Track 4, Different Guide",
-			"color": null
+			"color": null,
+			"created_at": "2017-09-12T21:28:35.432366+0000"
 		}
 	]
 }
+
 ```
 
 
@@ -114,3 +112,9 @@ This endpoint can also be used to read data on Schedule Tracks.
 ### Model Fields
 
 Same as the fields used in creation.
+
+### Filtering By Guide id
+
+Including a query parameter `guide` allows you to filter for all `ScheduleTracks` related to a `Guide` you have access to (`Guide` 47 in the following example):
+
+`GET http://builder.guidebook.com/open-api/v1/schedule-tracks/?guide=47`
