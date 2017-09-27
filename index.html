@@ -274,6 +274,17 @@
           <li>
             <a href="#versioning" class="toc-h1 toc-link" data-title="Versioning">Versioning</a>
           </li>
+          <li>
+            <a href="#timezones-utc" class="toc-h1 toc-link" data-title="Timezones + UTC">Timezones + UTC</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#communicating-with-the-open-api" class="toc-h2 toc-link" data-title="Timezones + UTC">Communicating With the Open API</a>
+                  </li>
+                  <li>
+                    <a href="#display-in-guidebook-39-s-mobile-apps" class="toc-h2 toc-link" data-title="Timezones + UTC">Display in Guidebook's Mobile Apps</a>
+                  </li>
+              </ul>
+          </li>
       </div>
         <ul class="toc-footer">
             <li><a href='https://builder.guidebook.com/'>Sign Up for a Guidebook API Key</a></li>
@@ -968,6 +979,10 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <li>Changing the order of properties in existing API responses</li>
 <li>Changing the length or format of object IDs or other opaque strings.</li>
 </ul>
+<h1 id='timezones-utc'>Timezones + UTC</h1><h2 id='communicating-with-the-open-api'>Communicating With the Open API</h2>
+<p>Internally, Guidebook&#39;s servers store all inputted datetime values in the <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Universal Time Zone (UTC)</a>. As such, when the Guidebook Open API reports a datetime, it returns a datetime value in UTC. For example, <code>Session.start_time</code>, <code>Session.end_time</code>, and <code>Guide.created_at</code> all report themselves in UTC. To minimize confusion and error, we recommend that your applications send datetimes to the Guidebook Open API in UTC. For example, <code>2017-09-26T09:35:00.000000-0700</code> (&quot;September 26th 2017 9:35AM US/Pacific&quot;) would be sent as <code>2017-09-26T16:35:00.000000+0000</code> (&quot;September 26th 2017 4:35PM UTC&quot;).</p>
+<h2 id='display-in-guidebook-39-s-mobile-apps'>Display in Guidebook&#39;s Mobile Apps</h2>
+<p>When datetimes (like <code>Session.start_time</code> and <code>Session.end_time</code>) are displayed to users in Guidebook&#39;s Android + iOS mobile apps, they are converted from UTC to the timezone of the <code>Guide</code> object they belong to. As of now, <code>Guide</code> timezone management is available in the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a> (and not via the Open API).</p>
 
       </div>
       <div class="dark-box">
