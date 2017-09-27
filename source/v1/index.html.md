@@ -17,6 +17,7 @@ includes:
   - schedule_tracks
   - custom_list_item_relations
   - versioning
+  - timezones
 
 search: true
 ---
