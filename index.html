@@ -231,7 +231,7 @@
             <a href="#guides" class="toc-h1 toc-link" data-title="Guides">Guides</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#listing-guides" class="toc-h2 toc-link" data-title="Guides">Listing Guides</a>
+                    <a href="#listing-code-guides-code" class="toc-h2 toc-link" data-title="Guides">Listing <code>Guides</code></a>
                   </li>
               </ul>
           </li>
@@ -239,32 +239,32 @@
             <a href="#sessions" class="toc-h1 toc-link" data-title="Sessions">Sessions</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#how-to-create-a-session" class="toc-h2 toc-link" data-title="Sessions">How to Create a Session</a>
+                    <a href="#how-to-create-a-code-session-code" class="toc-h2 toc-link" data-title="Sessions">How to Create a <code>Session</code></a>
                   </li>
                   <li>
-                    <a href="#how-to-fetch-data-on-sessions" class="toc-h2 toc-link" data-title="Sessions">How to Fetch Data on Sessions</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#schedule-tracks" class="toc-h1 toc-link" data-title="Schedule Tracks">Schedule Tracks</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#how-to-create-a-schedule-track" class="toc-h2 toc-link" data-title="Schedule Tracks">How to Create a Schedule Track</a>
-                  </li>
-                  <li>
-                    <a href="#how-to-fetch-data-on-schedule-tracks" class="toc-h2 toc-link" data-title="Schedule Tracks">How to Fetch Data on Schedule Tracks</a>
+                    <a href="#how-to-fetch-data-on-code-sessions-code" class="toc-h2 toc-link" data-title="Sessions">How to Fetch Data on <code>Sessions</code></a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#custom-lists" class="toc-h1 toc-link" data-title="Custom Lists">Custom Lists</a>
+            <a href="#scheduletracks" class="toc-h1 toc-link" data-title="ScheduleTracks">ScheduleTracks</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#how-to-create-a-custom-list" class="toc-h2 toc-link" data-title="Custom Lists">How to Create a Custom List</a>
+                    <a href="#how-to-create-a-code-scheduletrack-code" class="toc-h2 toc-link" data-title="ScheduleTracks">How to Create a <code>ScheduleTrack</code></a>
                   </li>
                   <li>
-                    <a href="#how-to-fetch-data-on-custom-lists" class="toc-h2 toc-link" data-title="Custom Lists">How to Fetch Data on Custom Lists</a>
+                    <a href="#how-to-fetch-data-on-code-scheduletracks-code" class="toc-h2 toc-link" data-title="ScheduleTracks">How to Fetch Data on <code>ScheduleTracks</code></a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#customlists" class="toc-h1 toc-link" data-title="CustomLists">CustomLists</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#how-to-create-a-code-customlist-code" class="toc-h2 toc-link" data-title="CustomLists">How to Create a <code>CustomList</code></a>
+                  </li>
+                  <li>
+                    <a href="#how-to-fetch-data-on-code-customlists-code" class="toc-h2 toc-link" data-title="CustomLists">How to Fetch Data on <code>CustomLists</code></a>
                   </li>
               </ul>
           </li>
@@ -275,7 +275,7 @@
                     <a href="#how-to-create-a-customlistitem" class="toc-h2 toc-link" data-title="CustomListItems">How to Create a CustomListItem</a>
                   </li>
                   <li>
-                    <a href="#how-to-fetch-data-on-code-customlistitem-code-s" class="toc-h2 toc-link" data-title="CustomListItems">How to Fetch Data on <code>CustomListItem</code>s</a>
+                    <a href="#how-to-fetch-data-on-code-customlistitems-code" class="toc-h2 toc-link" data-title="CustomListItems">How to Fetch Data on <code>CustomListItems</code></a>
                   </li>
               </ul>
           </li>
@@ -439,7 +439,7 @@ You must replace <code>API_KEY</code> with your personal API key.
 <p>Many of the resources exposed by the Guidebook Open API relate to a class of objects called <code>Guide</code>. <code>Guide</code> objects are typically containers for the set of data related to an event like a conference. For example, if you were hosting a conference called, &quot;Programmer Summit 2017&quot; you would likely have one <code>Guide</code> object that contained the schedule for the conference, a list of speakers for that conference, and a list of users who you expect to attend the conference.</p>
 
 <p>As of now, <code>Guide</code> objects themselves are primarily managed via the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a> (and not via the Open API). Resources exposed by the Open API, however, will contain references to the id of <code>Guide</code> objects they belong to. For example, every <code>Session</code> object returned in the Open API will report the id of the one <code>Guide</code> that <code>Session</code> belongs to (e.g. <code>&quot;guide&quot;: 1</code>). In general, resources cannot be transferred or otherwise shared amongst more than one <code>Guide</code> -- once a <code>Session</code> is created under a given <code>Guide</code> object, it lives under that <code>Guide</code> permanently and cannot be moved to a different <code>Guide</code>.</p>
-<h2 id='listing-guides'>Listing Guides</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h2 id='listing-code-guides-code'>Listing <code>Guides</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">guides_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/guides/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
@@ -478,24 +478,24 @@ You must replace <code>API_KEY</code> with your personal API key.
 <tr>
 <td>id</td>
 <td>int</td>
-<td>id of the Guide object.</td>
+<td>id of the <code>Guide</code> object.</td>
 </tr>
 <tr>
 <td>created_at</td>
 <td>datetime</td>
-<td>Time when Guide was created -- in UTC.</td>
+<td>Time when <code>Guide</code> was created -- in UTC.</td>
 </tr>
 <tr>
 <td>name</td>
 <td>str</td>
-<td>Name of the Guide.</td>
+<td>Name of the <code>Guide</code>.</td>
 </tr>
 </tbody></table>
 <h3 id='filtering-by-id'>Filtering By id</h3>
 <p>To filter the listing for one <code>Guide</code> in particular you can issue a request with a query parameter <code>id</code>. The following request, for examples, filters for <code>Guide</code> with <code>id</code> 21.</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/guides/?id=21</code></p>
-<h1 id='sessions'>Sessions</h1><h2 id='how-to-create-a-session'>How to Create a Session</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h1 id='sessions'>Sessions</h1><h2 id='how-to-create-a-code-session-code'>How to Create a <code>Session</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">session_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/sessions/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
@@ -509,7 +509,7 @@ You must replace <code>API_KEY</code> with your personal API key.
 <span class="p">}</span>
 <span class="n">response_1</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">session_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
-<span class="c"># example with schedule tracks</span>
+<span class="c"># example with `ScheduleTracks`</span>
 <span class="n">post_data</span> <span class="o">=</span>
 <span class="p">{</span>
     <span class="s">"start_time"</span><span class="p">:</span> <span class="s">"2017-09-18T16:00:00"</span><span class="p">,</span>
@@ -540,7 +540,7 @@ You must replace <code>API_KEY</code> with your personal API key.
     </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span><span class="err">#</span><span class="w"> </span><span class="err">example</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">schedule</span><span class="w"> </span><span class="err">tracks</span><span class="w">
+</span><span class="err">#</span><span class="w"> </span><span class="err">example</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">`ScheduleTracks`</span><span class="w">
 </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">106</span><span class="p">,</span><span class="w">
     </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T22:13:25.766623+0000"</span><span class="p">,</span><span class="w">
@@ -557,7 +557,7 @@ You must replace <code>API_KEY</code> with your personal API key.
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>This endpoint will create a session for your guide.</p>
+<p>This endpoint will create a <code>Session</code> for your <code>Guide</code>.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://builder.guidebook.com/open-api/v1/sessions/</code></p>
 <h3 id='model-fields'>Model Fields</h3>
@@ -573,19 +573,19 @@ You must replace <code>API_KEY</code> with your personal API key.
 <td>guide</td>
 <td>yes</td>
 <td>integer</td>
-<td>The specific guide your Session belongs to.  See section on Guides for more info.</td>
+<td>The specific <code>Guide</code> your <code>Session</code> belongs to.  See section on <a href="#guides">Guides</a> for more info.</td>
 </tr>
 <tr>
 <td>name</td>
 <td>yes</td>
 <td>string</td>
-<td>The title of your Session.</td>
+<td>The title of your <code>Session</code>.</td>
 </tr>
 <tr>
 <td>description_html</td>
 <td>yes</td>
 <td>string</td>
-<td>A text description of the Session. This field supports basic HTML.</td>
+<td>A text description of the <code>Session</code>. This field supports basic HTML.</td>
 </tr>
 <tr>
 <td>start_time</td>
@@ -603,43 +603,43 @@ You must replace <code>API_KEY</code> with your personal API key.
 <td>all_day</td>
 <td>no</td>
 <td>boolean</td>
-<td>A boolean value indicating if a Session runs for the entire day.</td>
+<td>A boolean value indicating if a <code>Session</code> runs for the entire day.</td>
 </tr>
 <tr>
 <td>allow_rating</td>
 <td>no</td>
 <td>boolean</td>
-<td>A boolean value indicating if end-users can rate this Session.</td>
+<td>A boolean value indicating if end-users can rate this <code>Session</code>.</td>
 </tr>
 <tr>
 <td>add_to_schedule</td>
 <td>no</td>
 <td>boolean</td>
-<td>A boolean value indicating if end-users can add this Session to their personal schedule.</td>
+<td>A boolean value indicating if end-users can add this <code>Session</code> to their personal schedule.</td>
 </tr>
 <tr>
 <td>import_id</td>
 <td>no</td>
 <td>string</td>
-<td>A string field you can used to input your own identifier.  This is for when you have your own IDs for Sessions in your data store.</td>
+<td>A string field you can used to input your own identifier.  This is for when you have your own IDs for <code>Sessions</code> in your data store.</td>
 </tr>
 <tr>
 <td>schedule_tracks</td>
 <td>no</td>
 <td>array of integers</td>
-<td>Array of IDs of Schedule Tracks this Session should belong to.  See section on Schedule Tracks.</td>
+<td>Array of IDs of <code>ScheduleTracks</code> this <code>Session</code> should belong to.  See section on <a href="#schedule-tracks">ScheduleTracks</a>.</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
 Remember — don't forget to include your API key in the `Authorization` header!
 </aside>
-<h2 id='how-to-fetch-data-on-sessions'>How to Fetch Data on Sessions</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h2 id='how-to-fetch-data-on-code-sessions-code'>How to Fetch Data on <code>Sessions</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">session_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/sessions/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 
-<span class="c"># This will return all sessions you have access to</span>
+<span class="c"># This will return all `Sessions` you have access to</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 </code></pre>
 <blockquote>
@@ -710,7 +710,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>This endpoint can also be used to read data on Sessions.</p>
+<p>This endpoint can also be used to read data on <code>Sessions</code>.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET https://builder.guidebook.com/open-api/v1/sessions/</code></p>
 <h3 id='model-fields-2'>Model Fields</h3>
@@ -719,7 +719,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>Sessions</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47</code></p>
-<h1 id='schedule-tracks'>Schedule Tracks</h1><h2 id='how-to-create-a-schedule-track'>How to Create a Schedule Track</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h1 id='scheduletracks'>ScheduleTracks</h1><h2 id='how-to-create-a-code-scheduletrack-code'>How to Create a <code>ScheduleTrack</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
@@ -745,7 +745,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 
 
 </span></code></pre>
-<p>This endpoint will create a Schedule Track for your guide.</p>
+<p>This endpoint will create a <code>ScheduleTrack</code> for your guide.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://builder.guidebook.com/open-api/v1/schedule-tracks/</code></p>
 <h3 id='model-fields'>Model Fields</h3>
@@ -761,13 +761,13 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <td>guide</td>
 <td>yes</td>
 <td>integer</td>
-<td>The specific guide your Schedule Track belongs to.  See section on Guides for more info.</td>
+<td>The specific guide your <code>ScheduleTrack</code> belongs to.  See section on <a href="#guides">Guides</a> for more info.</td>
 </tr>
 <tr>
 <td>name</td>
 <td>yes</td>
 <td>string</td>
-<td>The title of your Schedule Track.</td>
+<td>The title of your <code>ScheduleTrack</code>.</td>
 </tr>
 <tr>
 <td>color</td>
@@ -778,12 +778,12 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </tbody></table>
 
 <p>Example: &quot;#000080&quot; for blue.</p>
-<h2 id='how-to-fetch-data-on-schedule-tracks'>How to Fetch Data on Schedule Tracks</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h2 id='how-to-fetch-data-on-code-scheduletracks-code'>How to Fetch Data on <code>ScheduleTracks</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 
-<span class="c"># This will return all schedule tracks you have access to</span>
+<span class="c"># This will return all `ScheduleTracks` you have access to</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">schedule_tracks_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 </code></pre>
 <blockquote>
@@ -825,7 +825,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>This endpoint can also be used to read data on Schedule Tracks.</p>
+<p>This endpoint can also be used to read data on <code>ScheduleTracks</code>.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET https://builder.guidebook.com/open-api/v1/schedule-tracks/</code></p>
 <h3 id='model-fields-2'>Model Fields</h3>
@@ -834,7 +834,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>ScheduleTracks</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/schedule-tracks/?guide=47</code></p>
-<h1 id='custom-lists'>Custom Lists</h1><h2 id='how-to-create-a-custom-list'>How to Create a Custom List</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h1 id='customlists'>CustomLists</h1><h2 id='how-to-create-a-code-customlist-code'>How to Create a <code>CustomList</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">custom_lists_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/custom-lists/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
@@ -860,7 +860,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>This endpoint will create and list all <code>CustomList</code>s that are owned by your Account. Typically, this endpoint is called with a <code>guide_id</code> filter such that it returns a list of <code>CustomList</code>s associated to a lone <code>Guide</code> object that is owned by you.</p>
+<p>This endpoint will create and list all <code>CustomLists</code> that are owned by your Account. Typically, this endpoint is called with a <code>guide_id</code> filter such that it returns a list of <code>CustomLists</code> associated to a lone <code>Guide</code> object that is owned by you.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://builder.guidebook.com/open-api/v1/custom-lists/</code></p>
 <h3 id='model-fields'>Model Fields</h3>
@@ -876,7 +876,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <td>guide</td>
 <td>yes</td>
 <td>integer</td>
-<td>The specific <code>Guide</code> your <code>CustomList</code> belongs to.  See section on Guides for more info.</td>
+<td>The specific <code>Guide</code> your <code>CustomList</code> belongs to.  See section on <a href="#guides">Guides</a> for more info.</td>
 </tr>
 <tr>
 <td>name</td>
@@ -903,7 +903,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <td>A string field you can used to input your own identifier.  This is for when you have your own IDs for your Lists in your data store.</td>
 </tr>
 </tbody></table>
-<h2 id='how-to-fetch-data-on-custom-lists'>How to Fetch Data on Custom Lists</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h2 id='how-to-fetch-data-on-code-customlists-code'>How to Fetch Data on <code>CustomLists</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">custom_lists_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/custom-lists/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
@@ -958,7 +958,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint can also be used to read data on <code>CustomList</code>s.</p>
+<p>This endpoint can also be used to read data on <code>CustomLists</code>.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET https://builder.guidebook.com/open-api/v1/custom-lists/</code></p>
 <h3 id='model-fields-2'>Model Fields</h3>
@@ -982,8 +982,8 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <td>Time when this <code>CustomList</code> was created - UTC.</td>
 </tr>
 </tbody></table>
-<h3 id='filtering-by-guide-id'>Filtering By Guide id</h3>
-<p>Including a query parameter <code>guide</code> allows you to filter for all <code>CustomList</code>s related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
+<h3 id='filtering-by-code-guide-code-id'>Filtering By <code>Guide</code> id</h3>
+<p>Including a query parameter <code>guide</code> allows you to filter for all <code>CustomLists</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/custom-lists/?guide=47</code></p>
 <h1 id='customlistitems'>CustomListItems</h1><h2 id='how-to-create-a-customlistitem'>How to Create a CustomListItem</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
@@ -1034,7 +1034,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <td>guide</td>
 <td>yes</td>
 <td>integer</td>
-<td>The specific <code>Guide</code> your <code>CustomListItem</code> belongs to.  See section on <a href="#guides"><code>Guide</code></a>s for more info.</td>
+<td>The specific <code>Guide</code> your <code>CustomListItem</code> belongs to.  See section on <a href="#guides">Guides</a> for more info.</td>
 </tr>
 <tr>
 <td>name</td>
@@ -1064,15 +1064,15 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <td>import_id</td>
 <td>no</td>
 <td>string</td>
-<td>A string field you can used to input your own identifier.  This is for when you have your own IDs for <code>CustomListItem</code>s in your data store.</td>
+<td>A string field you can used to input your own identifier.  This is for when you have your own IDs for <code>CustomListItems</code> in your data store.</td>
 </tr>
 </tbody></table>
-<h2 id='how-to-fetch-data-on-code-customlistitem-code-s'>How to Fetch Data on <code>CustomListItem</code>s</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h2 id='how-to-fetch-data-on-code-customlistitems-code'>How to Fetch Data on <code>CustomListItems</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">custom_list_item_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/custom-list-items/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 
-<span class="c"># This will return all `CustomListItem`s you have access to</span>
+<span class="c"># This will return all `CustomListItems` you have access to</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">custom_list_item_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 </code></pre>
 <blockquote>
@@ -1171,8 +1171,8 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <td>A list of the <code>CustomList</code> IDs that this <code>CustomListItem</code> is related to.</td>
 </tr>
 </tbody></table>
-<h3 id='filtering-by-code-guide-code-id'>Filtering By <code>Guide</code> Id</h3>
-<p>Including a query parameter <code>guide</code> allows you to filter for all <code>CustomListItem</code>s related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
+<h3 id='filtering-by-code-guide-code-id'>Filtering By <code>Guide</code> id</h3>
+<p>Including a query parameter <code>guide</code> allows you to filter for all <code>CustomListItems</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47</code></p>
 <h1 id='customlistitemrelations'>CustomListItemRelations</h1>
