@@ -1,4 +1,4 @@
-# `Locations`
+# Locations
 
 `Location` objects can be added to `Sessions` and `CustomListItems` to give users additional context about where an event or point of interest is located.
 
