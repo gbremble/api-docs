@@ -5,7 +5,7 @@ Guidebook offers a REST API to manage a subset of the resources available in the
 Here are, for example, some typical response codes you might encounter:
 
 Code                  | Description
----------             | --------  
+---------             | --------
 200                   | OK. Request received and processed successfully
 201                   | Created. The request has been fulfilled and has resulted in one or more new resources being created
 400                   | Bad request. The request is malformed and has not been accepted

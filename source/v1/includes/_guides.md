@@ -43,7 +43,7 @@ response = requests.get(guides_url, headers={'Authorization': 'JWT ' + api_key})
 ### Guide Properties
 
 Property       | Type        | Description
----------      | --------    | --------    
+---------      | --------    | --------
 id             | int         | id of the Guide object.
 created_at     | datetime    | Time when Guide was created -- in UTC.
 name           | str         | Name of the Guide.
