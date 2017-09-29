@@ -1,6 +1,6 @@
-# Schedule Tracks
+# ScheduleTracks
 
-## How to Create a Schedule Track
+## How to Create a `ScheduleTrack`
 
 
 ```python
@@ -33,7 +33,7 @@ response = request.post(schedule_tracks_url, data=post_data, headers={'Authoriza
 ```
 
 
-This endpoint will create a Schedule Track for your guide.
+This endpoint will create a `ScheduleTrack` for your guide.
 
 ### HTTP Request
 
@@ -43,13 +43,13 @@ This endpoint will create a Schedule Track for your guide.
 
 Parameter       | Required  | Type    | Description
 ---------       | --------  | ------- | -----------
-guide           | yes | integer  | The specific guide your Schedule Track belongs to.  See section on Guides for more info.
-name            | yes | string   | The title of your Schedule Track.
+guide           | yes | integer  | The specific guide your `ScheduleTrack` belongs to.  See section on [Guides](#guides) for more info.
+name            | yes | string   | The title of your `ScheduleTrack`.
 color           | no  | string   | Hex value of the color you want this track to be. Used for highlighting sessions in the app.
 Example: "#000080" for blue.
 
 
-## How to Fetch Data on Schedule Tracks
+## How to Fetch Data on `ScheduleTracks`
 
 
 ```python
@@ -58,7 +58,7 @@ import requests
 schedule_tracks_url =  'https://builder.guidebook.com/open-api/v1/schedule-tracks/'
 api_key = 'API_KEY'
 
-# This will return all schedule tracks you have access to
+# This will return all `ScheduleTracks` you have access to
 response = request.get(schedule_tracks_url, headers={'Authorization': 'JWT ' + api_key})
 ```
 
@@ -103,7 +103,7 @@ response = request.get(schedule_tracks_url, headers={'Authorization': 'JWT ' + a
 ```
 
 
-This endpoint can also be used to read data on Schedule Tracks.
+This endpoint can also be used to read data on `ScheduleTracks`.
 
 ### HTTP Request
 

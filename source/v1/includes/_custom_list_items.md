@@ -49,15 +49,15 @@ This endpoint will create a `CustomListItem` for your `Guide`.
 
 Parameter       | Required  | Type    | Description
 ---------       | --------  | ------- | -----------
-guide           | yes | integer  | The specific `Guide` your `CustomListItem` belongs to.  See section on [`Guide`](#guides)s for more info.
+guide           | yes | integer  | The specific `Guide` your `CustomListItem` belongs to.  See section on [Guides](#guides) for more info.
 name            | yes | string   | The title of your `CustomListItem`.
 description_html| yes | string   | A text description of the `CustomListItem`. This field supports basic HTML.
 subtitle        | no  | string   | A short tagline thats displayed below the name of the name field.
 allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this `CustomListItem`.
-import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for `CustomListItem`s in your data store.
+import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for `CustomListItems` in your data store.
 
 
-## How to Fetch Data on `CustomListItem`s
+## How to Fetch Data on `CustomListItems`
 
 
 ```python
@@ -66,7 +66,7 @@ import requests
 custom_list_item_url =  'https://builder.guidebook.com/open-api/v1/custom-list-items/'
 api_key = 'API_KEY'
 
-# This will return all `CustomListItem`s you have access to
+# This will return all `CustomListItems` you have access to
 response = request.get(custom_list_item_url, headers={'Authorization': 'JWT ' + api_key})
 ```
 
@@ -156,8 +156,8 @@ created_at      | datetime | Time when this `CustomListItem` was created - UTC.
 custom_list     | list of integers | A list of the `CustomList` IDs that this `CustomListItem` is related to.
 
 
-### Filtering By `Guide` Id
+### Filtering By `Guide` id
 
-Including a query parameter `guide` allows you to filter for all `CustomListItem`s related to a `Guide` you have access to (`Guide` 47 in this example):
+Including a query parameter `guide` allows you to filter for all `CustomListItems` related to a `Guide` you have access to (`Guide` 47 in this example):
 
 `GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47`

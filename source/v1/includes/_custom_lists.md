@@ -1,6 +1,6 @@
-# Custom Lists
+# CustomLists
 
-## How to Create a Custom List
+## How to Create a `CustomList`
 
 
 ```python
@@ -33,7 +33,7 @@ response = request.post(custom_lists_url, data=post_data, headers={'Authorizatio
 ```
 
 
-This endpoint will create and list all `CustomList`s that are owned by your Account. Typically, this endpoint is called with a `guide_id` filter such that it returns a list of `CustomList`s associated to a lone `Guide` object that is owned by you.
+This endpoint will create and list all `CustomLists` that are owned by your Account. Typically, this endpoint is called with a `guide_id` filter such that it returns a list of `CustomLists` associated to a lone `Guide` object that is owned by you.
 
 ### HTTP Request
 
@@ -43,14 +43,14 @@ This endpoint will create and list all `CustomList`s that are owned by your Acco
 
 Parameter       | Required  | Type    | Description
 ---------       | --------  | ------- | -----------
-guide           | yes | integer  | The specific `Guide` your `CustomList` belongs to.  See section on Guides for more info.
+guide           | yes | integer  | The specific `Guide` your `CustomList` belongs to.  See section on [Guides](#guides) for more info.
 name            | yes | string   | The title of your `CustomList`. i.e (Exhibitors, Speakers, Places to Visit, etc).
 disable_todo    | no  | boolean   | A booelan value that will hide the "Add to To-do" button for all items on this list.
 allow_rating    | no  | boolean   |  A boolean value indicating if end-users can rate items in this `CustomList`.
 import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for your Lists in your data store.
 
 
-## How to Fetch Data on Custom Lists
+## How to Fetch Data on `CustomLists`
 
 
 ```python
@@ -112,7 +112,7 @@ response = request.get(custom_lists_url, headers={'Authorization': 'JWT ' + api_
 ```
 
 
-This endpoint can also be used to read data on `CustomList`s.
+This endpoint can also be used to read data on `CustomLists`.
 
 ### HTTP Request
 
@@ -128,8 +128,8 @@ id              | integer  | An unique identifier for your `CustomList`.
 created_at      | datetime | Time when this `CustomList` was created - UTC.
 
 
-### Filtering By Guide id
+### Filtering By `Guide` id
 
-Including a query parameter `guide` allows you to filter for all `CustomList`s related to a `Guide` you have access to (`Guide` 47 in the following example):
+Including a query parameter `guide` allows you to filter for all `CustomLists` related to a `Guide` you have access to (`Guide` 47 in the following example):
 
 `GET https://builder.guidebook.com/open-api/v1/custom-lists/?guide=47`
