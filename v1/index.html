@@ -272,7 +272,7 @@
             <a href="#customlistitems" class="toc-h1 toc-link" data-title="CustomListItems">CustomListItems</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#how-to-create-a-customlistitem" class="toc-h2 toc-link" data-title="CustomListItems">How to Create a CustomListItem</a>
+                    <a href="#how-to-create-a-code-customlistitem-code" class="toc-h2 toc-link" data-title="CustomListItems">How to Create a <code>CustomListItem</code></a>
                   </li>
                   <li>
                     <a href="#how-to-fetch-data-on-code-customlistitems-code" class="toc-h2 toc-link" data-title="CustomListItems">How to Fetch Data on <code>CustomListItems</code></a>
@@ -627,7 +627,7 @@ You must replace <code>API_KEY</code> with your personal API key.
 <td>schedule_tracks</td>
 <td>no</td>
 <td>array of integers</td>
-<td>Array of IDs of <code>ScheduleTracks</code> this <code>Session</code> should belong to.  See section on <a href="#schedule-tracks">ScheduleTracks</a>.</td>
+<td>Array of IDs of <code>ScheduleTracks</code> this <code>Session</code> should belong to.  See section on <a href="#scheduletracks">ScheduleTracks</a>.</td>
 </tr>
 </tbody></table>
 
@@ -986,7 +986,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>CustomLists</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/custom-lists/?guide=47</code></p>
-<h1 id='customlistitems'>CustomListItems</h1><h2 id='how-to-create-a-customlistitem'>How to Create a CustomListItem</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h1 id='customlistitems'>CustomListItems</h1><h2 id='how-to-create-a-code-customlistitem-code'>How to Create a <code>CustomListItem</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">custom_list_item_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/custom-list-items/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
