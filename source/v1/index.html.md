@@ -15,6 +15,7 @@ includes:
   - guides
   - sessions
   - schedule_tracks
+  - locations
   - custom_lists
   - custom_list_items
   - custom_list_item_relations
