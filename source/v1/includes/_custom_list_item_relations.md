@@ -73,7 +73,7 @@ To filter the returned `CustomListItemRelations` by the related `CustomList` you
 
 You can combine the above two filters to do something like, "find the `CustomListItemRelation` that associates `custom_list_item` 5 with `custom_list` 1:"
 
-https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list_item=5&custom_list=1`
+`GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list_item=5&custom_list=1`
 
 ## Creating CustomListItemRelations
 
