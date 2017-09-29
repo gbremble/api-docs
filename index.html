@@ -258,6 +258,20 @@
               </ul>
           </li>
           <li>
+            <a href="#code-locations-code" class="toc-h1 toc-link" data-title="<code>Locations</code>"><code>Locations</code></a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#listing-code-locations-code" class="toc-h2 toc-link" data-title="<code>Locations</code>">Listing <code>Locations</code></a>
+                  </li>
+                  <li>
+                    <a href="#creating-code-locations-code" class="toc-h2 toc-link" data-title="<code>Locations</code>">Creating <code>Locations</code></a>
+                  </li>
+                  <li>
+                    <a href="#manipulating-individual-code-locations-code" class="toc-h2 toc-link" data-title="<code>Locations</code>">Manipulating Individual <code>Locations</code></a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#customlists" class="toc-h1 toc-link" data-title="CustomLists">CustomLists</a>
               <ul class="toc-list-h2">
                   <li>
@@ -834,6 +848,188 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>ScheduleTracks</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/schedule-tracks/?guide=47</code></p>
+<h1 id='code-locations-code'><code>Locations</code></h1>
+<p><code>Location</code> objects can be added to <code>Sessions</code> and <code>CustomListItems</code> to give users additional context about where an event or point of interest is located.</p>
+<h2 id='listing-code-locations-code'>Listing <code>Locations</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/locations/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">guides_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Conference Hall A"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"location_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-31T20:18:28.018529+0000"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lobby"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"location_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-31T20:18:28.038556+0000"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Meeting Place"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"location_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.7749</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-122.4194</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-31T20:18:28.052157+0000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://builder.guidebook.com/open-api/v1/locations/</code></p>
+<h3 id='location-properties'>Location Properties</h3>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>id of the <code>Location</code> object.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td>Time when this <code>Location</code> was created - UTC.</td>
+</tr>
+<tr>
+<td>guide</td>
+<td>integer</td>
+<td>id of the <code>Guide</code> this <code>Location</code> belongs to.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Name of this <code>Location</code>.</td>
+</tr>
+<tr>
+<td>import_id</td>
+<td>string</td>
+<td>A string field you can used to input your own identifier. This is for when you have your own IDs for <code>Locations</code> in your data store.</td>
+</tr>
+<tr>
+<td>location_type</td>
+<td>integer</td>
+<td>Either 2 or 3. If 3, indicates that this <code>Location</code> is a &quot;google maps Location&quot;; if <code>location_type=3</code> latitude and longitude are required.</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>float</td>
+<td>Latitude of this <code>Location</code> - only required if this <code>Location</code> has <code>location_type=3</code> (&quot;google maps <code>Location</code>&quot;).</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>float</td>
+<td>Longitude of this <code>Location</code> - only required if this <code>Location</code> has <code>location_type=3</code> (&quot;google maps <code>Location</code>&quot;).</td>
+</tr>
+</tbody></table>
+<h3 id='filtering-code-locations-code'>Filtering <code>Locations</code></h3>
+<p>To filter the returned <code>Locations</code> by their <code>location_type</code> include the query parameter <code>location_type</code>. The following request, for examples, filters for <code>Locations</code> with <code>location_type</code> 2.</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/locations/?location_type=2</code></p>
+<h2 id='creating-code-locations-code'>Creating <code>Locations</code></h2><pre class="highlight python tab-python"><code>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/locations/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">post_data</span> <span class="o">=</span>
+<span class="p">{</span>
+  <span class="s">"guide"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s">"name"</span><span class="p">:</span> <span class="s">"Stadium"</span><span class="p">,</span>
+  <span class="s">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">"location_type"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s">"latitude"</span><span class="p">:</span> <span class="mf">37.3327</span><span class="p">,</span>
+  <span class="s">"longitude"</span><span class="p">:</span> <span class="o">-</span><span class="mf">121.901236</span><span class="p">,</span>
+  <span class="s">"import_id"</span><span class="p">:</span> <span class="n">null</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">89</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Stadium"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"location_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.3327</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-121.901236</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-25T20:18:28.052157+0000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://builder.guidebook.com/open-api/v1/locations/</code></p>
+<h2 id='manipulating-individual-code-locations-code'>Manipulating Individual <code>Locations</code></h2>
+<blockquote>
+<p>Update the name of a <code>Location</code></p>
+</blockquote>
+<pre class="highlight python tab-python"><code>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/locations/156/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">patch_data</span> <span class="o">=</span>
+<span class="p">{</span>
+  <span class="s">"name"</span><span class="p">:</span> <span class="s">"San Jose Sharks Stadium"</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">patch_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>PATCH requests (to update) and GET requests (to retrieve) an individual Location will return a JSON structure like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">89</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Jose Sharks Stadium"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"location_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.3327</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-121.901236</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-25T20:18:28.052157+0000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>To access and manipulate an individual <code>Location</code> object, use a url that ends with the id of a <code>Location</code> object:</p>
+
+<p><code>https://builder.guidebook.com/open-api/v1/locations/&lt;location_id&gt;/</code></p>
+
+<p>In the following examples, we will assume that the id of the <code>Locations</code> we&#39;d like to modify is 89.</p>
+<h3 id='retrieving-a-location'>Retrieving a Location</h3>
+<p>To retrieve an individual <code>Location</code> object, issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/locations/89/</code></p>
+<h3 id='updating-a-code-location-code'>Updating a <code>Location</code></h3>
+<p>To modify an existing <code>Location</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/locations/89/</code></p>
+<h3 id='deleting-a-code-location-code'>Deleting a <code>Location</code></h3>
+<p>To delete a particular <code>Location</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>Location</code> you&#39;d like deleted:</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/locations/89/</code></p>
 <h1 id='customlists'>CustomLists</h1><h2 id='how-to-create-a-code-customlist-code'>How to Create a <code>CustomList</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">custom_lists_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/custom-lists/'</span>
