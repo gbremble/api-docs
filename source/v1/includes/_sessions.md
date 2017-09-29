@@ -88,7 +88,7 @@ all_day         | no  | boolean  | A boolean value indicating if a `Session` run
 allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this `Session`.
 add_to_schedule | no  | boolean  | A boolean value indicating if end-users can add this `Session` to their personal schedule.
 import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for `Sessions` in your data store.
-schedule_tracks | no  | array of integers | Array of IDs of `ScheduleTracks` this `Session` should belong to.  See section on [ScheduleTracks](#schedule-tracks).
+schedule_tracks | no  | array of integers | Array of IDs of `ScheduleTracks` this `Session` should belong to.  See section on [ScheduleTracks](#scheduletracks).
 
 
 <aside class="success">
