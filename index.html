@@ -348,7 +348,7 @@
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='https://builder.guidebook.com/'>Sign Up for a Guidebook API Key</a></li>
+            <li><a href='https://builder.guidebook.com/#/account/api/'>Get your Guidebook API Key</a></li>
             <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -415,7 +415,7 @@
 <p>Note that the sample python code sample in this documentation uses the python <code>requests</code> package. Installation instructions for <code>requests</code> can be found <a href="http://docs.python-requests.org/en/master/">here</a>; alternatively, for the more eager, you can run <code>pip install requests</code>.</p>
 </blockquote>
 
-<p>To access Guidebook&#39;s Open API, you&#39;ll need to include an API Key with your requests. You can manage your API Keys in the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a>. Your API Keys grant significant access to resources related to your account, so keep them secret! Do not share your API Keys with anyone, and do not place API Keys in publicly accessible areas like GitHub or client-side code.</p>
+<p>To access Guidebook&#39;s Open API, you&#39;ll need to include an API Key with your requests. You can manage your API Keys in the Guidebook Builder CMS <a href="https://builder.guidebook.com/#/account/api/">API Page</a>. Your API Keys grant significant access to resources related to your account, so keep them secret! Do not share your API Keys with anyone, and do not place API Keys in publicly accessible areas like GitHub or client-side code.</p>
 
 <p>All requests to the Guidebook Open API need to have an API Key included in a header that looks something like:</p>
 
@@ -812,11 +812,9 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <td>color</td>
 <td>no</td>
 <td>string</td>
-<td>Hex value of the color you want this track to be. Used for highlighting sessions in the app.</td>
+<td>Hex value of the color you want this track to be. Used for highlighting sessions in the app. Example: &quot;#000080&quot; for blue.</td>
 </tr>
 </tbody></table>
-
-<p>Example: &quot;#000080&quot; for blue.</p>
 <h2 id='how-to-fetch-data-on-code-scheduletracks-code'>How to Fetch Data on <code>ScheduleTracks</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
@@ -1811,7 +1809,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <h2 id='deleting-an-code-attendee-code-or-updating-code-attendee-code-info'>Deleting an <code>Attendee</code> or Updating <code>Attendee</code> info</h2>
 <p>The <code>Attendee</code> object is a crucial component that&#39;s used in our metrics tracking system.  In order to preserve the integrity of our metrics tracking stack, we do NOT allow Attendee objects to be deleted once they been created.  Fields such as the <code>status</code> of the <code>Attendee</code> are strictly controlled by specific metrics events happening and can not be manipulated via the Open API. Additionally we do not allow you to manipulate the profile information of the individual accounts.  These are controlled by the end-user themselves.</p>
 
-<p>We do allow various Open API operations for objects that are related to an <code>Attendee</code> and a <code>Guide</code>. i.e Preset schedules for a given attendee.</p>
+<p>We do allow various Open API operations for objects that are related to an <code>Attendee</code> and a <code>Guide</code>. i.e <a href="#personalized-schedules">Personalized Schedules</a> for a given <code>Attendee</code>.</p>
 <h1 id='personalizedschedule'>PersonalizedSchedule</h1><h2 id='how-to-create-a-code-personalizedschedule-code'>How to Create a <code>PersonalizedSchedule</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">personalized_schedule_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/personalized-schedules/'</span>
