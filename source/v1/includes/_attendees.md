@@ -213,5 +213,5 @@ Prepending `-` in front of an ordering field reverses it.  The following example
 
 The `Attendee` object is a crucial component that's used in our metrics tracking system.  In order to preserve the integrity of our metrics tracking stack, we do NOT allow Attendee objects to be deleted once they been created.  Fields such as the `status` of the `Attendee` are strictly controlled by specific metrics events happening and can not be manipulated via the Open API. Additionally we do not allow you to manipulate the profile information of the individual accounts.  These are controlled by the end-user themselves.
 
-We do allow various Open API operations for objects that are related to an `Attendee` and a `Guide`. i.e Preset schedules for a given attendee.
+We do allow various Open API operations for objects that are related to an `Attendee` and a `Guide`. i.e [Personalized Schedules](#personalized-schedules) for a given `Attendee`.
 

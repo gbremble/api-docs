@@ -17,7 +17,7 @@ api_response = requests.get(api_url, headers={'Authorization': 'JWT ' + api_key}
 
 
 
-To access Guidebook's Open API, you'll need to include an API Key with your requests. You can manage your API Keys in the [Guidebook Builder CMS](https://builder.guidebook.com). Your API Keys grant significant access to resources related to your account, so keep them secret! Do not share your API Keys with anyone, and do not place API Keys in publicly accessible areas like GitHub or client-side code.
+To access Guidebook's Open API, you'll need to include an API Key with your requests. You can manage your API Keys in the Guidebook Builder CMS [API Page](https://builder.guidebook.com/#/account/api/). Your API Keys grant significant access to resources related to your account, so keep them secret! Do not share your API Keys with anyone, and do not place API Keys in publicly accessible areas like GitHub or client-side code.
 
 All requests to the Guidebook Open API need to have an API Key included in a header that looks something like:
 

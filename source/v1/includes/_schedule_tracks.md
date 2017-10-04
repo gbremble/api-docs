@@ -45,8 +45,7 @@ Parameter       | Required  | Type    | Description
 ---------       | --------  | ------- | -----------
 guide           | yes | integer  | The specific guide your `ScheduleTrack` belongs to.  See section on [Guides](#guides) for more info.
 name            | yes | string   | The title of your `ScheduleTrack`.
-color           | no  | string   | Hex value of the color you want this track to be. Used for highlighting sessions in the app.
-Example: "#000080" for blue.
+color           | no  | string   | Hex value of the color you want this track to be. Used for highlighting sessions in the app. Example: "#000080" for blue.
 
 
 ## How to Fetch Data on `ScheduleTracks`
