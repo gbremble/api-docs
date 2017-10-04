@@ -19,6 +19,8 @@ includes:
   - custom_lists
   - custom_list_items
   - custom_list_item_relations
+  - attendees
+  - personalized_schedules
   - versioning
   - timezones
 
