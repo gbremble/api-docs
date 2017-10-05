@@ -322,13 +322,13 @@
               </ul>
           </li>
           <li>
-            <a href="#personalizedschedule" class="toc-h1 toc-link" data-title="PersonalizedSchedule">PersonalizedSchedule</a>
+            <a href="#personalizedschedules" class="toc-h1 toc-link" data-title="PersonalizedSchedules">PersonalizedSchedules</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#how-to-create-a-code-personalizedschedule-code" class="toc-h2 toc-link" data-title="PersonalizedSchedule">How to Create a <code>PersonalizedSchedule</code></a>
+                    <a href="#how-to-create-a-code-personalizedschedule-code" class="toc-h2 toc-link" data-title="PersonalizedSchedules">How to Create a <code>PersonalizedSchedule</code></a>
                   </li>
                   <li>
-                    <a href="#how-to-fetch-data-on-code-personalizedschedule-code" class="toc-h2 toc-link" data-title="PersonalizedSchedule">How to Fetch Data on <code>PersonalizedSchedule</code></a>
+                    <a href="#how-to-fetch-data-on-code-personalizedschedule-code" class="toc-h2 toc-link" data-title="PersonalizedSchedules">How to Fetch Data on <code>PersonalizedSchedule</code></a>
                   </li>
               </ul>
           </li>
@@ -753,11 +753,60 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET https://builder.guidebook.com/open-api/v1/sessions/</code></p>
 <h3 id='model-fields-2'>Model Fields</h3>
-<p>Same as the fields used in creation.</p>
-<h3 id='filtering-by-guide-id'>Filtering By Guide id</h3>
+<p>Same as the fields used in creation with the addition of the following read-only fields</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>An unique identifier for your <code>Session</code>.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td>Time when this <code>Session</code> was created - UTC.</td>
+</tr>
+</tbody></table>
+<h3 id='filtering-data-by-code-guide-code-id-and-other-fields'>Filtering data by <code>Guide</code> id and other fields</h3>
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>Sessions</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47</code></p>
+
+<p>You are also able to filter by the fields <code>schedule_tracks</code> and <code>id</code> if you want to fetch a list of <code>Sessions</code> fitting specific criteria.  See example below for how to filter on to these fields and combining multiple filters:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47&amp;schedule_tracks=3</code></p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47&amp;id=8673</code></p>
+<h3 id='sorting-returned-data'>Sorting Returned Data</h3>
+<p>When fetching a list of your <code>Sessions</code>, you&#39;re also able to control the order of the returned data if this is important for your needs.  The fields that you can sort by are <code>id</code>, <code>start_time</code>, and <code>end_time</code>. The following example will sort all <code>Sessions</code> from <code>Guide</code> 47 by <code>start_time</code> in chronological order:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47&amp;ordering=start_time</code></p>
+
+<p>Prepending <code>-</code> in front of an ordering field reverses it.  The following example with sort by <code>end_time</code> in reverse chronological order and then do a secondary sort by <code>start_time</code>:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47&amp;ordering=-end_time,start_time</code></p>
+
+<p>In the following examples, we will assume that the id of the <code>Session</code> we&#39;d like to modify is 71.</p>
+<h3 id='retrieving-a-code-session-code'>Retrieving a <code>Session</code></h3>
+<p>To retrieve an individual <code>Session</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/sessions/71/</code></p>
+<h3 id='updating-a-code-session-code'>Updating a <code>Session</code></h3>
+<p>To modify an existing <code>Session</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/sessions/71/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body.</p>
+<h3 id='deleting-a-code-session-code'>Deleting a <code>Session</code></h3>
+<p>To delete a particular <code>Session</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>Session</code> you&#39;d like deleted:</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/sessions/71/</code></p>
 <h1 id='scheduletracks'>ScheduleTracks</h1><h2 id='how-to-create-a-code-scheduletrack-code'>How to Create a <code>ScheduleTrack</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">schedule_tracks_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/schedule-tracks/'</span>
@@ -871,6 +920,22 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>ScheduleTracks</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/schedule-tracks/?guide=47</code></p>
+
+<p>In the following examples, we will assume that the id of the <code>ScheduleTrack</code> we&#39;d like to modify is 71.</p>
+<h3 id='retrieving-a-code-scheduletrack-code'>Retrieving a <code>ScheduleTrack</code></h3>
+<p>To retrieve an individual <code>ScheduleTrack</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/schedule-tracks/71/</code></p>
+<h3 id='updating-a-code-scheduletrack-code'>Updating a <code>ScheduleTrack</code></h3>
+<p>To modify an existing <code>ScheduleTracks</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/schedule-tracks/71/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body.</p>
+<h3 id='deleting-a-code-scheduletrack-code'>Deleting a <code>ScheduleTrack</code></h3>
+<p>To delete a particular <code>ScheduleTrack</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>ScheduleTrack</code> you&#39;d like deleted:</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/schedule-tracks/71/</code></p>
 <h1 id='locations'>Locations</h1>
 <p><code>Location</code> objects can be added to <code>Sessions</code> and <code>CustomListItems</code> to give users additional context about where an event or point of interest is located.</p>
 <h2 id='listing-code-locations-code'>Listing <code>Locations</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
@@ -1205,6 +1270,22 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>CustomLists</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/custom-lists/?guide=47</code></p>
+
+<p>In the following examples, we will assume that the id of the <code>CustomList</code> we&#39;d like to modify is 71.</p>
+<h3 id='retrieving-a-code-customlist-code'>Retrieving a <code>CustomList</code></h3>
+<p>To retrieve an individual <code>CustomList</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-lists/71/</code></p>
+<h3 id='updating-a-code-customlist-code'>Updating a <code>CustomList</code></h3>
+<p>To modify an existing <code>CustomList</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/custom-lists/71/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body.</p>
+<h3 id='deleting-a-code-customlist-code'>Deleting a <code>CustomList</code></h3>
+<p>To delete a particular <code>CustomList</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>CustomList</code> you&#39;d like deleted:</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/custom-lists/71/</code></p>
 <h1 id='customlistitems'>CustomListItems</h1><h2 id='how-to-create-a-code-customlistitem-code'>How to Create a <code>CustomListItem</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">custom_list_item_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/custom-list-items/'</span>
@@ -1390,10 +1471,40 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <td>A list of the <code>CustomList</code> IDs that this <code>CustomListItem</code> is related to.</td>
 </tr>
 </tbody></table>
-<h3 id='filtering-by-code-guide-code-id'>Filtering By <code>Guide</code> id</h3>
+<h3 id='filtering-data-by-code-guide-code-id-and-other-fields'>Filtering data by <code>Guide</code> id and other fields</h3>
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>CustomListItems</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47</code></p>
+
+<p>You are also able to filter by the fields <code>custom_lists</code> and <code>id</code> if you want to fetch a list of <code>CustomListItems</code> fitting specific criteria. See example below for how to filter on to these fields and combining multiple filters:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47&amp;custom_lists=12</code></p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47&amp;id=44859</code></p>
+<h3 id='sorting-returned-data'>Sorting Returned Data</h3>
+<p>When fetching a list of your <code>CustomListItems</code>, you&#39;re also able to control the order of the returned data if this is important for your needs.  The only field you can currently sort by is <code>id</code>. The following example will sort all <code>CustomListItems</code> from <code>Guide</code> 47 by <code>id</code> in numerical order:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47&amp;ordering=id</code></p>
+
+<p>Prepending <code>-</code> in front of an ordering field reverses it.  The following example with sort in reverse:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47&amp;ordering=-id</code></p>
+
+<p>In the following examples, we will assume that the id of the <code>CustomListItem</code> we&#39;d like to modify is 71.</p>
+<h3 id='retrieving-a-code-customlistitem-code'>Retrieving a <code>CustomListItem</code></h3>
+<p>To retrieve an individual <code>CustomListItem</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-items/71/</code></p>
+<h3 id='updating-a-code-customlistitem-code'>Updating a <code>CustomListItem</code></h3>
+<p>To modify an existing <code>CustomListItems</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/custom-list-items/71/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body.</p>
+<h3 id='deleting-a-code-customlistitem-code'>Deleting a <code>CustomListItem</code></h3>
+<p>To delete a particular <code>CustomListItem</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>CustomListItem</code> you&#39;d like deleted:</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/custom-list-items/71/</code></p>
 <h1 id='customlistitemrelations'>CustomListItemRelations</h1>
 <p>The <code>CustomListItemRelation</code> resource is the &quot;through&quot; object that links a <code>CustomListItem</code> to a <code>CustomList</code>. For example, to add a <code>CustomListItem</code> named &quot;Peter Lada&quot; to a <code>CustomList</code> named &quot;Programmer Conference 2017 Speakers&quot;, a new <code>CustomListItemRelation</code> object would be created with the id of the &quot;Peter Lada&quot; <code>CustomListItem</code> and the id of the &quot;Programmer Conference 2017 Speakers&quot; <code>CustomList</code>. When more than one <code>CustomListItem</code> exists inside of a <code>CustomList</code>, display order can be controlled by the <code>rank</code> field on <code>CustomListItemRelation</code>.</p>
 <h2 id='listing-customlistitemrelations'>Listing CustomListItemRelations</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
@@ -1535,17 +1646,25 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p>To access and manipulate an individual <code>CustomListItemRelation</code> object, use a url that ends with the id of a <code>CustomListItemRelation</code> object:</p>
 
 <p><code>https://builder.guidebook.com/open-api/v1/custom-list-item-relations/&lt;custom_list_item_relation_id&gt;/</code></p>
+<h3 id='filtering-data-on-code-customlistitemrelations-code'>Filtering data on <code>CustomListItemRelations</code></h3>
+<p>Including a query parameter <code>custom_list</code> allows you to filter for all <code>CustomListItemRelation</code> related to a <code>CustomList</code> you have access to (<code>CustomList</code> 47 in the following example):</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list=47</code></p>
+
+<p>You are also able to filter by the fields <code>custom_list</code> and <code>custom_list_item</code> if you want to fetch a list of <code>CustomListItemRelations</code> fitting specific criteria. See example below for how to filter on to these fields and combining multiple filters:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list_item=27&amp;custom_list=12</code></p>
 
 <p>In the following examples, we will assume that the id of the <code>CustomListItemRelation</code> we&#39;d like to modify is 156.</p>
-<h3 id='retrieving-a-customlistitemrelation'>Retrieving a CustomListItemRelation</h3>
-<p>To retrieve an individual CustomListItemRelation object issue a <code>GET</code> request like:</p>
+<h3 id='retrieving-a-code-customlistitemrelation-code'>Retrieving a <code>CustomListItemRelation</code></h3>
+<p>To retrieve an individual <code>CustomListItemRelation</code> object issue a <code>GET</code> request like:</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/</code></p>
-<h3 id='updating-a-customlistitemrelation'>Updating a CustomListItemRelation</h3>
+<h3 id='updating-a-code-customlistitemrelation-code'>Updating a <code>CustomListItemRelation</code></h3>
 <p>The only field that can be updated on <code>CustomListItemRelation</code> is <code>rank</code>. Attempts to modify, for example, the <code>custom_list</code> or <code>custom_list_item</code> fields on a <code>CustomListItemRelation</code> object will be ignored. To update the <code>rank</code> of a  <code>CustomListItemRelation</code>, issue a <code>PATCH</code> request where the request body includes the new <code>rank</code> you&#39;d like the <code>CustomListItemRelation</code> to have.</p>
 
 <p><code>PATCH https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/</code></p>
-<h3 id='deleting-a-customlistitemrelation'>Deleting a CustomListItemRelation</h3>
+<h3 id='deleting-a-code-customlistitemrelation-code'>Deleting a <code>CustomListItemRelation</code></h3>
 <p>To delete a particular <code>CustomListItemRelation</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>CustomListItemRelation</code> you&#39;d like deleted:</p>
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/</code></p>
@@ -1793,7 +1912,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/attendees/?guide=47</code></p>
 
-<p>You are also able to filter by the fields <code>revoked</code> and <code>status</code> if you want to fetch a list of <code>Attendees</code> fitting a specific criteria.  See examples below for how to filter on to these fields and combining multiple filters:</p>
+<p>You are also able to filter by the fields <code>revoked</code> and <code>status</code> if you want to fetch a list of <code>Attendees</code> fitting specific criteria.  See examples below for how to filter on to these fields and combining multiple filters:</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/attendees/?guide=47&amp;status=3</code></p>
 
@@ -1806,11 +1925,17 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p>Prepending <code>-</code> in front of an ordering field reverses it.  The following example with sort by last name in reverse alphabetical order and then do a secondary sort in alphabetical order by first name:</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/attendees/?guide=47&amp;ordering=-last_name,first_name</code></p>
+<h3 id='retrieving-an-code-attendee-code'>Retrieving an <code>Attendee</code></h3>
+<p>To retrieve an individual <code>Attendee</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/attendees/71/</code></p>
+
+<p>The above request will fetch data for the <code>Attendee</code> with the id 71.</p>
 <h2 id='deleting-an-code-attendee-code-or-updating-code-attendee-code-info'>Deleting an <code>Attendee</code> or Updating <code>Attendee</code> info</h2>
 <p>The <code>Attendee</code> object is a crucial component that&#39;s used in our metrics tracking system.  In order to preserve the integrity of our metrics tracking stack, we do NOT allow Attendee objects to be deleted once they been created.  Fields such as the <code>status</code> of the <code>Attendee</code> are strictly controlled by specific metrics events happening and can not be manipulated via the Open API. Additionally we do not allow you to manipulate the profile information of the individual accounts.  These are controlled by the end-user themselves.</p>
 
-<p>We do allow various Open API operations for objects that are related to an <code>Attendee</code> and a <code>Guide</code>. i.e <a href="#personalized-schedules">Personalized Schedules</a> for a given <code>Attendee</code>.</p>
-<h1 id='personalizedschedule'>PersonalizedSchedule</h1><h2 id='how-to-create-a-code-personalizedschedule-code'>How to Create a <code>PersonalizedSchedule</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<p>We do allow various Open API operations for objects that are related to an <code>Attendee</code> and a <code>Guide</code>. i.e <a href="#personalizedschedules">Personalized Schedules</a> for a given <code>Attendee</code>.</p>
+<h1 id='personalizedschedules'>PersonalizedSchedules</h1><h2 id='how-to-create-a-code-personalizedschedule-code'>How to Create a <code>PersonalizedSchedule</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">personalized_schedule_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/personalized-schedules/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
@@ -1968,8 +2093,14 @@ Remember — don't forget to include your API key in the `Authorization` header!
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>PersonalizedSchedule</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/personalized-schedules/?guide=47</code></p>
+
+<p>In the following examples, we will assume that the id of the <code>PersonalizedSchedule</code> we&#39;d like to modify is 71.</p>
+<h3 id='retrieving-a-code-personalizedschedule-code'>Retrieving a <code>PersonalizedSchedule</code></h3>
+<p>To retrieve an individual <code>PersonalizedSchedule</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/personalized-schedules/71/</code></p>
 <h3 id='updating-a-code-personalizedschedule-code'>Updating a <code>PersonalizedSchedule</code></h3>
-<p>To modify an existing <code>Location</code> object, issue a <code>PATCH</code> request like:</p>
+<p>To modify an existing <code>PersonalizedSchedule</code> object, issue a <code>PATCH</code> request like:</p>
 
 <p><code>PATCH https://builder.guidebook.com/open-api/v1/personalized-schedules/71/</code></p>
 
