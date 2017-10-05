@@ -133,3 +133,25 @@ created_at      | datetime | Time when this `CustomList` was created - UTC.
 Including a query parameter `guide` allows you to filter for all `CustomLists` related to a `Guide` you have access to (`Guide` 47 in the following example):
 
 `GET https://builder.guidebook.com/open-api/v1/custom-lists/?guide=47`
+
+In the following examples, we will assume that the id of the `CustomList` we'd like to modify is 71.
+
+### Retrieving a `CustomList`
+
+To retrieve an individual `CustomList` object issue a `GET` request like:
+
+`GET https://builder.guidebook.com/open-api/v1/custom-lists/71/`
+
+### Updating a `CustomList`
+
+To modify an existing `CustomList` object, issue a `PATCH` request like:
+
+`PATCH https://builder.guidebook.com/open-api/v1/custom-lists/71/`
+
+You will only need to include the specific fields you are updating and not a full request body.
+
+### Deleting a `CustomList`
+
+To delete a particular `CustomList`, issue a `DELETE` request to the url that points to the specific `CustomList` you'd like deleted:
+
+`DELETE https://builder.guidebook.com/open-api/v1/custom-lists/71/`

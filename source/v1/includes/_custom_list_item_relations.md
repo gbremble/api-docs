@@ -145,21 +145,33 @@ To access and manipulate an individual `CustomListItemRelation` object, use a ur
 
 `https://builder.guidebook.com/open-api/v1/custom-list-item-relations/<custom_list_item_relation_id>/`
 
+
+### Filtering data on `CustomListItemRelations`
+
+Including a query parameter `custom_list` allows you to filter for all `CustomListItemRelation` related to a `CustomList` you have access to (`CustomList` 47 in the following example):
+
+`GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list=47`
+
+You are also able to filter by the fields `custom_list` and `custom_list_item` if you want to fetch a list of `CustomListItemRelations` fitting specific criteria. See example below for how to filter on to these fields and combining multiple filters:
+
+`GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list_item=27&custom_list=12`
+
+
 In the following examples, we will assume that the id of the `CustomListItemRelation` we'd like to modify is 156.
 
-### Retrieving a CustomListItemRelation
+### Retrieving a `CustomListItemRelation`
 
-To retrieve an individual CustomListItemRelation object issue a `GET` request like:
+To retrieve an individual `CustomListItemRelation` object issue a `GET` request like:
 
 `GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/`
 
-### Updating a CustomListItemRelation
+### Updating a `CustomListItemRelation`
 
 The only field that can be updated on `CustomListItemRelation` is `rank`. Attempts to modify, for example, the `custom_list` or `custom_list_item` fields on a `CustomListItemRelation` object will be ignored. To update the `rank` of a  `CustomListItemRelation`, issue a `PATCH` request where the request body includes the new `rank` you'd like the `CustomListItemRelation` to have.
 
 `PATCH https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/`
 
-### Deleting a CustomListItemRelation
+### Deleting a `CustomListItemRelation`
 
 To delete a particular `CustomListItemRelation`, issue a `DELETE` request to the url that points to the specific `CustomListItemRelation` you'd like deleted:
 

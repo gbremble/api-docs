@@ -156,8 +156,47 @@ created_at      | datetime | Time when this `CustomListItem` was created - UTC.
 custom_list     | list of integers | A list of the `CustomList` IDs that this `CustomListItem` is related to.
 
 
-### Filtering By `Guide` id
+### Filtering data by `Guide` id and other fields
 
 Including a query parameter `guide` allows you to filter for all `CustomListItems` related to a `Guide` you have access to (`Guide` 47 in this example):
 
 `GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47`
+
+You are also able to filter by the fields `custom_lists` and `id` if you want to fetch a list of `CustomListItems` fitting specific criteria. See example below for how to filter on to these fields and combining multiple filters:
+
+`GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47&custom_lists=12`
+
+`GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47&id=44859`
+
+### Sorting Returned Data
+
+When fetching a list of your `CustomListItems`, you're also able to control the order of the returned data if this is important for your needs.  The only field you can currently sort by is `id`. The following example will sort all `CustomListItems` from `Guide` 47 by `id` in numerical order:
+
+`GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47&ordering=id`
+
+Prepending `-` in front of an ordering field reverses it.  The following example with sort in reverse:
+
+`GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47&ordering=-id`
+
+
+In the following examples, we will assume that the id of the `CustomListItem` we'd like to modify is 71.
+
+### Retrieving a `CustomListItem`
+
+To retrieve an individual `CustomListItem` object issue a `GET` request like:
+
+`GET https://builder.guidebook.com/open-api/v1/custom-list-items/71/`
+
+### Updating a `CustomListItem`
+
+To modify an existing `CustomListItems` object, issue a `PATCH` request like:
+
+`PATCH https://builder.guidebook.com/open-api/v1/custom-list-items/71/`
+
+You will only need to include the specific fields you are updating and not a full request body.
+
+### Deleting a `CustomListItem`
+
+To delete a particular `CustomListItem`, issue a `DELETE` request to the url that points to the specific `CustomListItem` you'd like deleted:
+
+`DELETE https://builder.guidebook.com/open-api/v1/custom-list-items/71/`

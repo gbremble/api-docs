@@ -191,7 +191,7 @@ Including a query parameter `guide` allows you to filter for all `Attendees` rel
 
 `GET https://builder.guidebook.com/open-api/v1/attendees/?guide=47`
 
-You are also able to filter by the fields `revoked` and `status` if you want to fetch a list of `Attendees` fitting a specific criteria.  See examples below for how to filter on to these fields and combining multiple filters:
+You are also able to filter by the fields `revoked` and `status` if you want to fetch a list of `Attendees` fitting specific criteria.  See examples below for how to filter on to these fields and combining multiple filters:
 
 `GET https://builder.guidebook.com/open-api/v1/attendees/?guide=47&status=3`
 
@@ -209,9 +209,17 @@ Prepending `-` in front of an ordering field reverses it.  The following example
 `GET https://builder.guidebook.com/open-api/v1/attendees/?guide=47&ordering=-last_name,first_name`
 
 
+### Retrieving an `Attendee`
+
+To retrieve an individual `Attendee` object issue a `GET` request like:
+
+`GET https://builder.guidebook.com/open-api/v1/attendees/71/`
+
+The above request will fetch data for the `Attendee` with the id 71.
+
 ## Deleting an `Attendee` or Updating `Attendee` info
 
 The `Attendee` object is a crucial component that's used in our metrics tracking system.  In order to preserve the integrity of our metrics tracking stack, we do NOT allow Attendee objects to be deleted once they been created.  Fields such as the `status` of the `Attendee` are strictly controlled by specific metrics events happening and can not be manipulated via the Open API. Additionally we do not allow you to manipulate the profile information of the individual accounts.  These are controlled by the end-user themselves.
 
-We do allow various Open API operations for objects that are related to an `Attendee` and a `Guide`. i.e [Personalized Schedules](#personalized-schedules) for a given `Attendee`.
+We do allow various Open API operations for objects that are related to an `Attendee` and a `Guide`. i.e [Personalized Schedules](#personalizedschedules) for a given `Attendee`.
 

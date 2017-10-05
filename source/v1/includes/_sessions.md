@@ -187,10 +187,55 @@ This endpoint can also be used to read data on `Sessions`.
 
 ### Model Fields
 
-Same as the fields used in creation.
+Same as the fields used in creation with the addition of the following read-only fields
 
-### Filtering By Guide id
+Parameter       | Type    | Description
+---------       | ------- | -----------
+id              | integer  | An unique identifier for your `Session`.
+created_at      | datetime | Time when this `Session` was created - UTC.
+
+
+### Filtering data by `Guide` id and other fields
 
 Including a query parameter `guide` allows you to filter for all `Sessions` related to a `Guide` you have access to (`Guide` 47 in this example):
 
 `GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47`
+
+You are also able to filter by the fields `schedule_tracks` and `id` if you want to fetch a list of `Sessions` fitting specific criteria.  See example below for how to filter on to these fields and combining multiple filters:
+
+`GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47&schedule_tracks=3`
+
+`GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47&id=8673`
+
+### Sorting Returned Data
+
+When fetching a list of your `Sessions`, you're also able to control the order of the returned data if this is important for your needs.  The fields that you can sort by are `id`, `start_time`, and `end_time`. The following example will sort all `Sessions` from `Guide` 47 by `start_time` in chronological order:
+
+`GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47&ordering=start_time`
+
+Prepending `-` in front of an ordering field reverses it.  The following example with sort by `end_time` in reverse chronological order and then do a secondary sort by `start_time`:
+
+`GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47&ordering=-end_time,start_time`
+
+In the following examples, we will assume that the id of the `Session` we'd like to modify is 71.
+
+### Retrieving a `Session`
+
+To retrieve an individual `Session` object issue a `GET` request like:
+
+`GET https://builder.guidebook.com/open-api/v1/sessions/71/`
+
+### Updating a `Session`
+
+To modify an existing `Session` object, issue a `PATCH` request like:
+
+`PATCH https://builder.guidebook.com/open-api/v1/sessions/71/`
+
+You will only need to include the specific fields you are updating and not a full request body.
+
+### Deleting a `Session`
+
+To delete a particular `Session`, issue a `DELETE` request to the url that points to the specific `Session` you'd like deleted:
+
+`DELETE https://builder.guidebook.com/open-api/v1/sessions/71/`
+

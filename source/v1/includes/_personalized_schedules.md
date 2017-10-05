@@ -1,4 +1,4 @@
-# PersonalizedSchedule
+# PersonalizedSchedules
 
 ## How to Create a `PersonalizedSchedule`
 
@@ -145,9 +145,17 @@ Including a query parameter `guide` allows you to filter for all `PersonalizedSc
 
 `GET https://builder.guidebook.com/open-api/v1/personalized-schedules/?guide=47`
 
+In the following examples, we will assume that the id of the `PersonalizedSchedule` we'd like to modify is 71.
+
+### Retrieving a `PersonalizedSchedule`
+
+To retrieve an individual `PersonalizedSchedule` object issue a `GET` request like:
+
+`GET https://builder.guidebook.com/open-api/v1/personalized-schedules/71/`
+
 ### Updating a `PersonalizedSchedule`
 
-To modify an existing `Location` object, issue a `PATCH` request like:
+To modify an existing `PersonalizedSchedule` object, issue a `PATCH` request like:
 
 `PATCH https://builder.guidebook.com/open-api/v1/personalized-schedules/71/`
 
