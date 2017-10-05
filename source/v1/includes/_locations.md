@@ -160,21 +160,19 @@ To access and manipulate an individual `Location` object, use a url that ends wi
 
 `https://builder.guidebook.com/open-api/v1/locations/<location_id>/`
 
+## Retrieving a Location
 In the following examples, we will assume that the id of the `Locations` we'd like to modify is 89.
-
-### Retrieving a Location
-
 To retrieve an individual `Location` object, issue a `GET` request like:
 
 `GET https://builder.guidebook.com/open-api/v1/locations/89/`
 
-### Updating a `Location`
+## Updating a `Location`
 
 To modify an existing `Location` object, issue a `PATCH` request like:
 
 `PATCH https://builder.guidebook.com/open-api/v1/locations/89/`
 
-### Deleting a `Location`
+## Deleting a `Location`
 
 To delete a particular `Location`, issue a `DELETE` request to the url that points to the specific `Location` you'd like deleted:
 

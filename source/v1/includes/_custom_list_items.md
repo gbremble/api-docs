@@ -179,15 +179,13 @@ Prepending `-` in front of an ordering field reverses it.  The following example
 `GET https://builder.guidebook.com/open-api/v1/custom-list-items/?guide=47&ordering=-id`
 
 
+## Retrieving a `CustomListItem`
 In the following examples, we will assume that the id of the `CustomListItem` we'd like to modify is 71.
-
-### Retrieving a `CustomListItem`
-
 To retrieve an individual `CustomListItem` object issue a `GET` request like:
 
 `GET https://builder.guidebook.com/open-api/v1/custom-list-items/71/`
 
-### Updating a `CustomListItem`
+## Updating a `CustomListItem`
 
 To modify an existing `CustomListItems` object, issue a `PATCH` request like:
 
@@ -195,7 +193,7 @@ To modify an existing `CustomListItems` object, issue a `PATCH` request like:
 
 You will only need to include the specific fields you are updating and not a full request body.
 
-### Deleting a `CustomListItem`
+## Deleting a `CustomListItem`
 
 To delete a particular `CustomListItem`, issue a `DELETE` request to the url that points to the specific `CustomListItem` you'd like deleted:
 

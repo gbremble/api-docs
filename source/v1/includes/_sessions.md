@@ -217,15 +217,13 @@ Prepending `-` in front of an ordering field reverses it.  The following example
 
 `GET https://builder.guidebook.com/open-api/v1/sessions/?guide=47&ordering=-end_time,start_time`
 
+## Retrieving a `Session`
 In the following examples, we will assume that the id of the `Session` we'd like to modify is 71.
-
-### Retrieving a `Session`
-
 To retrieve an individual `Session` object issue a `GET` request like:
 
 `GET https://builder.guidebook.com/open-api/v1/sessions/71/`
 
-### Updating a `Session`
+## Updating a `Session`
 
 To modify an existing `Session` object, issue a `PATCH` request like:
 
@@ -233,7 +231,7 @@ To modify an existing `Session` object, issue a `PATCH` request like:
 
 You will only need to include the specific fields you are updating and not a full request body.
 
-### Deleting a `Session`
+## Deleting a `Session`
 
 To delete a particular `Session`, issue a `DELETE` request to the url that points to the specific `Session` you'd like deleted:
 

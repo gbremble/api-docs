@@ -145,15 +145,14 @@ Including a query parameter `guide` allows you to filter for all `PersonalizedSc
 
 `GET https://builder.guidebook.com/open-api/v1/personalized-schedules/?guide=47`
 
+## Retrieving a `PersonalizedSchedule`
+
 In the following examples, we will assume that the id of the `PersonalizedSchedule` we'd like to modify is 71.
-
-### Retrieving a `PersonalizedSchedule`
-
 To retrieve an individual `PersonalizedSchedule` object issue a `GET` request like:
 
 `GET https://builder.guidebook.com/open-api/v1/personalized-schedules/71/`
 
-### Updating a `PersonalizedSchedule`
+## Updating a `PersonalizedSchedule`
 
 To modify an existing `PersonalizedSchedule` object, issue a `PATCH` request like:
 
@@ -161,7 +160,7 @@ To modify an existing `PersonalizedSchedule` object, issue a `PATCH` request lik
 
 The only fields you will be able to update are `sessions` and `attendees`.  Note that due to the complexity of `PersonalizedSchedules`, you'll need to sign into Builder UI and review the updates and publish updates to the app.  Publishing these updates is not available via the Open API at this moment.
 
-### Deleting a `PersonalizedSchedule`
+## Deleting a `PersonalizedSchedule`
 
 To delete a particular `PersonalizedSchedule`, issue a `DELETE` request to the url that points to the specific `PersonalizedSchedule` you'd like deleted:
 

@@ -209,7 +209,7 @@ Prepending `-` in front of an ordering field reverses it.  The following example
 `GET https://builder.guidebook.com/open-api/v1/attendees/?guide=47&ordering=-last_name,first_name`
 
 
-### Retrieving an `Attendee`
+## Retrieving an `Attendee`
 
 To retrieve an individual `Attendee` object issue a `GET` request like:
 

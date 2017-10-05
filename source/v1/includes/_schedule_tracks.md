@@ -118,15 +118,13 @@ Including a query parameter `guide` allows you to filter for all `ScheduleTracks
 
 `GET https://builder.guidebook.com/open-api/v1/schedule-tracks/?guide=47`
 
+## Retrieving a `ScheduleTrack`
 In the following examples, we will assume that the id of the `ScheduleTrack` we'd like to modify is 71.
-
-### Retrieving a `ScheduleTrack`
-
 To retrieve an individual `ScheduleTrack` object issue a `GET` request like:
 
 `GET https://builder.guidebook.com/open-api/v1/schedule-tracks/71/`
 
-### Updating a `ScheduleTrack`
+## Updating a `ScheduleTrack`
 
 To modify an existing `ScheduleTracks` object, issue a `PATCH` request like:
 
@@ -134,7 +132,7 @@ To modify an existing `ScheduleTracks` object, issue a `PATCH` request like:
 
 You will only need to include the specific fields you are updating and not a full request body.
 
-### Deleting a `ScheduleTrack`
+## Deleting a `ScheduleTrack`
 
 To delete a particular `ScheduleTrack`, issue a `DELETE` request to the url that points to the specific `ScheduleTrack` you'd like deleted:
 
