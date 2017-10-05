@@ -1,6 +1,6 @@
 # PersonalizedSchedules
 
-## How to Create a `PersonalizedSchedule`
+## Creating a `PersonalizedSchedule`
 
 
 ```python
@@ -68,7 +68,7 @@ sessions       | yes | array of integers | Array of IDs of `Sessions` this `Pers
 
 
 
-## How to Fetch Data on `PersonalizedSchedule`
+## Listing `PersonalizedSchedule`
 
 
 ```python

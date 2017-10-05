@@ -1,6 +1,6 @@
 # Attendees
 
-## How to Create a `Attendee`
+## Creating a `Attendee`
 
 
 ```python
@@ -61,7 +61,7 @@ last_name      | no  | string    | Last name of the Attendee.  Only used if no e
 
 
 
-## How to Fetch Data on `Attendees`
+## Listing `Attendees`
 
 
 ```python

@@ -1,6 +1,6 @@
 # ScheduleTracks
 
-## How to Create a `ScheduleTrack`
+## Creating a `ScheduleTrack`
 
 
 ```python
@@ -48,7 +48,7 @@ name            | yes | string   | The title of your `ScheduleTrack`.
 color           | no  | string   | Hex value of the color you want this track to be. Used for highlighting sessions in the app. Example: "#000080" for blue.
 
 
-## How to Fetch Data on `ScheduleTracks`
+## Listing `ScheduleTracks`
 
 
 ```python

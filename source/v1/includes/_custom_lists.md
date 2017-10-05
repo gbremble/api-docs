@@ -1,6 +1,6 @@
 # CustomLists
 
-## How to Create a `CustomList`
+## Creating a `CustomList`
 
 
 ```python
@@ -50,7 +50,7 @@ allow_rating    | no  | boolean   |  A boolean value indicating if end-users can
 import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for your Lists in your data store.
 
 
-## How to Fetch Data on `CustomLists`
+## Listing `CustomLists`
 
 
 ```python

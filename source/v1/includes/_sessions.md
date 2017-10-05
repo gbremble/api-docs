@@ -1,6 +1,6 @@
 # Sessions
 
-## How to Create a `Session`
+## Creating `Session`
 
 
 ```python
@@ -96,7 +96,7 @@ Remember — don't forget to include your API key in the `Authorization` header!
 </aside>
 
 
-## How to Fetch Data on `Sessions`
+## Listing `Sessions`
 
 
 ```python

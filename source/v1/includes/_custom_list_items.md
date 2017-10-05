@@ -1,6 +1,6 @@
 # CustomListItems
 
-## How to Create a `CustomListItem`
+## Creating a `CustomListItem`
 
 
 ```python
@@ -57,7 +57,7 @@ allow_rating    | no  | boolean  | A boolean value indicating if end-users can r
 import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for `CustomListItems` in your data store.
 
 
-## How to Fetch Data on `CustomListItems`
+## Listing `CustomListItems`
 
 
 ```python
