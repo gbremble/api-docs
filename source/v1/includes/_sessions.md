@@ -1,5 +1,7 @@
 # Sessions
 
+`Sessions` can be added to a `Guide` to build up a schedule for your event. For example, the, "Programmer Conference 2017" event might have a `Session` for the talk, "Python in a Scientific Environment", and a `Session` about, "Off by One Errors."
+
 ## Creating `Session`
 
 
@@ -26,8 +28,9 @@ post_data =
 	"guide": 1,
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
 	"name": "Test Session Created via the Open API",
-	"schedule_tracks": [3,42,47,101]
+	"schedule_tracks": [3, 42, 47, 101]
 }
+
 response_2 = request.post(session_url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
 
 ```
@@ -44,8 +47,8 @@ response_2 = request.post(session_url, data=post_data, headers={'Authorization':
 	"name": "Test Session Created via the Open API",
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
 	"import_id": null,
-	"allow_rating": false,
-	"add_to_schedule": false,
+	"allow_rating": true,
+	"add_to_schedule": true,
 	"guide": 1,
 	"schedule_tracks": []
 }
@@ -60,10 +63,10 @@ response_2 = request.post(session_url, data=post_data, headers={'Authorization':
 	"name": "Test Session Created via the Open API",
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
 	"import_id": null,
-	"allow_rating": false,
-	"add_to_schedule": false,
+	"allow_rating": true,
+	"add_to_schedule": true,
 	"guide": 1,
-	"schedule_tracks": [3,42,47,101]
+	"schedule_tracks": [3, 42, 47, 101]
 }
 
 ```
@@ -187,7 +190,7 @@ This endpoint can also be used to read data on `Sessions`.
 
 ### Model Fields
 
-Same as the fields used in creation with the addition of the following read-only fields
+Same as the fields used in creation with the addition of the following read-only fields:
 
 Parameter       | Type    | Description
 ---------       | ------- | -----------
@@ -236,4 +239,3 @@ You will only need to include the specific fields you are updating and not a ful
 To delete a particular `Session`, issue a `DELETE` request to the url that points to the specific `Session` you'd like deleted:
 
 `DELETE https://builder.guidebook.com/open-api/v1/sessions/71/`
-
