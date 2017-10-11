@@ -178,6 +178,8 @@ To modify an existing `Location` object, issue a `PATCH` request like:
 
 `PATCH https://builder.guidebook.com/open-api/v1/locations/89/`
 
+You will only need to include the specific fields you are updating and not a full request body.
+
 ## Deleting a `Location`
 
 To delete a particular `Location`, issue a `DELETE` request to the url that points to the specific `Location` you'd like deleted:

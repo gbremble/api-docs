@@ -152,17 +152,6 @@ To access and manipulate an individual `CustomListItemRelation` object, use a ur
 
 `https://builder.guidebook.com/open-api/v1/custom-list-item-relations/<custom_list_item_relation_id>/`
 
-
-## Filtering data on `CustomListItemRelations`
-
-Including a query parameter `custom_list` allows you to filter for all `CustomListItemRelation` related to a `CustomList` you have access to (`CustomList` 47 in the following example):
-
-`GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list=47`
-
-You are also able to filter by the fields `custom_list` and `custom_list_item` if you want to fetch a list of `CustomListItemRelations` fitting specific criteria. See example below for how to filter on to these fields and combining multiple filters:
-
-`GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list_item=27&custom_list=12`
-
 ## Retrieving a `CustomListItemRelation`
 
 In the following examples, we will assume that the id of the `CustomListItemRelation` we'd like to modify is 156.  To retrieve an individual `CustomListItemRelation` object issue a `GET` request like:
