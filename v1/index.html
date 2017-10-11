@@ -351,9 +351,6 @@
                     <a href="#manipulating-individual-customlistitemrelations" class="toc-h2 toc-link" data-title="CustomListItemRelations">Manipulating Individual CustomListItemRelations</a>
                   </li>
                   <li>
-                    <a href="#filtering-data-on-code-customlistitemrelations-code" class="toc-h2 toc-link" data-title="CustomListItemRelations">Filtering data on <code>CustomListItemRelations</code></a>
-                  </li>
-                  <li>
                     <a href="#retrieving-a-code-customlistitemrelation-code" class="toc-h2 toc-link" data-title="CustomListItemRelations">Retrieving a <code>CustomListItemRelation</code></a>
                   </li>
                   <li>
@@ -1222,6 +1219,8 @@ To retrieve an individual <code>Location</code> object, issue a <code>GET</code>
 <p>To modify an existing <code>Location</code> object, issue a <code>PATCH</code> request like:</p>
 
 <p><code>PATCH https://builder.guidebook.com/open-api/v1/locations/89/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body.</p>
 <h2 id='deleting-a-code-location-code'>Deleting a <code>Location</code></h2>
 <p>To delete a particular <code>Location</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>Location</code> you&#39;d like deleted:</p>
 
@@ -1765,14 +1764,6 @@ To retrieve an individual <code>CustomListItem</code> object issue a <code>GET</
 <p>To access and manipulate an individual <code>CustomListItemRelation</code> object, use a url that ends with the id of a <code>CustomListItemRelation</code> object:</p>
 
 <p><code>https://builder.guidebook.com/open-api/v1/custom-list-item-relations/&lt;custom_list_item_relation_id&gt;/</code></p>
-<h2 id='filtering-data-on-code-customlistitemrelations-code'>Filtering data on <code>CustomListItemRelations</code></h2>
-<p>Including a query parameter <code>custom_list</code> allows you to filter for all <code>CustomListItemRelation</code> related to a <code>CustomList</code> you have access to (<code>CustomList</code> 47 in the following example):</p>
-
-<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list=47</code></p>
-
-<p>You are also able to filter by the fields <code>custom_list</code> and <code>custom_list_item</code> if you want to fetch a list of <code>CustomListItemRelations</code> fitting specific criteria. See example below for how to filter on to these fields and combining multiple filters:</p>
-
-<p><code>GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list_item=27&amp;custom_list=12</code></p>
 <h2 id='retrieving-a-code-customlistitemrelation-code'>Retrieving a <code>CustomListItemRelation</code></h2>
 <p>In the following examples, we will assume that the id of the <code>CustomListItemRelation</code> we&#39;d like to modify is 156.  To retrieve an individual <code>CustomListItemRelation</code> object issue a <code>GET</code> request like:</p>
 
