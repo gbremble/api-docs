@@ -2,6 +2,57 @@
 
 `Location` objects can be added to `Sessions` and `CustomListItems` to give users additional context about where an event or point of interest is located.
 
+## Creating `Locations`
+
+
+```python
+
+url = 'https://builder.guidebook.com/open-api/v1/locations/'
+api_key = 'API_KEY'
+post_data =
+{
+  "guide": 1,
+  "name": "Stadium",
+  "description": null,
+  "location_type": 3,
+  "latitude": 37.3327,
+  "longitude": -121.901236,
+  "import_id": null
+}
+response = requests.post(url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 89,
+  "guide": 1,
+  "name": "Stadium",
+  "description": null,
+  "location_type": 3,
+  "latitude": 37.3327,
+  "longitude": -121.901236,
+  "import_id": null,
+  "created_at": "2017-09-25T20:18:28.052157+0000"
+}
+```
+
+### HTTP Request
+
+`POST https://builder.guidebook.com/open-api/v1/locations/`
+
+### Model Fields
+
+Property          | Required    | Type        | Description
+---------         | --------    | --------    | --------
+guide             | yes          | integer     | id of the `Guide` this `Location` belongs to.
+name              | yes         | string      | Name of this `Location`.
+import_id         | no          | string      | A string field you can used to input your own identifier. This is for when you have your own IDs for `Locations` in your data store.
+location_type     | yes         | integer     | Either 2 or 3. If 3, indicates that this `Location` is a "google maps Location"; if `location_type=3` latitude and longitude are required.
+latitude          | no          | float       | Latitude of this `Location` - only required if this `Location` has `location_type=3` ("google maps `Location`").
+longitude         | no          | float       | Longitude of this `Location` - only required if this `Location` has `location_type=3` ("google maps `Location`").
+
 ## Listing `Locations`
 
 
@@ -63,65 +114,20 @@ response = requests.get(guides_url, headers={'Authorization': 'JWT ' + api_key})
 
 `GET https://builder.guidebook.com/open-api/v1/locations/`
 
-### Location Properties
+### Model Fields
 
-Property          | Type        | Description
----------         | --------    | --------
-id                | integer     | id of the `Location` object.
-created_at        | datetime    | Time when this `Location` was created - UTC.
-guide             | integer     | id of the `Guide` this `Location` belongs to.
-name              | string      | Name of this `Location`.
-import_id         | string      | A string field you can used to input your own identifier. This is for when you have your own IDs for `Locations` in your data store.
-location_type     | integer     | Either 2 or 3. If 3, indicates that this `Location` is a "google maps Location"; if `location_type=3` latitude and longitude are required.
-latitude          | float       | Latitude of this `Location` - only required if this `Location` has `location_type=3` ("google maps `Location`").
-longitude         | float       | Longitude of this `Location` - only required if this `Location` has `location_type=3` ("google maps `Location`").
+Same as the fields used in creation with the addition of the following read-only fields:
+
+Parameter       | Type    | Description
+---------       | ------- | -----------
+id              | integer  | An unique identifier for your `Location`.
+created_at      | datetime | Time when this `Location` was created - UTC.
 
 ### Filtering `Locations`
 
 To filter the returned `Locations` by their `location_type` include the query parameter `location_type`. The following request, for examples, filters for `Locations` with `location_type` 2.
 
 `GET https://builder.guidebook.com/open-api/v1/locations/?location_type=2`
-
-## Creating `Locations`
-
-
-```python
-
-url = 'https://builder.guidebook.com/open-api/v1/locations/'
-api_key = 'API_KEY'
-post_data =
-{
-  "guide": 1,
-  "name": "Stadium",
-  "description": null,
-  "location_type": 3,
-  "latitude": 37.3327,
-  "longitude": -121.901236,
-  "import_id": null
-}
-response = requests.post(url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 89,
-  "guide": 1,
-  "name": "Stadium",
-  "description": null,
-  "location_type": 3,
-  "latitude": 37.3327,
-  "longitude": -121.901236,
-  "import_id": null,
-  "created_at": "2017-09-25T20:18:28.052157+0000"
-}
-```
-
-
-### HTTP Request
-
-`POST https://builder.guidebook.com/open-api/v1/locations/`
 
 ## Manipulating Individual `Locations`
 
@@ -130,7 +136,7 @@ response = requests.post(url, data=post_data, headers={'Authorization': 'JWT ' +
 
 ```python
 
-url = 'https://builder.guidebook.com/open-api/v1/locations/156/'
+url = 'https://builder.guidebook.com/open-api/v1/locations/89/'
 api_key = 'API_KEY'
 patch_data =
 {

@@ -1,6 +1,6 @@
 # ScheduleTracks
 
-`ScheduleTracks` allow you to build a filtered view of your schedule. A `ScheduleTrack` contains a subset of the `Sessions` in your `Guide`. For the event, "Programmer Conference 2017" you might, for example, have a `ScheduleTrack` for `Sessions` about Python, and a `ScheduleTrack` `Sessions` about Java.
+`ScheduleTracks` allow you to build a filtered view of your schedule. A `ScheduleTrack` contains a subset of the `Sessions` in your `Guide`. For the event, "Programmer Conference 2017" you might, for example, have a `ScheduleTrack` for `Sessions` about Python, and a `ScheduleTrack` for `Sessions` about Java.
 
 ## Creating a `ScheduleTrack`
 

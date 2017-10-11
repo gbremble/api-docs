@@ -2,6 +2,50 @@
 
 The `CustomListItemRelation` resource is the "through" object that links a `CustomListItem` to a `CustomList`. For example, to add a `CustomListItem` named "Peter Lada" to a `CustomList` named "Programmer Conference 2017 Speakers", a new `CustomListItemRelation` object would be created with the id of the "Peter Lada" `CustomListItem` and the id of the "Programmer Conference 2017 Speakers" `CustomList`. When more than one `CustomListItem` exists inside of a `CustomList`, display order can be controlled by the `rank` field on `CustomListItemRelation`.
 
+## Creating CustomListItemRelations
+
+
+```python
+import requests
+
+url = 'https://builder.guidebook.com/open-api/v1/custom-list-item-relations/'
+api_key = 'API_KEY'
+post_data =
+{
+  "custom_list": 59,
+  "custom_list_item": 369,
+  "rank": 15.1
+}
+response = requests.post(url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 156,
+  "custom_list": 59,
+  "custom_list_item": 369,
+  "rank": 15.1,
+  "created_at": "2017-09-22T20:18:38.174876+0000"
+}
+```
+
+### HTTP Request
+
+`POST https://builder.guidebook.com/open-api/v1/custom-list-item-relations/`
+
+Note that if you do not include a `rank` value in your `POST` data, `rank` defaults to to a large negative value that decreases with time.
+
+### Model Fields
+
+Property          | Required    | Type        | Description
+---------         | --------    | --------    | --------
+custom_list_item  | yes         | integer     | id of the `CustomListItem` being associated to the `CustomList` identified by `custom_list`.
+custom_list       | yes         | integer     | id of the `CustomList` that `custom_list_item` is being associated to. Note that a given `(custom_list_item, custom_list)` tuple cannot be repeated on different `CustomListItemRelation` objects ("you can only associate a given `CustomListItem` to a given `CustomList`" once").
+rank              | no          | float       | Controls the display order of `CustomListItems` within a `CustomList` - `CustomListItems` are displayed in ascending order by rank. Note that a given `(custom_list, rank)` tuple cannot be repeated on different `CustomLIstItemRelation` objects ("`rank` is unique amongst all the `CustomListItemRelations` associated to a given `CustomList`").
+
+
 ## Listing CustomListItemRelations
 
 
@@ -51,15 +95,14 @@ response = requests.get(guides_url, headers={'Authorization': 'JWT ' + api_key})
 
 `GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/`
 
-### CustomListItemRelation Properties
+### Model Fields
 
-Property          | Type        | Description
----------         | --------    | --------
-id                | integer     | id of the `CustomListItemRelation` object.
-created_at        | datetime    | Time when this `CustomListItemRelation` was created - UTC.
-custom_list_item  | integer     | id of the `CustomListItem` being associated to the `CustomList` identified by `custom_list`.
-custom_list       | integer     | id of the `CustomList` that `custom_list_item` is being associated to. Note that a given `(custom_list_item, custom_list)` tuple cannot be repeated on different `CustomListItemRelation` objects ("you can only associate a given `CustomListItem` to a given `CustomList`" once").
-rank              | float       | Controls the display order of `CustomListItems` within a `CustomList` - `CustomListItems` are displayed in ascending order by rank. Note that a given `(custom_list, rank)` tuple cannot be repeated on different `CustomLIstItemRelation` objects ("`rank` is unique amongst all the `CustomListItemRelations` associated to a given `CustomList`").
+Same as the fields used in creation with the addition of the following read-only fields:
+
+Parameter       | Type    | Description
+---------       | ------- | -----------
+id              | integer  | An unique identifier for your `CustomListItemRelation`.
+created_at      | datetime | Time when this `CustomListItemRelation` was created - UTC.
 
 ### Filtering CustomListItemRelations
 
@@ -74,42 +117,6 @@ To filter the returned `CustomListItemRelations` by the related `CustomList` you
 You can combine the above two filters to do something like, "find the `CustomListItemRelation` that associates `custom_list_item` 5 with `custom_list` 1:"
 
 `GET https://builder.guidebook.com/open-api/v1/custom-list-item-relations/?custom_list_item=5&custom_list=1`
-
-## Creating CustomListItemRelations
-
-
-```python
-import requests
-
-url = 'https://builder.guidebook.com/open-api/v1/custom-list-item-relations/'
-api_key = 'API_KEY'
-post_data =
-{
-  "custom_list": 59,
-  "custom_list_item": 369,
-  "rank": 15.1
-}
-response = requests.post(url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 156,
-  "custom_list": 59,
-  "custom_list_item": 369,
-  "rank": 15.1,
-  "created_at": "2017-09-22T20:18:38.174876+0000"
-}
-```
-
-
-### HTTP Request
-
-`POST https://builder.guidebook.com/open-api/v1/custom-list-item-relations/`
-
-Note that if you do not include a `rank` value in your `POST` data, `rank` defaults to to a large negative value that decreases with time.
 
 ## Manipulating Individual CustomListItemRelations
 
