@@ -228,6 +228,9 @@
             <a href="#pagination" class="toc-h1 toc-link" data-title="Pagination">Pagination</a>
           </li>
           <li>
+            <a href="#images" class="toc-h1 toc-link" data-title="Images">Images</a>
+          </li>
+          <li>
             <a href="#guides" class="toc-h1 toc-link" data-title="Guides">Guides</a>
               <ul class="toc-list-h2">
                   <li>
@@ -540,7 +543,20 @@ You must replace <code>API_KEY</code> with your personal API key.
 </tbody></table>
 
 <p><code>next</code> will be <code>null</code> if no additional resources are available (you have reached the last page).</p>
-<h1 id='guides'>Guides</h1>
+<h1 id='images'>Images</h1>
+<p>Some resources (like <code>Sessions</code> and <code>CustomListItems</code>) can be associated to images that will be displayed in Guidebook apps. To upload images, you can submit a multipart request. A code example accompanies this section that <a href="http://docs.python-requests.org/en/v2.9.1/user/quickstart/#post-a-multipart-encoded-file">uploads an image to a <code>Session</code> using the python <code>requests</code> package</a>.</p>
+
+<blockquote>
+<p>Example request that changes the name <em>and</em> image of an existing <code>Session</code></p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/sessions/71/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">}</span>
+<span class="n">image_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'your_image_file.png'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span>
+<span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'updated session name'</span><span class="p">},</span> <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s">'image'</span><span class="p">:</span> <span class="n">image_file</span><span class="p">},</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre><h1 id='guides'>Guides</h1>
 <p>Many of the resources exposed by the Guidebook Open API relate to a class of objects called <code>Guide</code>. <code>Guide</code> objects are typically containers for the set of data related to an event like a conference. For example, if you were hosting a conference called, &quot;Programmer Summit 2017&quot; you would likely have one <code>Guide</code> object that contained the schedule for the conference, a list of speakers for that conference, and a list of users who you expect to attend the conference.</p>
 
 <p>As of now, <code>Guide</code> objects themselves are primarily managed via the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a> (and not via the Open API). Resources exposed by the Open API, however, will contain references to the id of <code>Guide</code> objects they belong to. For example, every <code>Session</code> object returned in the Open API will report the id of the one <code>Guide</code> that <code>Session</code> belongs to (e.g. <code>&quot;guide&quot;: 1</code>). In general, resources cannot be transferred or otherwise shared amongst more than one <code>Guide</code> -- once a <code>Session</code> is created under a given <code>Guide</code> object, it lives under that <code>Guide</code> permanently and cannot be moved to a different <code>Guide</code>.</p>
@@ -614,6 +630,7 @@ You must replace <code>API_KEY</code> with your personal API key.
     <span class="s">"description_html"</span><span class="p">:</span> <span class="s">"&lt;p&gt;This is a description field that supports basic HTML&lt;/p&gt;"</span><span class="p">,</span>
     <span class="s">"name"</span><span class="p">:</span> <span class="s">"Test Session Created via the Open API"</span>
 <span class="p">}</span>
+
 <span class="n">response_1</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">session_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 <span class="c"># example with `ScheduleTracks`</span>
@@ -645,7 +662,8 @@ You must replace <code>API_KEY</code> with your personal API key.
     </span><span class="s2">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"add_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span><span class="err">#</span><span class="w"> </span><span class="err">example</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">`ScheduleTracks`</span><span class="w">
@@ -661,7 +679,8 @@ You must replace <code>API_KEY</code> with your personal API key.
     </span><span class="s2">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"add_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w"> </span><span class="mi">101</span><span class="p">]</span><span class="w">
+    </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w"> </span><span class="mi">101</span><span class="p">],</span><span class="w">
+    </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -737,6 +756,12 @@ You must replace <code>API_KEY</code> with your personal API key.
 <td>array of integers</td>
 <td>Array of IDs of <code>ScheduleTracks</code> this <code>Session</code> should belong to.  See section on <a href="#scheduletracks">ScheduleTracks</a>.</td>
 </tr>
+<tr>
+<td>image</td>
+<td>no</td>
+<td>image</td>
+<td>image will appear above the <code>Session</code> name, date, times, location, and description in Guidebook apps. The ideal size is 640px wide, 240 px tall. See section on <a href="#images">images</a>.</td>
+</tr>
 </tbody></table>
 
 <aside class="success">
@@ -770,7 +795,8 @@ Remember — don't forget to include your API key in the `Authorization` header!
             </span><span class="s2">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="s2">"add_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
@@ -784,7 +810,8 @@ Remember — don't forget to include your API key in the `Authorization` header!
             </span><span class="s2">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="s2">"add_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
@@ -798,7 +825,8 @@ Remember — don't forget to include your API key in the `Authorization` header!
             </span><span class="s2">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="s2">"add_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
@@ -812,7 +840,8 @@ Remember — don't forget to include your API key in the `Authorization` header!
             </span><span class="s2">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="s2">"add_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="s2">"schedule_tracks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
