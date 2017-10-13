@@ -33,8 +33,11 @@ response = request.post(custom_list_item_url, data=post_data, headers={'Authoriz
 	"guide": 1,
 	"custom_lists": [],
 	"locations": [],
-	"created_at": "2017-09-27T08:19:08.544919+0000"
+	"created_at": "2017-09-27T08:19:08.544919+0000",
+	"image": null,
+	"thumbnail": null
 }
+
 
 ```
 
@@ -55,6 +58,8 @@ description_html| yes | string   | A text description of the `CustomListItem`. T
 subtitle        | no  | string   | A short tagline thats displayed below the name of the name field.
 allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this `CustomListItem`.
 import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for `CustomListItems` in your data store.
+image           | no  | image    |  image will appear with the `CustomListItem` in Guidebook apps. The ideal size is 640px wide, 240 px tall. See section on [images](#images).
+thumbnail       | no  | thumbnail  |  thumbnail will appear with the `CustomListItem` in Guidebook apps. The ideal size is 240px wide, 240 px tall. See section on [images](#images).
 
 
 ## Listing `CustomListItems`
@@ -90,7 +95,9 @@ response = request.get(custom_list_item_url, headers={'Authorization': 'JWT ' + 
 				6
 			],
 			"locations": [],
-			"created_at": "2017-09-27T08:11:40.183229+0000"
+			"created_at": "2017-09-27T08:11:40.183229+0000",
+			"image": null,
+			"thumbnail": null
 		},
 		{
 			"id": 2,
@@ -104,7 +111,9 @@ response = request.get(custom_list_item_url, headers={'Authorization': 'JWT ' + 
 				6
 			],
 			"locations": [],
-			"created_at": "2017-09-27T08:11:40.189964+0000"
+			"created_at": "2017-09-27T08:11:40.189964+0000",
+			"image": null,
+			"thumbnail": null
 		},
 		{
 			"id": 3,
@@ -118,7 +127,9 @@ response = request.get(custom_list_item_url, headers={'Authorization': 'JWT ' + 
 				6
 			],
 			"locations": [],
-			"created_at": "2017-09-27T08:11:40.195613+0000"
+			"created_at": "2017-09-27T08:11:40.195613+0000",
+			"image": null,
+			"thumbnail": null
 		},
 		{
 			"id": 4,
@@ -132,10 +143,13 @@ response = request.get(custom_list_item_url, headers={'Authorization': 'JWT ' + 
 				7
 			],
 			"locations": [],
-			"created_at": "2017-09-27T08:11:40.200571+0000"
+			"created_at": "2017-09-27T08:11:40.200571+0000",
+			"image": null,
+			"thumbnail": null
 		}
 	]
 }
+
 ```
 
 
