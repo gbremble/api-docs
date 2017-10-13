@@ -12,6 +12,7 @@ includes:
   - introduction  # md files in the '/docs/' folder to include. must be all lowercase no spaces
   - authentication
   - pagination
+  - images
   - guides
   - sessions
   - schedule_tracks

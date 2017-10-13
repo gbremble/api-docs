@@ -18,6 +18,7 @@ post_data =
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
 	"name": "Test Session Created via the Open API"
 }
+
 response_1 = request.post(session_url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
 
 # example with `ScheduleTracks`
@@ -50,7 +51,8 @@ response_2 = request.post(session_url, data=post_data, headers={'Authorization':
 	"allow_rating": true,
 	"add_to_schedule": true,
 	"guide": 1,
-	"schedule_tracks": []
+	"schedule_tracks": [],
+	"image": null
 }
 
 # example with `ScheduleTracks`
@@ -66,7 +68,8 @@ response_2 = request.post(session_url, data=post_data, headers={'Authorization':
 	"allow_rating": true,
 	"add_to_schedule": true,
 	"guide": 1,
-	"schedule_tracks": [3, 42, 47, 101]
+	"schedule_tracks": [3, 42, 47, 101],
+	"image": null
 }
 
 ```
@@ -92,6 +95,7 @@ allow_rating    | no  | boolean  | A boolean value indicating if end-users can r
 add_to_schedule | no  | boolean  | A boolean value indicating if end-users can add this `Session` to their personal schedule.
 import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for `Sessions` in your data store.
 schedule_tracks | no  | array of integers | Array of IDs of `ScheduleTracks` this `Session` should belong to.  See section on [ScheduleTracks](#scheduletracks).
+image           | no  | image    |  image will appear above the `Session` name, date, times, location, and description in Guidebook apps. The ideal size is 640px wide, 240 px tall. See section on [images](#images).
 
 
 <aside class="success">
@@ -132,7 +136,8 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 42,
-			"schedule_tracks": []
+			"schedule_tracks": [],
+			"image": null
 		},
 		{
 			"id": 22,
@@ -146,7 +151,8 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 42,
-			"schedule_tracks": []
+			"schedule_tracks": [],
+			"image": null
 		},
 		{
 			"id": 23,
@@ -160,7 +166,8 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 42,
-			"schedule_tracks": []
+			"schedule_tracks": [],
+			"image": null
 		},
 		{
 			"id": 24,
@@ -174,7 +181,8 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 43,
-			"schedule_tracks": []
+			"schedule_tracks": [],
+			"image": null
 		}
 	]
 }
