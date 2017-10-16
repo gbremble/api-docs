@@ -54,7 +54,7 @@ Parameter       | Required  | Type    | Description
 ---------       | --------  | ------- | -----------
 guide           | yes | integer  | The specific `Guide` your `CustomListItem` belongs to.  See section on [Guides](#guides) for more info.
 name            | yes | string   | The title of your `CustomListItem`.
-description_html| yes | string   | A text description of the `CustomListItem`. This field supports basic HTML.
+description_html| yes | string   | A text description of the `CustomListItem`. This field supports basic HTML. See section on [html text](#html-text),
 subtitle        | no  | string   | A short tagline thats displayed below the name of the name field.
 allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this `CustomListItem`.
 import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for `CustomListItems` in your data store.
