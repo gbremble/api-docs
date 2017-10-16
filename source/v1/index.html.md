@@ -15,6 +15,7 @@ includes:
   - pagination
   - timezones
   - images
+  - html_tags
   - guides
   - sessions
   - schedule_tracks
