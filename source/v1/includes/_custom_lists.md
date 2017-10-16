@@ -33,8 +33,6 @@ response = request.post(custom_lists_url, data=post_data, headers={'Authorizatio
 ```
 
 
-This endpoint will create and list all `CustomLists` that are owned by your Account. Typically, this endpoint is called with a `guide_id` filter such that it returns a list of `CustomLists` associated to a lone `Guide` object that is owned by you.
-
 ### HTTP Request
 
 `POST https://builder.guidebook.com/open-api/v1/custom-lists/`
@@ -51,6 +49,8 @@ import_id       | no  | string     | A string field you can used to input your o
 
 
 ## Listing `CustomLists`
+
+This endpoint will list all `CustomLists` that are owned by your Account. Typically, this endpoint is called with a `guide_id` filter such that it returns a list of `CustomLists` associated to a lone `Guide` object that is owned by you.
 
 
 ```python
@@ -111,8 +111,6 @@ response = request.get(custom_lists_url, headers={'Authorization': 'JWT ' + api_
 }
 ```
 
-
-This endpoint can also be used to read data on `CustomLists`.
 
 ### HTTP Request
 

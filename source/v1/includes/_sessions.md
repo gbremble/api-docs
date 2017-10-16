@@ -1,5 +1,7 @@
 # Sessions
 
+`Sessions` can be added to a `Guide` to build up a schedule for your event. For example, the, "Programmer Conference 2017" event might have a `Session` for the talk, "Python in a Scientific Environment", and a `Session` about, "Off by One Errors."
+
 ## Creating `Session`
 
 
@@ -16,6 +18,7 @@ post_data =
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
 	"name": "Test Session Created via the Open API"
 }
+
 response_1 = request.post(session_url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
 
 # example with `ScheduleTracks`
@@ -26,8 +29,9 @@ post_data =
 	"guide": 1,
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
 	"name": "Test Session Created via the Open API",
-	"schedule_tracks": [3,42,47,101]
+	"schedule_tracks": [3, 42, 47, 101]
 }
+
 response_2 = request.post(session_url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
 
 ```
@@ -44,10 +48,11 @@ response_2 = request.post(session_url, data=post_data, headers={'Authorization':
 	"name": "Test Session Created via the Open API",
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
 	"import_id": null,
-	"allow_rating": false,
-	"add_to_schedule": false,
+	"allow_rating": true,
+	"add_to_schedule": true,
 	"guide": 1,
-	"schedule_tracks": []
+	"schedule_tracks": [],
+	"image": null
 }
 
 # example with `ScheduleTracks`
@@ -60,10 +65,11 @@ response_2 = request.post(session_url, data=post_data, headers={'Authorization':
 	"name": "Test Session Created via the Open API",
 	"description_html": "<p>This is a description field that supports basic HTML</p>",
 	"import_id": null,
-	"allow_rating": false,
-	"add_to_schedule": false,
+	"allow_rating": true,
+	"add_to_schedule": true,
 	"guide": 1,
-	"schedule_tracks": [3,42,47,101]
+	"schedule_tracks": [3, 42, 47, 101],
+	"image": null
 }
 
 ```
@@ -89,6 +95,7 @@ allow_rating    | no  | boolean  | A boolean value indicating if end-users can r
 add_to_schedule | no  | boolean  | A boolean value indicating if end-users can add this `Session` to their personal schedule.
 import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for `Sessions` in your data store.
 schedule_tracks | no  | array of integers | Array of IDs of `ScheduleTracks` this `Session` should belong to.  See section on [ScheduleTracks](#scheduletracks).
+image           | no  | image    |  image will appear above the `Session` name, date, times, location, and description in Guidebook apps. The ideal size is 640px wide, 240 px tall. See section on [images](#images).
 
 
 <aside class="success">
@@ -129,7 +136,8 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 42,
-			"schedule_tracks": []
+			"schedule_tracks": [],
+			"image": null
 		},
 		{
 			"id": 22,
@@ -143,7 +151,8 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 42,
-			"schedule_tracks": []
+			"schedule_tracks": [],
+			"image": null
 		},
 		{
 			"id": 23,
@@ -157,7 +166,8 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 42,
-			"schedule_tracks": []
+			"schedule_tracks": [],
+			"image": null
 		},
 		{
 			"id": 24,
@@ -171,7 +181,8 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 43,
-			"schedule_tracks": []
+			"schedule_tracks": [],
+			"image": null
 		}
 	]
 }
@@ -187,7 +198,7 @@ This endpoint can also be used to read data on `Sessions`.
 
 ### Model Fields
 
-Same as the fields used in creation with the addition of the following read-only fields
+Same as the fields used in creation with the addition of the following read-only fields:
 
 Parameter       | Type    | Description
 ---------       | ------- | -----------
@@ -236,4 +247,3 @@ You will only need to include the specific fields you are updating and not a ful
 To delete a particular `Session`, issue a `DELETE` request to the url that points to the specific `Session` you'd like deleted:
 
 `DELETE https://builder.guidebook.com/open-api/v1/sessions/71/`
-
