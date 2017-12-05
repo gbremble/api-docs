@@ -1,12 +1,12 @@
 # Attendees
 
-## Creating a `Attendee`
+## Creating an `Attendee`
 
 
 ```python
 import requests
 
-attendees_lists_url =  'https://builder.guidebook.com/open-api/v1/attendees/'
+attendees_list_url =  'https://builder.guidebook.com/open-api/v1/attendees/'
 api_key = 'API_KEY'
 post_data =
 {
@@ -15,7 +15,7 @@ post_data =
 	"first_name": "Open API",
 	"last_name": "Example User"
 }
-response = request.post(attendees_lists_url, data=post_data, headers={'Authorization': 'JWT ' + api_key})
+response = request.post(attendees_list_url, data=post_data, headers={'Authorization': 'JWT ' + api_key})
 
 ```
 
@@ -222,4 +222,3 @@ The above request will fetch data for the `Attendee` with the id 71.
 The `Attendee` object is a crucial component that's used in our metrics tracking system.  In order to preserve the integrity of our metrics tracking stack, we do NOT allow Attendee objects to be deleted once they been created.  Fields such as the `status` of the `Attendee` are strictly controlled by specific metrics events happening and can not be manipulated via the Open API. Additionally we do not allow you to manipulate the profile information of the individual accounts.  These are controlled by the end-user themselves.
 
 We do allow various Open API operations for objects that are related to an `Attendee` and a `Guide`. i.e [Personalized Schedules](#personalizedschedules) for a given `Attendee`.
-

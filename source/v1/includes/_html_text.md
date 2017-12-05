@@ -18,7 +18,7 @@ other          | `ruby`, `rt`, `rp`
 
 ### Allowed Attributes
 
-Tag       | Allowed Attritbutes for Tag
+Tag       | Allowed Attributes for Tag
 --------- | --------
 `a`       | `href`
 `img`     | `src`

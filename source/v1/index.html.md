@@ -24,6 +24,7 @@ includes:
   - custom_list_items
   - custom_list_item_relations
   - attendees
+  - attendee_groups
   - personalized_schedules
 
 search: true

@@ -125,9 +125,11 @@ created_at      | datetime | Time when this `Location` was created - UTC.
 
 ### Filtering `Locations`
 
-To filter the returned `Locations` by their `location_type` include the query parameter `location_type`. The following request, for examples, filters for `Locations` with `location_type` 2.
+To filter the returned `Locations` by their `location_type` include the query parameter `location_type`. The following request, for examples, filters for `Locations` with `location_type` 2.  Additionally, you can also filter by `guide` to limit to locations belonging to a specific guide.
 
 `GET https://builder.guidebook.com/open-api/v1/locations/?location_type=2`
+
+`GET https://builder.guidebook.com/open-api/v1/locations/?location_type=2&guide=42`
 
 ## Manipulating Individual `Locations`
 
