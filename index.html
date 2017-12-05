@@ -393,7 +393,7 @@
             <a href="#attendees" class="toc-h1 toc-link" data-title="Attendees">Attendees</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#creating-a-code-attendee-code" class="toc-h2 toc-link" data-title="Attendees">Creating a <code>Attendee</code></a>
+                    <a href="#creating-an-code-attendee-code" class="toc-h2 toc-link" data-title="Attendees">Creating an <code>Attendee</code></a>
                   </li>
                   <li>
                     <a href="#listing-code-attendees-code" class="toc-h2 toc-link" data-title="Attendees">Listing <code>Attendees</code></a>
@@ -403,6 +403,35 @@
                   </li>
                   <li>
                     <a href="#deleting-an-code-attendee-code-or-updating-code-attendee-code-info" class="toc-h2 toc-link" data-title="Attendees">Deleting an <code>Attendee</code> or Updating <code>Attendee</code> info</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#attendeegroups" class="toc-h1 toc-link" data-title="AttendeeGroups">AttendeeGroups</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#creating-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Creating an <code>AttendeeGroup</code></a>
+                  </li>
+                  <li>
+                    <a href="#listing-code-attendeegroups-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Listing <code>AttendeeGroups</code></a>
+                  </li>
+                  <li>
+                    <a href="#retrieving-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Retrieving an <code>AttendeeGroup</code></a>
+                  </li>
+                  <li>
+                    <a href="#retrieving-the-members-of-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Retrieving the Members of an <code>AttendeeGroup</code></a>
+                  </li>
+                  <li>
+                    <a href="#adding-members-to-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Adding Members to an <code>AttendeeGroup</code></a>
+                  </li>
+                  <li>
+                    <a href="#removing-members-from-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Removing Members from an <code>AttendeeGroup</code></a>
+                  </li>
+                  <li>
+                    <a href="#updating-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Updating an <code>AttendeeGroup</code></a>
+                  </li>
+                  <li>
+                    <a href="#deleting-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Deleting an <code>AttendeeGroup</code></a>
                   </li>
               </ul>
           </li>
@@ -629,7 +658,7 @@ You must replace <code>API_KEY</code> with your personal API key.
 <table><thead>
 <tr>
 <th>Tag</th>
-<th>Allowed Attritbutes for Tag</th>
+<th>Allowed Attributes for Tag</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -805,7 +834,7 @@ You must replace <code>API_KEY</code> with your personal API key.
 <td>description_html</td>
 <td>yes</td>
 <td>string</td>
-<td>A text description of the <code>Session</code>. This field supports basic HTML.</td>
+<td>A text description of the <code>Session</code>.  This field has a 20,000 character limit.  This field supports basic HTML.  See section on <a href="#html-text">html text</a>.</td>
 </tr>
 <tr>
 <td>start_time</td>
@@ -1298,9 +1327,11 @@ To retrieve an individual <code>ScheduleTrack</code> object issue a <code>GET</c
 </tr>
 </tbody></table>
 <h3 id='filtering-code-locations-code'>Filtering <code>Locations</code></h3>
-<p>To filter the returned <code>Locations</code> by their <code>location_type</code> include the query parameter <code>location_type</code>. The following request, for examples, filters for <code>Locations</code> with <code>location_type</code> 2.</p>
+<p>To filter the returned <code>Locations</code> by their <code>location_type</code> include the query parameter <code>location_type</code>. The following request, for examples, filters for <code>Locations</code> with <code>location_type</code> 2.  Additionally, you can also filter by <code>guide</code> to limit to locations belonging to a specific guide.</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/locations/?location_type=2</code></p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/locations/?location_type=2&amp;guide=42</code></p>
 <h2 id='manipulating-individual-code-locations-code'>Manipulating Individual <code>Locations</code></h2>
 <blockquote>
 <p>Update the name of a <code>Location</code></p>
@@ -1575,7 +1606,7 @@ To retrieve an individual <code>CustomList</code> object issue a <code>GET</code
 <td>description_html</td>
 <td>yes</td>
 <td>string</td>
-<td>A text description of the <code>CustomListItem</code>. This field supports basic HTML. See section on <a href="#html-text">html text</a>,</td>
+<td>A text description of the <code>CustomListItem</code>. This field has a 20,000 character limit.  This field supports basic HTML. See section on <a href="#html-text">html text</a>.</td>
 </tr>
 <tr>
 <td>subtitle</td>
@@ -1922,9 +1953,9 @@ To retrieve an individual <code>CustomListItem</code> object issue a <code>GET</
 <p>To delete a particular <code>CustomListItemRelation</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>CustomListItemRelation</code> you&#39;d like deleted:</p>
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/</code></p>
-<h1 id='attendees'>Attendees</h1><h2 id='creating-a-code-attendee-code'>Creating a <code>Attendee</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h1 id='attendees'>Attendees</h1><h2 id='creating-an-code-attendee-code'>Creating an <code>Attendee</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">attendees_lists_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/attendees/'</span>
+<span class="n">attendees_list_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/attendees/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
 <span class="n">post_data</span> <span class="o">=</span>
 <span class="p">{</span>
@@ -1933,7 +1964,7 @@ To retrieve an individual <code>CustomListItem</code> object issue a <code>GET</
     <span class="s">"first_name"</span><span class="p">:</span> <span class="s">"Open API"</span><span class="p">,</span>
     <span class="s">"last_name"</span><span class="p">:</span> <span class="s">"Example User"</span>
 <span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">attendees_lists_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">attendees_list_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
 
 </code></pre>
 <blockquote>
@@ -2189,6 +2220,158 @@ To retrieve an individual <code>CustomListItem</code> object issue a <code>GET</
 <p>The <code>Attendee</code> object is a crucial component that&#39;s used in our metrics tracking system.  In order to preserve the integrity of our metrics tracking stack, we do NOT allow Attendee objects to be deleted once they been created.  Fields such as the <code>status</code> of the <code>Attendee</code> are strictly controlled by specific metrics events happening and can not be manipulated via the Open API. Additionally we do not allow you to manipulate the profile information of the individual accounts.  These are controlled by the end-user themselves.</p>
 
 <p>We do allow various Open API operations for objects that are related to an <code>Attendee</code> and a <code>Guide</code>. i.e <a href="#personalizedschedules">Personalized Schedules</a> for a given <code>Attendee</code>.</p>
+<h1 id='attendeegroups'>AttendeeGroups</h1>
+<p><code>AttendeeGroups</code> allow you to collect 1 or more <code>Attendee</code> objects into a group.</p>
+<h2 id='creating-an-code-attendeegroup-code'>Creating an <code>AttendeeGroup</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">attendee_groups_list_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/attendee-groups/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">post_data</span> <span class="o">=</span>
+<span class="p">{</span>
+    <span class="s">"guide"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"Test AttendeeGroup created via the Open API"</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">attendee_groups_list_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
+
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test AttendeeGroup created via the Open API"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-18T22:13:25.766623+0000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+<p>This endpoint will create an <code>AttendeeGroup</code> that belongs to the given <code>Guide</code>. <code>AttendeeGroups</code> allow you to collect 1 or more <code>Attendee</code> objects into a group.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://builder.guidebook.com/open-api/v1/attendee-groups/</code></p>
+<h3 id='model-fields'>Model Fields</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>guide</td>
+<td>yes</td>
+<td>integer</td>
+<td>The specific <code>Guide</code> your <code>AttendeeGroup</code> belongs to.  See section on <a href="#guides">Guides</a> for more info.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>yes</td>
+<td>string</td>
+<td>A string to identify your <code>AttendeeGroup</code> with.</td>
+</tr>
+</tbody></table>
+<h2 id='listing-code-attendeegroups-code'>Listing <code>AttendeeGroups</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">attendee_groups_list_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/attendee-groups/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+
+<span class="c"># This will return all AttendeeGroups you have access to</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attendee_groups_list_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AttendeeGroup Example 1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.429989+0000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AttendeeGroup Example 2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-18T21:28:35.429989+0000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AttendeeGroup Example 3"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-18T21:28:35.429989+0000"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint can also be used to read <code>AttendeeGroup</code> data. Typically, this endpoint is called with a <code>guide</code> filter such that it returns a list of <code>Attendees</code> associated to a lone <code>Guide</code> object that is owned by you.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://builder.guidebook.com/open-api/v1/attendee-groups/</code></p>
+<h3 id='model-fields-2'>Model Fields</h3>
+<p>Same as the fields used in creation with the addition of the following read-only fields:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>An unique identifier for your <code>AttendeeGroup</code>.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td>Time when this <code>AttendeeGroup</code> was created - UTC.</td>
+</tr>
+</tbody></table>
+<h3 id='filtering-data-by-code-guide-code-id-and-other-fields'>Filtering data by <code>Guide</code> id and other fields</h3>
+<p>Including a query parameter <code>guide</code> allows you to filter for all <code>AttendeeGroups</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/attendee-groups/?guide=47</code></p>
+<h2 id='retrieving-an-code-attendeegroup-code'>Retrieving an <code>AttendeeGroup</code></h2>
+<p>To retrieve an individual <code>AttendeeGroup</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/attendee-groups/71/</code></p>
+
+<p>The above request will fetch data for the <code>AttendeeGroup</code> with the id 71.</p>
+<h2 id='retrieving-the-members-of-an-code-attendeegroup-code'>Retrieving the Members of an <code>AttendeeGroup</code></h2>
+<p>To retrieve all the current members of an <code>AttendeeGroup</code> objects, issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/attendee-groups/71/members/</code></p>
+
+<p>The above request (which can be paged through) will return representations of the <code>Attendee</code> objects currently in the <code>AttendeeGroup</code>.</p>
+<h2 id='adding-members-to-an-code-attendeegroup-code'>Adding Members to an <code>AttendeeGroup</code></h2>
+<p>To add members to an <code>AttendeeGroup</code>, issue a <code>POST</code> request like:</p>
+
+<p><code>POST https://builder.guidebook.com/open-api/v1/attendee-groups/71/add-members/</code></p>
+
+<p>The body of the POST request should be a dictionary like...<code>{&quot;attendees&quot;: [&lt;attendee_id_1&gt;, &lt;attendee_id_2&gt;, &lt;attendee_id_n&gt;]}</code>.</p>
+<h2 id='removing-members-from-an-code-attendeegroup-code'>Removing Members from an <code>AttendeeGroup</code></h2>
+<p>To remove members from an <code>AttendeeGroup</code>, issue a <code>POST</code> request like:</p>
+
+<p><code>POST https://builder.guidebook.com/open-api/v1/attendee-groups/71/remove-members/</code></p>
+
+<p>The body of the POST request should be a dictionary like...<code>{&quot;attendees&quot;: [&lt;attendee_id_1&gt;, &lt;attendee_id_2&gt;, &lt;attendee_id_n&gt;]}</code>.</p>
+<h2 id='updating-an-code-attendeegroup-code'>Updating an <code>AttendeeGroup</code></h2>
+<p>To modify an existing <code>AttendeeGroup</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/attendee-groups/71/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body. Note than only the <code>name</code> field is updatable at this time.</p>
+<h2 id='deleting-an-code-attendeegroup-code'>Deleting an <code>AttendeeGroup</code></h2>
+<p>To delete a particular <code>AttendeeGroup</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>AttendeeGroup</code> you&#39;d like deleted:</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/attendee-groups/71/</code></p>
 <h1 id='personalizedschedules'>PersonalizedSchedules</h1><h2 id='creating-a-code-personalizedschedule-code'>Creating a <code>PersonalizedSchedule</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">personalized_schedule_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/personalized-schedules/'</span>
