@@ -120,27 +120,27 @@ To retrieve an individual `AttendeeGroup` object issue a `GET` request like:
 
 The above request will fetch data for the `AttendeeGroup` with the id 71.
 
-## Retrieving the Members of an `AttendeeGroup`
+## Retrieving the Attendees in an `AttendeeGroup`
 
-To retrieve all the current members of an `AttendeeGroup` objects, issue a `GET` request like:
+To retrieve all the current `Attendees` in an `AttendeeGroup` objects, issue a `GET` request like:
 
-`GET https://builder.guidebook.com/open-api/v1/attendee-groups/71/members/`
+`GET https://builder.guidebook.com/open-api/v1/attendee-groups/71/attendees/`
 
 The above request (which can be paged through) will return representations of the `Attendee` objects currently in the `AttendeeGroup`.
 
-## Adding Members to an `AttendeeGroup`
+## Adding `Attendees` to an `AttendeeGroup`
 
-To add members to an `AttendeeGroup`, issue a `POST` request like:
+To add Attendees to an `AttendeeGroup`, issue a `POST` request like:
 
-`POST https://builder.guidebook.com/open-api/v1/attendee-groups/71/add-members/`
+`POST https://builder.guidebook.com/open-api/v1/attendee-groups/71/add-attendees/`
 
 The body of the POST request should be a dictionary like...`{"attendees": [<attendee_id_1>, <attendee_id_2>, <attendee_id_n>]}`.
 
-## Removing Members from an `AttendeeGroup`
+## Removing `Attendees` from an `AttendeeGroup`
 
-To remove members from an `AttendeeGroup`, issue a `POST` request like:
+To remove Attendess from an `AttendeeGroup`, issue a `POST` request like:
 
-`POST https://builder.guidebook.com/open-api/v1/attendee-groups/71/remove-members/`
+`POST https://builder.guidebook.com/open-api/v1/attendee-groups/71/remove-attendees/`
 
 The body of the POST request should be a dictionary like...`{"attendees": [<attendee_id_1>, <attendee_id_2>, <attendee_id_n>]}`.
 

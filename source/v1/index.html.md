@@ -11,6 +11,7 @@ toc_footers:
 includes:
   - introduction  # md files in the '/docs/' folder to include. must be all lowercase no spaces
   - versioning
+  - examples
   - authentication
   - pagination
   - timezones
