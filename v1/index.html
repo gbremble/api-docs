@@ -225,6 +225,17 @@
             <a href="#versioning" class="toc-h1 toc-link" data-title="Versioning">Versioning</a>
           </li>
           <li>
+            <a href="#example-implementations" class="toc-h1 toc-link" data-title="Example Implementations">Example Implementations</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#eventbrite-integration" class="toc-h2 toc-link" data-title="Example Implementations">Eventbrite Integration</a>
+                  </li>
+                  <li>
+                    <a href="#icalendar-integration" class="toc-h2 toc-link" data-title="Example Implementations">Icalendar Integration</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
@@ -419,13 +430,13 @@
                     <a href="#retrieving-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Retrieving an <code>AttendeeGroup</code></a>
                   </li>
                   <li>
-                    <a href="#retrieving-the-members-of-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Retrieving the Members of an <code>AttendeeGroup</code></a>
+                    <a href="#retrieving-the-attendees-in-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Retrieving the Attendees in an <code>AttendeeGroup</code></a>
                   </li>
                   <li>
-                    <a href="#adding-members-to-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Adding Members to an <code>AttendeeGroup</code></a>
+                    <a href="#adding-code-attendees-code-to-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Adding <code>Attendees</code> to an <code>AttendeeGroup</code></a>
                   </li>
                   <li>
-                    <a href="#removing-members-from-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Removing Members from an <code>AttendeeGroup</code></a>
+                    <a href="#removing-code-attendees-code-from-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Removing <code>Attendees</code> from an <code>AttendeeGroup</code></a>
                   </li>
                   <li>
                     <a href="#updating-an-code-attendeegroup-code" class="toc-h2 toc-link" data-title="AttendeeGroups">Updating an <code>AttendeeGroup</code></a>
@@ -520,6 +531,12 @@
 <li>Changing the order of properties in existing API responses</li>
 <li>Changing the length or format of object IDs or other opaque strings.</li>
 </ul>
+<h1 id='example-implementations'>Example Implementations</h1>
+<p>Our <a href="https://github.com/Guidebook/">public github repo</a> contains several source code samples of how to integrate Guidebook with other services.  These are provided as an additional resource to assist developers in learning about the possiblities enabled with our API.  Client&#39;s are welcome to use these examples as a starting point to create their own custom integrations.</p>
+<h2 id='eventbrite-integration'>Eventbrite Integration</h2>
+<p>Our <a href="https://github.com/Guidebook/guidebook-eventbrite-integration">Eventbrite Integration</a> is the open sourced code of how the default Eventbrite integration in <a href="https://builder.guidebook.com/">Guidebook Builder</a> runs.  The standard integration imports Attendees from Eventbrite and groups them by Ticket Type.  If you would like to run your own custom Eventbrite integration, you can use this code as a starting point.</p>
+<h2 id='icalendar-integration'>Icalendar Integration</h2>
+<p>Icalendar is a popular format for representing schedules.  The <a href="https://github.com/Guidebook/guidebook-ical-integration">Icalendar Integration</a> example we provide shows how you can import session data into Guidebook from an ical source.  Icalendar feeds can be incredibly complicated and if your ical feed incorporates non standard properties (X-prefixed properties), you can customize our ical integration to fit your needs.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>Example request that includes authentication:</p>
@@ -2344,22 +2361,22 @@ To retrieve an individual <code>CustomListItem</code> object issue a <code>GET</
 <p><code>GET https://builder.guidebook.com/open-api/v1/attendee-groups/71/</code></p>
 
 <p>The above request will fetch data for the <code>AttendeeGroup</code> with the id 71.</p>
-<h2 id='retrieving-the-members-of-an-code-attendeegroup-code'>Retrieving the Members of an <code>AttendeeGroup</code></h2>
-<p>To retrieve all the current members of an <code>AttendeeGroup</code> objects, issue a <code>GET</code> request like:</p>
+<h2 id='retrieving-the-attendees-in-an-code-attendeegroup-code'>Retrieving the Attendees in an <code>AttendeeGroup</code></h2>
+<p>To retrieve all the current <code>Attendees</code> in an <code>AttendeeGroup</code> objects, issue a <code>GET</code> request like:</p>
 
-<p><code>GET https://builder.guidebook.com/open-api/v1/attendee-groups/71/members/</code></p>
+<p><code>GET https://builder.guidebook.com/open-api/v1/attendee-groups/71/attendees/</code></p>
 
 <p>The above request (which can be paged through) will return representations of the <code>Attendee</code> objects currently in the <code>AttendeeGroup</code>.</p>
-<h2 id='adding-members-to-an-code-attendeegroup-code'>Adding Members to an <code>AttendeeGroup</code></h2>
-<p>To add members to an <code>AttendeeGroup</code>, issue a <code>POST</code> request like:</p>
+<h2 id='adding-code-attendees-code-to-an-code-attendeegroup-code'>Adding <code>Attendees</code> to an <code>AttendeeGroup</code></h2>
+<p>To add Attendees to an <code>AttendeeGroup</code>, issue a <code>POST</code> request like:</p>
 
-<p><code>POST https://builder.guidebook.com/open-api/v1/attendee-groups/71/add-members/</code></p>
+<p><code>POST https://builder.guidebook.com/open-api/v1/attendee-groups/71/add-attendees/</code></p>
 
 <p>The body of the POST request should be a dictionary like...<code>{&quot;attendees&quot;: [&lt;attendee_id_1&gt;, &lt;attendee_id_2&gt;, &lt;attendee_id_n&gt;]}</code>.</p>
-<h2 id='removing-members-from-an-code-attendeegroup-code'>Removing Members from an <code>AttendeeGroup</code></h2>
-<p>To remove members from an <code>AttendeeGroup</code>, issue a <code>POST</code> request like:</p>
+<h2 id='removing-code-attendees-code-from-an-code-attendeegroup-code'>Removing <code>Attendees</code> from an <code>AttendeeGroup</code></h2>
+<p>To remove Attendess from an <code>AttendeeGroup</code>, issue a <code>POST</code> request like:</p>
 
-<p><code>POST https://builder.guidebook.com/open-api/v1/attendee-groups/71/remove-members/</code></p>
+<p><code>POST https://builder.guidebook.com/open-api/v1/attendee-groups/71/remove-attendees/</code></p>
 
 <p>The body of the POST request should be a dictionary like...<code>{&quot;attendees&quot;: [&lt;attendee_id_1&gt;, &lt;attendee_id_2&gt;, &lt;attendee_id_n&gt;]}</code>.</p>
 <h2 id='updating-an-code-attendeegroup-code'>Updating an <code>AttendeeGroup</code></h2>
