@@ -470,16 +470,13 @@
             <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#sample-webhook-event-post" class="toc-h2 toc-link" data-title="Webhooks">Sample Webhook Event POST</a>
-                  </li>
-                  <li>
                     <a href="#event-dictionaries" class="toc-h2 toc-link" data-title="Webhooks">Event Dictionaries</a>
                   </li>
                   <li>
                     <a href="#security" class="toc-h2 toc-link" data-title="Webhooks">Security</a>
                   </li>
                   <li>
-                    <a href="#example-implementations" class="toc-h2 toc-link" data-title="Webhooks">Example Implementations</a>
+                    <a href="#webhook-examples" class="toc-h2 toc-link" data-title="Webhooks">Webhook Examples</a>
                   </li>
               </ul>
           </li>
@@ -2580,10 +2577,6 @@ To retrieve an individual <code>PersonalizedSchedule</code> object issue a <code
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/personalized-schedules/71/</code></p>
 <h1 id='webhooks'>Webhooks</h1>
-<p>Guidebook offers a <a href="https://en.wikipedia.org/wiki/Webhook">Webhook API</a> to allow customers to monitor and process metrics events in their guide.  Customers can get started by setting up their own Webhook URLs that will consume events.  Once their Webhook URL is live, they can go into <a href="https://builder.guidebook.com">Guidebook Builder</a> and supply the Webhook URL and configure the metrics events they want that URL to be notified of.</p>
-
-<p>Whenever a metrics event that you are monitoring occurs, we will immediately make a POST request to your Webhook with details of the metrics event.</p>
-<h2 id='sample-webhook-event-post'>Sample Webhook Event POST</h2>
 <blockquote>
 <p>Whenever a metrics event fires.  A POST request is made to your URL with data similar to the example below</p>
 </blockquote>
@@ -2605,7 +2598,11 @@ To retrieve an individual <code>PersonalizedSchedule</code> object issue a <code
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MobileApp-UserRegisteredScheduleSession"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h2 id='event-dictionaries'>Event Dictionaries</h2>
+</span></code></pre>
+<p>Guidebook offers a <a href="https://en.wikipedia.org/wiki/Webhook">Webhook API</a> to allow customers to monitor and process metrics events in their guide.  Customers can get started by setting up their own Webhook URLs that will consume events.  Once their Webhook URL is live, they can go into <a href="https://builder.guidebook.com">Guidebook Builder</a> and supply the Webhook URL and configure the metrics events they want that URL to be notified of.</p>
+
+<p>Whenever a metrics event that you are monitoring occurs, we will immediately make a POST request to your Webhook with details of the metrics event.</p>
+<h2 id='event-dictionaries'>Event Dictionaries</h2>
 <p>There are a variety of possible events that can fire.  Each one will contain the following:</p>
 
 <table><thead>
@@ -2616,30 +2613,30 @@ To retrieve an individual <code>PersonalizedSchedule</code> object issue a <code
 </tr>
 </thead><tbody>
 <tr>
+<td>weid</td>
+<td>string</td>
+<td>Unique id for this event.  You can use the Open API to refetch this event data via <code>weid</code> if needed.</td>
+</tr>
+<tr>
 <td>event</td>
 <td>string</td>
 <td>The name of the event that happened.</td>
-</tr>
-<tr>
-<td>weid</td>
-<td>string</td>
-<td>Unique ID for this event.  You can use the Open API to refetch this data via <code>weid</code> if needed.</td>
-</tr>
-<tr>
-<td>extra_metadata</td>
-<td>dictionary</td>
-<td>Usually null.  This is a field for integrations that require extra configuration options.</td>
 </tr>
 <tr>
 <td>properties</td>
 <td>dictionary</td>
 <td>All the extra details of the event that fired.  They keys will vary depending on type of event</td>
 </tr>
+<tr>
+<td>extra_metadata</td>
+<td>dictionary</td>
+<td>Usually null.  This is a field for integrations that require extra configuration options.</td>
+</tr>
 </tbody></table>
 
-<p>The properties dictionary will vary depending on the type of Event that fired.  Here is an outline of the possible keys for each event.</p>
+<p>The properties dictionary will vary depending on the type of event that fired.  Here is an outline of the possible keys for each event.</p>
 
-<p>Common Properities available in most events</p>
+<p>Common properities available in most events</p>
 
 <table><thead>
 <tr>
@@ -2810,7 +2807,7 @@ To retrieve an individual <code>PersonalizedSchedule</code> object issue a <code
 <p>When implementing your Webhook URL, please make sure to confirm that the POST data being sent to your Webhook is coming from Guidebook!!  Each Webhook you set up on Guidebook will have an unique security token.  This token will be visible on your Webhooks setup screen.</p>
 
 <p>This token will be included in ALL webhook POST requests from guidebook in the header.  The header will be <code>GB_WEBHOOK_SECURITY_TOKEN</code>.  Please verify that the token matches before processing the event data.</p>
-<h2 id='example-implementations'>Example Implementations</h2>
+<h2 id='webhook-examples'>Webhook Examples</h2>
 <p>Guidebook&#39;s Salesforce integration was built on top of our Webhook API.  For some example code on how you can customize your own Salesforce integration with our Webhook API, you can visit our <a href="https://github.com/Guidebook/guidebook-sfdc-integration">github repo</a>.</p>
 
       </div>
