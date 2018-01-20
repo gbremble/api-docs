@@ -1,10 +1,5 @@
 # Webhooks
 
-Guidebook offers a [Webhook API](https://en.wikipedia.org/wiki/Webhook) to allow customers to monitor and process metrics events in their guide.  Customers can get started by setting up their own Webhook URLs that will consume events.  Once their Webhook URL is live, they can go into [Guidebook Builder](https://builder.guidebook.com) and supply the Webhook URL and configure the metrics events they want that URL to be notified of.
-
-Whenever a metrics event that you are monitoring occurs, we will immediately make a POST request to your Webhook with details of the metrics event.
-
-## Sample Webhook Event POST
 > Whenever a metrics event fires.  A POST request is made to your URL with data similar to the example below
 
 ```json
@@ -28,6 +23,10 @@ Whenever a metrics event that you are monitoring occurs, we will immediately mak
 }
 ```
 
+Guidebook offers a [Webhook API](https://en.wikipedia.org/wiki/Webhook) to allow customers to monitor and process metrics events in their guide.  Customers can get started by setting up their own Webhook URLs that will consume events.  Once their Webhook URL is live, they can go into [Guidebook Builder](https://builder.guidebook.com) and supply the Webhook URL and configure the metrics events they want that URL to be notified of.
+
+Whenever a metrics event that you are monitoring occurs, we will immediately make a POST request to your Webhook with details of the metrics event.
+
 
 ## Event Dictionaries
 
@@ -35,15 +34,15 @@ There are a variety of possible events that can fire.  Each one will contain the
 
 Key             | Type    | Description
 ---------       | --------  | -----------
+weid            | string    | Unique id for this event.  You can use the Open API to refetch this event data via `weid` if needed.
 event           | string    | The name of the event that happened.
-weid            | string    | Unique ID for this event.  You can use the Open API to refetch this data via `weid` if needed.
-extra_metadata    | dictionary | Usually null.  This is a field for integrations that require extra configuration options.
 properties    | dictionary   | All the extra details of the event that fired.  They keys will vary depending on type of event
+extra_metadata    | dictionary | Usually null.  This is a field for integrations that require extra configuration options.
 
 
-The properties dictionary will vary depending on the type of Event that fired.  Here is an outline of the possible keys for each event.
+The properties dictionary will vary depending on the type of event that fired.  Here is an outline of the possible keys for each event.
 
-Common Properities available in most events
+Common properities available in most events
 
 Key             | Description
 ---------       |  -----------
@@ -116,6 +115,6 @@ When implementing your Webhook URL, please make sure to confirm that the POST da
 This token will be included in ALL webhook POST requests from guidebook in the header.  The header will be `GB_WEBHOOK_SECURITY_TOKEN`.  Please verify that the token matches before processing the event data.
 
 
-## Example Implementations
+## Webhook Examples
 
 Guidebook's Salesforce integration was built on top of our Webhook API.  For some example code on how you can customize your own Salesforce integration with our Webhook API, you can visit our [github repo](https://github.com/Guidebook/guidebook-sfdc-integration).
