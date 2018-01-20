@@ -466,6 +466,23 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#sample-webhook-event-post" class="toc-h2 toc-link" data-title="Webhooks">Sample Webhook Event POST</a>
+                  </li>
+                  <li>
+                    <a href="#event-dictionaries" class="toc-h2 toc-link" data-title="Webhooks">Event Dictionaries</a>
+                  </li>
+                  <li>
+                    <a href="#security" class="toc-h2 toc-link" data-title="Webhooks">Security</a>
+                  </li>
+                  <li>
+                    <a href="#example-implementations" class="toc-h2 toc-link" data-title="Webhooks">Example Implementations</a>
+                  </li>
+              </ul>
+          </li>
       </div>
         <ul class="toc-footer">
             <li><a href='https://builder.guidebook.com/#/account/api/'>Get your Guidebook API Key</a></li>
@@ -476,7 +493,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Guidebook offers a REST API to manage a subset of the resources available in the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a>. Our Open API uses resource-oriented urls, standard HTTP response codes, and HTTP verbs to segment different types of requests.</p>
+<p>Guidebook offers a REST API to manage a subset of the resources available in the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a>. Our Open API uses resource-oriented urls, standard HTTP response codes, and HTTP verbs to segment different types of requests.  The REST API is intended for content managment.  If you are interested in integrating with metrics data via our Export API, see the section on <a href="#webhooks">Webhooks</a>.</p>
 
 <p>Here are, for example, some typical response codes you might encounter:</p>
 
@@ -2562,6 +2579,239 @@ To retrieve an individual <code>PersonalizedSchedule</code> object issue a <code
 <p>To delete a particular <code>PersonalizedSchedule</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>PersonalizedSchedule</code> you&#39;d like deleted:</p>
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/personalized-schedules/71/</code></p>
+<h1 id='webhooks'>Webhooks</h1>
+<p>Guidebook offers a <a href="https://en.wikipedia.org/wiki/Webhook">Webhook API</a> to allow customers to monitor and process metrics events in their guide.  Customers can get started by setting up their own Webhook URLs that will consume events.  Once their Webhook URL is live, they can go into <a href="https://builder.guidebook.com">Guidebook Builder</a> and supply the Webhook URL and configure the metrics events they want that URL to be notified of.</p>
+
+<p>Whenever a metrics event that you are monitoring occurs, we will immediately make a POST request to your Webhook with details of the metrics event.</p>
+<h2 id='sample-webhook-event-post'>Sample Webhook Event POST</h2>
+<blockquote>
+<p>Whenever a metrics event fires.  A POST request is made to your URL with data similar to the example below</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"weid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345-e11fb47d-bb63-46f8-912c-9ba18c351970"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"extra_metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example User"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Last Name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11913"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"guide_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"61737"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Guidebook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"session_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13745343"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_user@example.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"guide_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Guide 1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-18T21:25:55.988868+0000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API Tester"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"session_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Keynote Session: How to use the Open API"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MobileApp-UserRegisteredScheduleSession"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='event-dictionaries'>Event Dictionaries</h2>
+<p>There are a variety of possible events that can fire.  Each one will contain the following:</p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>The name of the event that happened.</td>
+</tr>
+<tr>
+<td>weid</td>
+<td>string</td>
+<td>Unique ID for this event.  You can use the Open API to refetch this data via <code>weid</code> if needed.</td>
+</tr>
+<tr>
+<td>extra_metadata</td>
+<td>dictionary</td>
+<td>Usually null.  This is a field for integrations that require extra configuration options.</td>
+</tr>
+<tr>
+<td>properties</td>
+<td>dictionary</td>
+<td>All the extra details of the event that fired.  They keys will vary depending on type of event</td>
+</tr>
+</tbody></table>
+
+<p>The properties dictionary will vary depending on the type of Event that fired.  Here is an outline of the possible keys for each event.</p>
+
+<p>Common Properities available in most events</p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time</td>
+<td>UTC Timestamp of when this event happened.</td>
+</tr>
+<tr>
+<td>guide_id</td>
+<td>The guide id this metrics event happened on.</td>
+</tr>
+<tr>
+<td>guide_name</td>
+<td>The guide name.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>The id of the user who performed the action.</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>The first name of the user who performed the action.</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>The last name of the user who performed the action,</td>
+</tr>
+<tr>
+<td>company</td>
+<td>The company that the user filled out on their profile. Can be null.</td>
+</tr>
+<tr>
+<td>position</td>
+<td>The company that the user filled out on their profile. Can be null.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>The email of the user.</td>
+</tr>
+</tbody></table>
+
+<p><code>MobileApp-UserRegisteredScheduleSession</code></p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>session_id</td>
+<td>The id of the session the user registered for.</td>
+</tr>
+<tr>
+<td>session_name</td>
+<td>The name of the session the user registered for.</td>
+</tr>
+</tbody></table>
+
+<p><code>MobileApp-UserMadeToDoItem</code></p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>custom_list_item_id</td>
+<td>The id of the custom list item the user added to their todo.</td>
+</tr>
+<tr>
+<td>custom_list_item_name</td>
+<td>The name of the custom list item the user added to their todo.</td>
+</tr>
+</tbody></table>
+
+<p><code>MobileApp-UserPostedPhoto</code></p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>photo_id</td>
+<td>The id of the photo the user uploaded.</td>
+</tr>
+</tbody></table>
+
+<p><code>MobileApp-UserTaggedOtherUser</code></p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tagged_user_id</td>
+<td>The id of the user tagged.</td>
+</tr>
+<tr>
+<td>tagged_user_first_name</td>
+<td>The first name of the user tagged.</td>
+</tr>
+<tr>
+<td>tagged_user_last_name</td>
+<td>The last name of the user tagged.</td>
+</tr>
+<tr>
+<td>tagged_user_company</td>
+<td>The company that the tagged user filled out on their profile. Can be null.</td>
+</tr>
+<tr>
+<td>tagged_user_position</td>
+<td>The position that the tagged user filled out on their profile. Can be null.</td>
+</tr>
+<tr>
+<td>tagged_user_email</td>
+<td>The email for the tagged user.</td>
+</tr>
+</tbody></table>
+
+<p><code>MobileApp-UserConnectionAccepted</code></p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>requesting_user_id</td>
+<td>The id of the user who requested the connection.</td>
+</tr>
+<tr>
+<td>requesting_user_first_name</td>
+<td>The first name of the requesting user.</td>
+</tr>
+<tr>
+<td>requesting_user_last_name</td>
+<td>The last name of the requesting user.</td>
+</tr>
+<tr>
+<td>requesting_user_company</td>
+<td>The company that the requesting user filled out on their profile. Can be null.</td>
+</tr>
+<tr>
+<td>requesting_user_position</td>
+<td>The position that the requesting user filled out on their profile. Can be null.</td>
+</tr>
+<tr>
+<td>requesting_user_email</td>
+<td>The email for the requesting user.</td>
+</tr>
+</tbody></table>
+
+<p><code>MobileApp-UserCheckedIn</code></p>
+
+<p>Standard fields. No additional fields.</p>
+<h2 id='security'>Security</h2>
+<p>When implementing your Webhook URL, please make sure to confirm that the POST data being sent to your Webhook is coming from Guidebook!!  Each Webhook you set up on Guidebook will have an unique security token.  This token will be visible on your Webhooks setup screen.</p>
+
+<p>This token will be included in ALL webhook POST requests from guidebook in the header.  The header will be <code>GB_WEBHOOK_SECURITY_TOKEN</code>.  Please verify that the token matches before processing the event data.</p>
+<h2 id='example-implementations'>Example Implementations</h2>
+<p>Guidebook&#39;s Salesforce integration was built on top of our Webhook API.  For some example code on how you can customize your own Salesforce integration with our Webhook API, you can visit our <a href="https://github.com/Guidebook/guidebook-sfdc-integration">github repo</a>.</p>
 
       </div>
       <div class="dark-box">
