@@ -27,6 +27,7 @@ includes:
   - attendees
   - attendee_groups
   - personalized_schedules
+  - webhooks
 
 search: true
 ---

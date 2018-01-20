@@ -1,6 +1,6 @@
 # Introduction
 
-Guidebook offers a REST API to manage a subset of the resources available in the [Guidebook Builder CMS](https://builder.guidebook.com). Our Open API uses resource-oriented urls, standard HTTP response codes, and HTTP verbs to segment different types of requests.
+Guidebook offers a REST API to manage a subset of the resources available in the [Guidebook Builder CMS](https://builder.guidebook.com). Our Open API uses resource-oriented urls, standard HTTP response codes, and HTTP verbs to segment different types of requests.  The REST API is intended for content managment.  If you are interested in integrating with metrics data via our Export API, see the section on [Webhooks](#webhooks).
 
 Here are, for example, some typical response codes you might encounter:
 
