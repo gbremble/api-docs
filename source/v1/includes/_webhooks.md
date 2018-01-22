@@ -57,7 +57,9 @@ position      | The company that the user filled out on their profile. Can be nu
 email      | The email of the user.
 
 
-> Note that there is a 5 second delay between Account creation and our metrics indexes updating with Account profile information.  This means that if a user signs up for a brand new account and then immediately starts triggering metrics events, the first few events might have Null first name, last name, and email fields.  This is an extremely rare edge case.  You are still always guaranteed the user_id field to be a non-null value.
+<aside class="notice">
+Note that there is a 5 second delay between Account creation and our metrics indexes updating with Account profile information.  This means that if a user signs up for a brand new account and then immediately starts triggering metrics events, the first few events might have Null first name, last name, and email fields.  This is an extremely rare edge case.  You are still always guaranteed the user_id field to be a non-null value.
+</aside>
 
 `MobileApp-UserRegisteredScheduleSession`
 
