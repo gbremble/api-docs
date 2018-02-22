@@ -34,6 +34,19 @@ post_data =
 
 response_2 = request.post(session_url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
 
+# example with `Locations`
+
+post_data =
+{
+	"start_time": "2017-09-18T16:00:00",
+	"end_time": "2017-09-18T17:00:00",
+	"guide": 1,
+	"description_html": "<p>This is a description field that supports basic HTML</p>",
+	"name": "Test Session Created via the Open API",
+	"locations": [3, 42, 47, 101]
+}
+
+response_3 = request.post(session_url, data=post_data, headers={'Authorization': 'JWT ' + api_key}).json()
 ```
 
 > The above commands return JSON structured like this:
@@ -51,6 +64,7 @@ response_2 = request.post(session_url, data=post_data, headers={'Authorization':
 	"allow_rating": true,
 	"add_to_schedule": true,
 	"guide": 1,
+	"locations": [],
 	"schedule_tracks": [],
 	"image": null
 }
@@ -68,7 +82,27 @@ response_2 = request.post(session_url, data=post_data, headers={'Authorization':
 	"allow_rating": true,
 	"add_to_schedule": true,
 	"guide": 1,
+	"locations": [],
 	"schedule_tracks": [3, 42, 47, 101],
+	"image": null
+}
+
+
+# example with `Locations`
+{
+	"id": 106,
+	"created_at": "2017-09-18T22:13:25.766623+0000",
+	"start_time": "2017-09-18T16:00:00.000000+0000",
+	"end_time": "2017-09-18T17:00:00.000000+0000",
+	"all_day": false,
+	"name": "Test Session Created via the Open API",
+	"description_html": "<p>This is a description field that supports basic HTML</p>",
+	"import_id": null,
+	"allow_rating": true,
+	"add_to_schedule": true,
+	"guide": 1,
+	"locations": [3, 42, 47, 101],
+	"schedule_tracks": [],
 	"image": null
 }
 
@@ -94,6 +128,7 @@ all_day         | no  | boolean  | A boolean value indicating if a `Session` run
 allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this `Session`.
 add_to_schedule | no  | boolean  | A boolean value indicating if end-users can add this `Session` to their personal schedule.
 import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for `Sessions` in your data store.
+locations       | no  | array of integers | Array of IDs of `Locations` this `Session` should belong to.  See section on [Locations](#locations).
 schedule_tracks | no  | array of integers | Array of IDs of `ScheduleTracks` this `Session` should belong to.  See section on [ScheduleTracks](#scheduletracks).
 image           | no  | image    |  image will appear above the `Session` name, date, times, location, and description in Guidebook apps. The ideal size is 640px wide, 240 px tall. See section on [images](#images).
 
@@ -136,6 +171,7 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 42,
+			"locations": [],
 			"schedule_tracks": [],
 			"image": null
 		},
@@ -151,6 +187,7 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 42,
+			"locations": [],
 			"schedule_tracks": [],
 			"image": null
 		},
@@ -166,6 +203,7 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 42,
+			"locations": [],
 			"schedule_tracks": [],
 			"image": null
 		},
@@ -181,6 +219,7 @@ response = request.get(session_url, headers={'Authorization': 'JWT ' + api_key})
 			"allow_rating": true,
 			"add_to_schedule": true,
 			"guide": 43,
+			"locations": [],
 			"schedule_tracks": [],
 			"image": null
 		}
