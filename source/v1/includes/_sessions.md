@@ -127,7 +127,7 @@ end_time        | no  | datetime | The end time of the event.  Leave blank for a
 all_day         | no  | boolean  | A boolean value indicating if a `Session` runs for the entire day.
 allow_rating    | no  | boolean  | A boolean value indicating if end-users can rate this `Session`.
 add_to_schedule | no  | boolean  | A boolean value indicating if end-users can add this `Session` to their personal schedule.
-import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for `Sessions` in your data store.
+import_id       | no  | string     | A string field you can use to input your own identifier.  This is for when you have your own IDs for `Sessions` in your data store.
 locations       | no  | array of integers | Array of IDs of `Locations` this `Session` should belong to.  See section on [Locations](#locations).
 schedule_tracks | no  | array of integers | Array of IDs of `ScheduleTracks` this `Session` should belong to.  See section on [ScheduleTracks](#scheduletracks).
 image           | no  | image    |  image will appear above the `Session` name, date, times, location, and description in Guidebook apps. The ideal size is 640px wide, 240 px tall. See section on [images](#images).

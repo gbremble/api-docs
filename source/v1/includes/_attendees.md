@@ -25,6 +25,7 @@ response = request.post(attendees_list_url, data=post_data, headers={'Authorizat
 {
 	"id": 1,
 	"guide_id": 1,
+	"import_id": null,
 	"account_id": 2,
 	"first_name": "Open API",
 	"last_name": "Example User",
@@ -55,6 +56,7 @@ This endpoint will create an `Attendee` that is owned by your `Account`.  An `At
 Parameter       | Required  | Type    | Description
 ---------       | --------  | ------- | -----------
 guide           | yes | integer  | The specific `Guide` your `Attendee` belongs to.  See section on [Guides](#guides) for more info.
+import_id       | no  | string     | A string field you can use to input your own identifier.  This is for when you have your own IDs for `Attendees` in your data store.
 email           | yes | string    | Email address of the `Attendee`.  We will search existing Guidebook users and attempt to associate with an existing account.
 first_name      | no  | string    | First name of the Attendee.  Only used if no existing Guidebook Account was found via email matching. Otherwise, this field is ignored.
 last_name      | no  | string    | Last name of the Attendee.  Only used if no existing Guidebook Account was found via email matching. Otherwise, this field is ignored.
@@ -86,6 +88,7 @@ response = request.get(attendees_url, headers={'Authorization': 'JWT ' + api_key
 			"id": 2,
 			"guide_id": 2,
 			"account_id": 4,
+			"import_id": null,
 			"first_name": "",
 			"last_name": "",
 			"email": "a@example.com",
@@ -104,6 +107,7 @@ response = request.get(attendees_url, headers={'Authorization': 'JWT ' + api_key
 			"id": 3,
 			"guide_id": 2,
 			"account_id": 5,
+			"import_id": null,
 			"first_name": "",
 			"last_name": "",
 			"email": "b@example.com",
@@ -122,6 +126,7 @@ response = request.get(attendees_url, headers={'Authorization': 'JWT ' + api_key
 			"id": 4,
 			"guide_id": 2,
 			"account_id": 6,
+			"import_id": null,
 			"first_name": "",
 			"last_name": "",
 			"email": "c@example.com",
@@ -140,6 +145,7 @@ response = request.get(attendees_url, headers={'Authorization': 'JWT ' + api_key
 			"id": 5,
 			"guide_id": 3,
 			"account_id": 7,
+			"import_id": null,
 			"first_name": "",
 			"last_name": "",
 			"email": "d@example.com",
@@ -217,8 +223,63 @@ To retrieve an individual `Attendee` object issue a `GET` request like:
 
 The above request will fetch data for the `Attendee` with the id 71.
 
-## Deleting an `Attendee` or Updating `Attendee` info
 
-The `Attendee` object is a crucial component that's used in our metrics tracking system.  In order to preserve the integrity of our metrics tracking stack, we do NOT allow Attendee objects to be deleted once they been created.  Fields such as the `status` of the `Attendee` are strictly controlled by specific metrics events happening and can not be manipulated via the Open API. Additionally we do not allow you to manipulate the profile information of the individual accounts.  These are controlled by the end-user themselves.
+## Updating `Attendee` info
+
+The `Attendee` object defines the relationship between an individual and a given `Guide`.  Fields such as `status` can not be manipulated via the Open API. Additionally we do not allow you to manipulate the profile information of the individual accounts.  These are controlled by the end-user themselves.
+
+There are two fields we allow you to update - `revoked` and `import_id`.  Updating the `revoked` field will toggle access to an invite-only guide.  If you have a public guide, this field will have no effect.  The `import_id `field acts as a link between the Attendee in Builder and the unique identifier of the related account in your system. In practice, this field should be populated during creation. However, if that is untenable, you can update that field at a later point in time via the Open API.
+
+<aside class="notice">
+Be very cautious with updating <code>import_ids</code>!  If your integration requires the use of the `import_id` of an Attendee, please fill this field on creation.  If this is not possible, please attempt to fill in the `import_id` ASAP.  The Guidebook Mobile Clients will cache Attendee `id` and `import_id` information when an individual signs in and first accesses a guide.  If you change the `import_id` via the Open API, you will still need to have the updated users logout and log back in to update their cached Ids.
+</aside>
+
+
+## Deleting an `Attendee`
+
+The `Attendee` object is a crucial component that's used in our metrics tracking system.  In order to preserve the accuracy of metrics reports, we do NOT allow Attendee objects to be deleted once they been created.  If you want to "revoke" a person's access to a specific guide, you would issue a PATCH request and set revoked=True.
 
 We do allow various Open API operations for objects that are related to an `Attendee` and a `Guide`. i.e [Personalized Schedules](#personalizedschedules) for a given `Attendee`.
+
+
+## Retrieving an Attendee In a Web View
+Starting in version 6.5.0 of the Guidebook mobile app (or in your branded app), you can now retrieve information about the current logged in user when they're viewing a `Web View` module.  The `id` and the `import_id` of the current logged in `Attendee` is surfaced via javascript.  After a guide `Web View` document has finished loading, the mobile app will call a javascript function named `onGuidebookLoad`, if it has been defined.  In that function, or anytime after that function has been called, you can access the `import-id` and `attendee-id` on the global object `Guidebook`.
+
+
+### HTML Example
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+<h3>Test for Attendee Webview</h3>
+<h3 id="error"></h3>
+</head>
+<body>
+
+<h4> Test for Attendee ID </h4>
+<p id="attendee-id">No attendee id</p>
+<p id="import-id">No import id</p>
+
+
+<script>
+function onGuidebookLoad(){
+	if(Guidebook.attendee_id != null) {
+		document.getElementById("attendee-id").innerHTML = "Attendee id: " + Guidebook.attendee_id;
+	}
+	if(Guidebook.import_id != null) {
+		document.getElementById("import-id").innerHTML = "Import id: " + Guidebook.import_id;
+	}
+}
+
+function setValue(key, value) {
+	document.getElementById(key).innerHTML = value;
+}
+
+</script>
+
+</body>
+</html>
+```
+
+To test the example, add a `Web View` feature to your guide in Builder, then upload the example HTML snippet.  Login to the app on your mobile device, download the guide, then open the `Web View` you just created.

@@ -45,7 +45,7 @@ guide           | yes | integer  | The specific `Guide` your `CustomList` belong
 name            | yes | string   | The title of your `CustomList`. i.e (Exhibitors, Speakers, Places to Visit, etc).
 disable_todo    | no  | boolean   | A booelan value that will hide the "Add to To-do" button for all items on this list.
 allow_rating    | no  | boolean   |  A boolean value indicating if end-users can rate items in this `CustomList`.
-import_id       | no  | string     | A string field you can used to input your own identifier.  This is for when you have your own IDs for your Lists in your data store.
+import_id       | no  | string     | A string field you can use to input your own identifier.  This is for when you have your own IDs for your Lists in your data store.
 
 
 ## Listing `CustomLists`
