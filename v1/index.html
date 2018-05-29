@@ -272,6 +272,15 @@
                   <li>
                     <a href="#listing-code-guides-code" class="toc-h2 toc-link" data-title="Guides">Listing <code>Guides</code></a>
                   </li>
+                  <li>
+                    <a href="#retrieving-a-code-guide-code" class="toc-h2 toc-link" data-title="Guides">Retrieving a <code>Guide</code></a>
+                  </li>
+                  <li>
+                    <a href="#updating-a-code-guide-code" class="toc-h2 toc-link" data-title="Guides">Updating a <code>Guide</code></a>
+                  </li>
+                  <li>
+                    <a href="#creating-deleting-a-code-guide-code" class="toc-h2 toc-link" data-title="Guides">Creating/Deleting a <code>Guide</code></a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -334,6 +343,9 @@
                   </li>
                   <li>
                     <a href="#deleting-a-code-location-code" class="toc-h2 toc-link" data-title="Locations">Deleting a <code>Location</code></a>
+                  </li>
+                  <li>
+                    <a href="#the-main-venue-code-location-code" class="toc-h2 toc-link" data-title="Locations">The Main Venue <code>Location</code></a>
                   </li>
               </ul>
           </li>
@@ -736,12 +748,22 @@ You must replace <code>API_KEY</code> with your personal API key.
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
             </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.429989+0000"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Programmer Summit 2017"</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Programmer Summit 2017"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEST DESCRIPTION"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-22T21:00:00.000000+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27T21:00:00.000000+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UTC"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-28T21:53:31.010760+0000"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
             </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T21:28:35.436433+0000"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Programmer Summit 2018"</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Programmer Summit 2018"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;b&gt;TEST DESCRIPTION 2018&lt;/b&gt;"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US/Pacific"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-28T21:53:31.010760+0000"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -770,11 +792,40 @@ You must replace <code>API_KEY</code> with your personal API key.
 <td>str</td>
 <td>Name of the <code>Guide</code>.</td>
 </tr>
+<tr>
+<td>start_date</td>
+<td>datetime</td>
+<td>The start date of the <code>Guide</code>. For consistency, all timestamps are converted to the UTC timezone.  Leave blank for ongoing <code>Guides</code>.</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>datetime</td>
+<td>The end date of the Guide.  Leave blank for ongoing <code>Guides</code>.</td>
+</tr>
+<tr>
+<td>description_html</td>
+<td>string</td>
+<td>A description of the <code>Guide</code>.  This field supports basic HTML.  See section on <a href="#html-text">html text</a>.</td>
+</tr>
+<tr>
+<td>timezone</td>
+<td>timezone</td>
+<td><code>Session</code> times in this <code>Guide</code> will be converted to this timezone.  Check <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List">this list</a> for valid timezone strings.</td>
+</tr>
 </tbody></table>
-<h3 id='filtering-by-id'>Filtering By id</h3>
-<p>To filter the listing for one <code>Guide</code> in particular you can issue a request with a query parameter <code>id</code>. The following request, for examples, filters for <code>Guide</code> with <code>id</code> 21.</p>
+<h2 id='retrieving-a-code-guide-code'>Retrieving a <code>Guide</code></h2>
+<p>In the following examples, we will assume that the id of the <code>Guide</code> we&#39;d like to modify is 21.
+To retrieve an individual <code>Guide</code> object issue a <code>GET</code> request like:</p>
 
-<p><code>GET https://builder.guidebook.com/open-api/v1/guides/?id=21</code></p>
+<p><code>GET https://builder.guidebook.com/open-api/v1/guides/21/</code></p>
+<h2 id='updating-a-code-guide-code'>Updating a <code>Guide</code></h2>
+<p>To modify an existing <code>Guide</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/guides/21/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body.</p>
+<h2 id='creating-deleting-a-code-guide-code'>Creating/Deleting a <code>Guide</code></h2>
+<p>We do not allow the <code>Create</code> or <code>Delete</code> operations for the <code>Guide</code> object via the Open API.  To perform these actions, please login to your account on the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a>.</p>
 <h1 id='sessions'>Sessions</h1>
 <p><code>Sessions</code> can be added to a <code>Guide</code> to build up a schedule for your event. For example, the, &quot;Programmer Conference 2017&quot; event might have a <code>Session</code> for the talk, &quot;Python in a Scientific Environment&quot;, and a <code>Session</code> about, &quot;Off by One Errors.&quot;</p>
 <h2 id='creating-code-session-code'>Creating <code>Session</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
@@ -1285,6 +1336,7 @@ To retrieve an individual <code>ScheduleTrack</code> object issue a <code>GET</c
   </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.3327</span><span class="p">,</span><span class="w">
   </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-121.901236</span><span class="p">,</span><span class="w">
   </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-25T20:18:28.052157+0000"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='http-request'>HTTP Request</h3>
@@ -1320,19 +1372,25 @@ To retrieve an individual <code>ScheduleTrack</code> object issue a <code>GET</c
 <td>location_type</td>
 <td>yes</td>
 <td>integer</td>
-<td>Either 2 or 3. If 3, indicates that this <code>Location</code> is a &quot;google maps Location&quot;; if <code>location_type=3</code> latitude and longitude are required.</td>
+<td>Either 1, 2 or 3. 1 is the special Main Venue location. 2 is a Placeholder location.  3 is a &quot;Google Maps Location&quot;</td>
 </tr>
 <tr>
 <td>latitude</td>
-<td>no</td>
+<td>sometimes</td>
 <td>float</td>
-<td>Latitude of this <code>Location</code> - only required if this <code>Location</code> has <code>location_type=3</code> (&quot;google maps <code>Location</code>&quot;).</td>
+<td>Latitude of this <code>Location</code> - only required if this <code>Location</code> is of type (&quot;Google Maps <code>Location</code>&quot;) or (&quot;Main Venue&quot; <code>Location</code>).</td>
 </tr>
 <tr>
 <td>longitude</td>
-<td>no</td>
+<td>sometimes</td>
 <td>float</td>
-<td>Longitude of this <code>Location</code> - only required if this <code>Location</code> has <code>location_type=3</code> (&quot;google maps <code>Location</code>&quot;).</td>
+<td>Longitude of this <code>Location</code> - only required if this <code>Location</code> is of type (&quot;Google Maps <code>Location</code>&quot;) or (&quot;Main Venue&quot; <code>Location</code>).</td>
+</tr>
+<tr>
+<td>address</td>
+<td>sometimes</td>
+<td>json</td>
+<td>Address of the <a href="#the-main-venue-code-location-code">Main Venue</a>.  JSON dictionary with the keys [&#39;address&#39;, city&#39;, &#39;country&#39;, &#39;state&#39;, &#39;street&#39;, &#39;zipcode&#39;]</td>
 </tr>
 </tbody></table>
 <h2 id='listing-code-locations-code'>Listing <code>Locations</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
@@ -1358,6 +1416,7 @@ To retrieve an individual <code>ScheduleTrack</code> object issue a <code>GET</c
       </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-31T20:18:28.018529+0000"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -1369,6 +1428,7 @@ To retrieve an individual <code>ScheduleTrack</code> object issue a <code>GET</c
       </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-31T20:18:28.038556+0000"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -1380,6 +1440,7 @@ To retrieve an individual <code>ScheduleTrack</code> object issue a <code>GET</c
       </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.7749</span><span class="p">,</span><span class="w">
       </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-122.4194</span><span class="p">,</span><span class="w">
       </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-31T20:18:28.052157+0000"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -1438,6 +1499,7 @@ To retrieve an individual <code>ScheduleTrack</code> object issue a <code>GET</c
   </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.3327</span><span class="p">,</span><span class="w">
   </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-121.901236</span><span class="p">,</span><span class="w">
   </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-25T20:18:28.052157+0000"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1459,7 +1521,55 @@ To retrieve an individual <code>Location</code> object, issue a <code>GET</code>
 <p>To delete a particular <code>Location</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>Location</code> you&#39;d like deleted:</p>
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/locations/89/</code></p>
-<h1 id='customlists'>CustomLists</h1><h2 id='creating-a-code-customlist-code'>Creating a <code>CustomList</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h2 id='the-main-venue-code-location-code'>The Main Venue <code>Location</code></h2>
+<p>The Main Venue is a special <code>Location</code> object for the <code>Guide</code> and represents the main location for your <code>Guide</code>.  There is only one Main Venue location allowed per guide and any attempts to create more than one Main Venue will result in validation errors.  This <code>Location</code> requires a JSON dictionary of the address and the longitude and latitude values of this address.</p>
+<pre class="highlight python tab-python"><code><span class="c"># First fetch the ID of the Main Venue object</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/locations/?location_type=1&amp;guide_id=21'</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">main_venue_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">'results'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'id'</span><span class="p">]</span>
+
+<span class="n">update_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/locations/{}/'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">main_venue_id</span><span class="p">)</span>
+<span class="n">patch_data</span> <span class="o">=</span>
+<span class="p">{</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"Moscone Center"</span><span class="p">,</span>
+    <span class="s">"longitude"</span><span class="p">:</span> <span class="o">-</span><span class="mf">122.401558</span><span class="p">,</span>
+    <span class="s">"latitude"</span><span class="p">:</span> <span class="mf">37.784172</span><span class="p">,</span>
+    <span class="s">"address"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"address"</span><span class="p">:</span> <span class="s">"Moscone Center"</span><span class="p">,</span>
+        <span class="s">"city"</span><span class="p">:</span> <span class="s">"San Francisco"</span><span class="p">,</span>
+        <span class="s">"state"</span><span class="p">:</span> <span class="s">"CA"</span><span class="p">,</span>
+        <span class="s">"street"</span><span class="p">:</span> <span class="s">"747 Howard Street"</span><span class="p">,</span>
+        <span class="s">"zipcode"</span><span class="p">:</span> <span class="s">"94103"</span><span class="p">,</span>
+        <span class="s">"country"</span><span class="p">:</span> <span class="s">"U.S.A."</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">patch_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>PATCH requests to update the Main Venue will return a JSON structure like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moscone Center"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"location_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.784172</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-122.401558</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"import_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-29T02:21:48.336713+0000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S.A."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94103"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"747 Howard Street"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moscone Center"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="err">```</span><span class="w">
+
+</span></code></pre><h1 id='customlists'>CustomLists</h1><h2 id='creating-a-code-customlist-code'>Creating a <code>CustomList</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">custom_lists_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/custom-lists/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
@@ -2079,6 +2189,8 @@ To retrieve an individual <code>CustomListItem</code> object issue a <code>GET</
 
 </span></code></pre>
 <p>This endpoint will create an <code>Attendee</code> that is owned by your <code>Account</code>.  An <code>Attendee</code> is an object that formally defines a relation between a <code>Guide</code> and a Guidebook App end-user.  When importing your <code>Attendees</code>, we will attempt to match to existing users in the Guidebook database.  If no user is found via email matching, we will create a placeholder <code>Account</code> that the end-user can later claim by logging in.  Email invite functionality is not available via the Open API.  To send out email invites to your Attendees, please login to Builder and use the UI to send out email invites.</p>
+
+<p>The <code>Attendee</code> create operation is a special endpoint that we&#39;ve made idempotent to facilitate client use cases.  If an <code>Attendee</code> object already exists, we will return the <code>Attendee</code> object and the POST data supplied will be ignored and not treated as an update operation.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://builder.guidebook.com/open-api/v1/attendees/</code></p>
 <h3 id='model-fields'>Model Fields</h3>
@@ -2350,10 +2462,6 @@ Be very cautious with updating <code>import_ids</code>!  If your integration req
     <span class="k">if</span><span class="p">(</span><span class="nx">Guidebook</span><span class="p">.</span><span class="nx">import_id</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"import-id"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">"Import id: "</span> <span class="o">+</span> <span class="nx">Guidebook</span><span class="p">.</span><span class="nx">import_id</span><span class="p">;</span>
     <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">function</span> <span class="nx">setValue</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="nt">&lt;/script&gt;</span>
