@@ -34,6 +34,7 @@ response = requests.post(url, data=post_data, headers={'Authorization': 'JWT ' +
   "latitude": 37.3327,
   "longitude": -121.901236,
   "import_id": null,
+  "address": null,
   "created_at": "2017-09-25T20:18:28.052157+0000"
 }
 ```
@@ -46,12 +47,13 @@ response = requests.post(url, data=post_data, headers={'Authorization': 'JWT ' +
 
 Property          | Required    | Type        | Description
 ---------         | --------    | --------    | --------
-guide             | yes          | integer     | id of the `Guide` this `Location` belongs to.
+guide             | yes         | integer     | id of the `Guide` this `Location` belongs to.
 name              | yes         | string      | Name of this `Location`.
 import_id         | no          | string      | A string field you can used to input your own identifier. This is for when you have your own IDs for `Locations` in your data store.
-location_type     | yes         | integer     | Either 2 or 3. If 3, indicates that this `Location` is a "google maps Location"; if `location_type=3` latitude and longitude are required.
-latitude          | no          | float       | Latitude of this `Location` - only required if this `Location` has `location_type=3` ("google maps `Location`").
-longitude         | no          | float       | Longitude of this `Location` - only required if this `Location` has `location_type=3` ("google maps `Location`").
+location_type     | yes         | integer     | Either 1, 2 or 3. 1 is the special Main Venue location. 2 is a Placeholder location.  3 is a "Google Maps Location"
+latitude          | sometimes   | float       | Latitude of this `Location` - only required if this `Location` is of type ("Google Maps `Location`") or ("Main Venue" `Location`).
+longitude         | sometimes   | float       | Longitude of this `Location` - only required if this `Location` is of type ("Google Maps `Location`") or ("Main Venue" `Location`).
+address           | sometimes   | json        | Address of the [Main Venue](#the-main-venue-code-location-code).  JSON dictionary with the keys ['address', city', 'country', 'state', 'street', 'zipcode']
 
 ## Listing `Locations`
 
@@ -81,6 +83,7 @@ response = requests.get(guides_url, headers={'Authorization': 'JWT ' + api_key})
       "latitude": null,
       "longitude": null,
       "import_id": null,
+      "address": null,
       "created_at": "2017-08-31T20:18:28.018529+0000"
     },
     {
@@ -92,6 +95,7 @@ response = requests.get(guides_url, headers={'Authorization': 'JWT ' + api_key})
       "latitude": null,
       "longitude": null,
       "import_id": null,
+      "address": null,
       "created_at": "2017-08-31T20:18:28.038556+0000"
     },
     {
@@ -103,6 +107,7 @@ response = requests.get(guides_url, headers={'Authorization': 'JWT ' + api_key})
       "latitude": 37.7749,
       "longitude": -122.4194,
       "import_id": null,
+      "address": null,
       "created_at": "2017-08-31T20:18:28.052157+0000"
     }
   ]
@@ -159,6 +164,7 @@ response = requests.patch(url, data=patch_data, headers={'Authorization': 'JWT '
   "latitude": 37.3327,
   "longitude": -121.901236,
   "import_id": null,
+  "address": null,
   "created_at": "2017-09-25T20:18:28.052157+0000"
 }
 ```
@@ -187,3 +193,57 @@ You will only need to include the specific fields you are updating and not a ful
 To delete a particular `Location`, issue a `DELETE` request to the url that points to the specific `Location` you'd like deleted:
 
 `DELETE https://builder.guidebook.com/open-api/v1/locations/89/`
+
+
+## The Main Venue `Location`
+
+The Main Venue is a special `Location` object for the `Guide` and represents the main location for your `Guide`.  There is only one Main Venue location allowed per guide and any attempts to create more than one Main Venue will result in validation errors.  This `Location` requires a JSON dictionary of the address and the longitude and latitude values of this address.
+
+```python
+# First fetch the ID of the Main Venue object
+api_key = 'API_KEY'
+
+url = 'https://builder.guidebook.com/open-api/v1/locations/?location_type=1&guide_id=21'
+response = requests.get(url, headers={'Authorization': 'JWT ' + api_key}).json()
+main_venue_id = response.json()['results'][0]['id']
+
+update_url = 'https://builder.guidebook.com/open-api/v1/locations/{}/'.format(main_venue_id)
+patch_data =
+{
+	"name": "Moscone Center",
+	"longitude": -122.401558,
+	"latitude": 37.784172,
+	"address": {
+		"address": "Moscone Center",
+		"city": "San Francisco",
+		"state": "CA",
+		"street": "747 Howard Street",
+		"zipcode": "94103",
+		"country": "U.S.A."
+	}
+}response = requests.patch(url, data=patch_data, headers={'Authorization': 'JWT ' + api_key}).json()
+```
+
+> PATCH requests to update the Main Venue will return a JSON structure like this:
+
+```json
+{
+	"id": 5,
+	"guide": 3,
+	"name": "Moscone Center",
+	"description": null,
+	"location_type": 1,
+	"latitude": 37.784172,
+	"longitude": -122.401558,
+	"import_id": null,
+	"created_at": "2018-05-29T02:21:48.336713+0000",
+	"address": {
+		"city": "San Francisco",
+		"country": "U.S.A.",
+		"zipcode": "94103",
+		"state": "CA",
+		"street": "747 Howard Street",
+		"address": "Moscone Center"
+	}
+}```
+

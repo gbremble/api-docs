@@ -47,6 +47,8 @@ response = request.post(attendees_list_url, data=post_data, headers={'Authorizat
 
 This endpoint will create an `Attendee` that is owned by your `Account`.  An `Attendee` is an object that formally defines a relation between a `Guide` and a Guidebook App end-user.  When importing your `Attendees`, we will attempt to match to existing users in the Guidebook database.  If no user is found via email matching, we will create a placeholder `Account` that the end-user can later claim by logging in.  Email invite functionality is not available via the Open API.  To send out email invites to your Attendees, please login to Builder and use the UI to send out email invites.
 
+The `Attendee` create operation is a special endpoint that we've made idempotent to facilitate client use cases.  If an `Attendee` object already exists, we will return the `Attendee` object and the POST data supplied will be ignored and not treated as an update operation.
+
 ### HTTP Request
 
 `POST https://builder.guidebook.com/open-api/v1/attendees/`
@@ -270,10 +272,6 @@ function onGuidebookLoad(){
 	if(Guidebook.import_id != null) {
 		document.getElementById("import-id").innerHTML = "Import id: " + Guidebook.import_id;
 	}
-}
-
-function setValue(key, value) {
-	document.getElementById(key).innerHTML = value;
 }
 
 </script>
