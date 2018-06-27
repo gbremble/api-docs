@@ -413,6 +413,43 @@
               </ul>
           </li>
           <li>
+            <a href="#links" class="toc-h1 toc-link" data-title="Links">Links</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#creating-a-code-link-code" class="toc-h2 toc-link" data-title="Links">Creating a <code>Link</code></a>
+                  </li>
+                  <li>
+                    <a href="#listing-code-links-code" class="toc-h2 toc-link" data-title="Links">Listing <code>Links</code></a>
+                  </li>
+                  <li>
+                    <a href="#retrieving-a-code-link-code" class="toc-h2 toc-link" data-title="Links">Retrieving a <code>Link</code></a>
+                  </li>
+                  <li>
+                    <a href="#updating-a-code-link-code" class="toc-h2 toc-link" data-title="Links">Updating a <code>Link</code></a>
+                  </li>
+                  <li>
+                    <a href="#deleting-a-code-link-code" class="toc-h2 toc-link" data-title="Links">Deleting a <code>Link</code></a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#link-categories" class="toc-h1 toc-link" data-title="Link Categories">Link Categories</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#listing-code-linkcategories-code" class="toc-h2 toc-link" data-title="Link Categories">Listing <code>LinkCategories</code></a>
+                  </li>
+                  <li>
+                    <a href="#retrieving-a-code-linkcategory-code" class="toc-h2 toc-link" data-title="Link Categories">Retrieving a <code>LinkCategory</code></a>
+                  </li>
+                  <li>
+                    <a href="#updating-a-code-linkcategory-code" class="toc-h2 toc-link" data-title="Link Categories">Updating a <code>LinkCategory</code></a>
+                  </li>
+                  <li>
+                    <a href="#deleting-a-code-linkcategory-code" class="toc-h2 toc-link" data-title="Link Categories">Deleting a <code>LinkCategory</code></a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#attendees" class="toc-h1 toc-link" data-title="Attendees">Attendees</a>
               <ul class="toc-list-h2">
                   <li>
@@ -525,6 +562,10 @@
 <tr>
 <td>201</td>
 <td>Created. The request has been fulfilled and has resulted in one or more new resources being created.</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content.  Standard response when a DELETE operation is successful</td>
 </tr>
 <tr>
 <td>400</td>
@@ -2150,6 +2191,566 @@ To retrieve an individual <code>CustomListItem</code> object issue a <code>GET</
 <p>To delete a particular <code>CustomListItemRelation</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>CustomListItemRelation</code> you&#39;d like deleted:</p>
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/</code></p>
+<h1 id='links'>Links</h1>
+<p>The <code>Link</code> resource is an object that is displayed at the bottom section of either a <code>Session</code> object or <code>CustomListItem</code> in the Guidebook mobile app.   These objects represent special in-app links that will navigate the app user to the corresponding object in the mobile app.  A common use case of this feature would be a speaker linking to all the panels that the speaker is participating in.</p>
+
+<p><code>Link</code> objects will always contain a source and a target.  In the example with speakers, the source would be the speaker <code>CustomListItem</code> and the target object would be a <code>Session</code> we want to link to.</p>
+<h2 id='creating-a-code-link-code'>Creating a <code>Link</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">link_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/links/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">post_data</span> <span class="o">=</span>
+<span class="p">{</span>
+    <span class="s">"_description"</span><span class="p">:</span> <span class="s">"testing overridden description"</span><span class="p">,</span>
+    <span class="s">"target_object_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"source_object_id"</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span>
+    <span class="s">"source_content_type"</span><span class="p">:</span> <span class="s">"schedule.session"</span><span class="p">,</span>
+    <span class="s">"guide"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s">"target_content_type"</span><span class="p">:</span> <span class="s">"custom_list.customlistitem"</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">link_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+
+</code></pre>
+<blockquote>
+<p>The above commands return JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"source_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom_list.customlistitem"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"source_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:30:11.015128+0000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test List Item 1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"en-US"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testing overridden description"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"category_detail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Items"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Items"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:30:11.007205+0000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"_title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testing overridden description"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint will create a <code>Link</code> for your <code>Guide</code>.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://builder.guidebook.com/open-api/v1/links/</code></p>
+<h3 id='model-fields'>Model Fields</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>guide</td>
+<td>yes</td>
+<td>integer</td>
+<td>The specific <code>Guide</code> your <code>Link</code> belongs to.  See section on <a href="#guides">Guides</a> for more info.</td>
+</tr>
+<tr>
+<td>source_content_type</td>
+<td>yes</td>
+<td>string</td>
+<td>The content type of the source object.  The options are: &quot;schedule.session&quot;, &quot;custom_list.customlistitem&quot;</td>
+</tr>
+<tr>
+<td>source_object_id</td>
+<td>yes</td>
+<td>integer</td>
+<td>The id number of the source object.  Not updatable after creation.</td>
+</tr>
+<tr>
+<td>target_content_type</td>
+<td>yes</td>
+<td>string</td>
+<td>The content type of the target object.  The options are: &quot;schedule.session&quot;, &quot;custom_list.customlistitem&quot;</td>
+</tr>
+<tr>
+<td>source_object_id</td>
+<td>yes</td>
+<td>integer</td>
+<td>The id number of the target object.  Not updatable after creation.</td>
+</tr>
+<tr>
+<td>rank</td>
+<td>no</td>
+<td>integer</td>
+<td>The order the <code>Link</code> will appear in the <code>Links</code> section on the app.  <code>Links</code> are displayed in ascending rank value.  If no rank value is supplied on creation, a default rank is used.</td>
+</tr>
+<tr>
+<td>_title</td>
+<td>no</td>
+<td>string</td>
+<td>Use this field to override the default title of the <code>Link</code>.  The default behavior is to derive the title from the target object</td>
+</tr>
+<tr>
+<td>_description</td>
+<td>no</td>
+<td>string</td>
+<td>Use this field to override the default description of the <code>Link</code>.  The default behavior is to derive the title from the target object</td>
+</tr>
+<tr>
+<td>category</td>
+<td>no</td>
+<td>integer</td>
+<td><code>LinkCategory</code> ID this <code>Link</code> will be displayed in.  Most of the logic regarding <code>LinkCategories</code> are automatically handled for you so you do not need to supply an category ID.   Use this field to update the category if needed.</td>
+</tr>
+</tbody></table>
+<h2 id='listing-code-links-code'>Listing <code>Links</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">link_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/links/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+
+<span class="c"># This will return all `Links` you have access to</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"source_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"source_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:19:05.300403+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"session B"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 15:19:05.283843+00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 16:19:05.283850+00:00"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"category_detail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:19:05.294694+0000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"source_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"source_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:19:05.310453+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"session A"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 15:19:05.281825+00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 16:19:05.281833+00:00"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"category_detail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:19:05.304460+0000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"source_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"source_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:19:05.319159+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"session C"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 15:19:05.285326+00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 16:19:05.285333+00:00"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"category_detail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:19:05.294694+0000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint can also be used to read data on <code>Links</code>.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://builder.guidebook.com/open-api/v1/links/</code></p>
+<h3 id='model-fields-2'>Model Fields</h3>
+<p>Same as the fields used in creation with the addition of the following read-only fields</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>An unique identifier for your <code>Link</code>.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td>Time when this <code>Link</code> was created - UTC.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Title that will be displayed in the app.  To change this, please use the _title field.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string/dictionary</td>
+<td>Description that will be displayed in the app.  To change this, please use the _description field.</td>
+</tr>
+<tr>
+<td>category_detail</td>
+<td>dictionary</td>
+<td>Extra metadata on the <code>LinkCategory</code> of this <code>Link</code></td>
+</tr>
+</tbody></table>
+<h3 id='filtering-data-by-code-guide-code-id'>Filtering data by <code>Guide</code> id</h3>
+<p>Including a query parameter <code>guide</code> allows you to filter for all <code>Links</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/links/?guide=47</code></p>
+<h2 id='retrieving-a-code-link-code'>Retrieving a <code>Link</code></h2>
+<p>In the following examples, we will assume that the id of the <code>Link</code> we&#39;d like to modify is 71.
+To retrieve an individual <code>Link</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/links/71/</code></p>
+<h2 id='updating-a-code-link-code'>Updating a <code>Link</code></h2>
+<p>To modify an existing <code>Link</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/links/71/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body.</p>
+<h2 id='deleting-a-code-link-code'>Deleting a <code>Link</code></h2>
+<p>To delete a particular <code>Link</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>Link</code> you&#39;d like deleted:</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/links/71/</code></p>
+<h1 id='link-categories'>Link Categories</h1>
+<p>The <code>LinkCategory</code> object is used to group together <code>Links</code> for display.   <code>LinkCategory</code> objects are automatically managed as part of the creation of <code>Link</code> objects.  Create operations are therefore not allowed on this object.  You will only able to list, update, and delete <code>LinkCategory</code> objects via the API.</p>
+<h2 id='listing-code-linkcategories-code'>Listing <code>LinkCategories</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">link_category_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/link-categories/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+
+<span class="c"># This will return all `Links` you have access to</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link_category_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.678935+0000"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"session C"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 15:56:28.641592+00:00"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 16:56:28.641600+00:00"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"category_detail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.651231+0000"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"_title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.659284+0000"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"session B"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 15:56:28.639726+00:00"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 16:56:28.639733+00:00"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"category_detail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.651231+0000"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"_title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.651231+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.669642+0000"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"session A"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 15:56:28.637319+00:00"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 16:56:28.637328+00:00"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"category_detail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.663602+0000"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"_title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.663602+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.692462+0000"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"session A"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 15:56:28.637319+00:00"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 16:56:28.637328+00:00"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"category_detail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.685621+0000"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"_title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.685621+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.703571+0000"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"session E"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 15:56:28.645808+00:00"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 16:56:28.645820+00:00"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"category_detail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.697603+0000"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"_title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.697603+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"source_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.714641+0000"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"session D"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 15:56:28.643482+00:00"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27 16:56:28.643489+00:00"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"category_detail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sessions"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.707867+0000"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"_title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:56:28.707867+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint can be used to read data on <code>LinkCategories</code>.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://builder.guidebook.com/open-api/v1/link-categories/</code></p>
+<h3 id='model-fields'>Model Fields</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>An unique identifier for your <code>Link</code>.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td>Time when this <code>Link</code> was created - UTC.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Title that will be displayed in the app.  To change this, please use the _title field.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string/dictionary</td>
+<td>Description that will be displayed in the app.  To change this, please use the _description field.</td>
+</tr>
+<tr>
+<td>category_detail</td>
+<td>dictionary</td>
+<td>Extra metadata on the <code>LinkCategory</code> of this <code>Link</code></td>
+</tr>
+<tr>
+<td>links</td>
+<td>list</td>
+<td>List of the <code>Link</code> objects displayed in this category</td>
+</tr>
+<tr>
+<td>rank</td>
+<td>no</td>
+<td>integer</td>
+</tr>
+</tbody></table>
+<h3 id='filtering-data-by-code-guide-code-id'>Filtering data by <code>Guide</code> id</h3>
+<p>Including a query parameter <code>guide</code> allows you to filter for all <code>LinkCategories</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/link-categories/?guide=47</code></p>
+<h2 id='retrieving-a-code-linkcategory-code'>Retrieving a <code>LinkCategory</code></h2>
+<p>In the following examples, we will assume that the id of the <code>LinkCategory</code> we&#39;d like to modify is 71.
+To retrieve an individual <code>LinkCategory</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/link-categories/71/</code></p>
+<h2 id='updating-a-code-linkcategory-code'>Updating a <code>LinkCategory</code></h2>
+<p>To modify an existing <code>Link</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/link-categories/71/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body.</p>
+<h2 id='deleting-a-code-linkcategory-code'>Deleting a <code>LinkCategory</code></h2>
+<p>To delete a particular <code>LinkCategory</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>LinkCategory</code> you&#39;d like deleted:</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/link-categories/71/</code></p>
 <h1 id='attendees'>Attendees</h1><h2 id='creating-an-code-attendee-code'>Creating an <code>Attendee</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">attendees_list_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/attendees/'</span>
