@@ -584,6 +584,10 @@
 <td>Not found. The requested URL is not found on the server.</td>
 </tr>
 <tr>
+<td>405</td>
+<td>Method not allowed.  Certain Objects only have limited methods allowed.</td>
+</tr>
+<tr>
 <td>429</td>
 <td>Too many requests. You have hit the Open API too quickly.</td>
 </tr>
@@ -2192,9 +2196,9 @@ To retrieve an individual <code>CustomListItem</code> object issue a <code>GET</
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/custom-list-item-relations/156/</code></p>
 <h1 id='links'>Links</h1>
-<p>The <code>Link</code> resource is an object that is displayed at the bottom section of either a <code>Session</code> object or <code>CustomListItem</code> in the Guidebook mobile app.   These objects represent special in-app links that will navigate the app user to the corresponding object in the mobile app.  A common use case of this feature would be a speaker linking to all the panels that the speaker is participating in.</p>
+<p>The <code>Link</code> resource is an object that is displayed at the bottom section of either a <code>Session</code> object or <code>CustomListItem</code> in the Guidebook mobile app.  These objects represent special in-app links that will navigate the app user to the corresponding object in the mobile app.  A common use case of this feature would be a speaker linking to all the panels that the speaker is participating in.</p>
 
-<p><code>Link</code> objects will always contain a source and a target.  In the example with speakers, the source would be the speaker <code>CustomListItem</code> and the target object would be a <code>Session</code> we want to link to.</p>
+<p><code>Link</code> objects will always contain a source and a target. In the example with speakers, the source would be the speaker <code>CustomListItem</code> and the target object would be a <code>Session</code> we want to link to.</p>
 <h2 id='creating-a-code-link-code'>Creating a <code>Link</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">link_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/links/'</span>
@@ -2465,7 +2469,7 @@ To retrieve an individual <code>Link</code> object issue a <code>GET</code> requ
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/links/71/</code></p>
 <h1 id='link-categories'>Link Categories</h1>
-<p>The <code>LinkCategory</code> object is used to group together <code>Links</code> for display.   <code>LinkCategory</code> objects are automatically managed as part of the creation of <code>Link</code> objects.  Create operations are therefore not allowed on this object.  You will only able to list, update, and delete <code>LinkCategory</code> objects via the API.</p>
+<p>The <code>LinkCategory</code> object is used to group together <code>Links</code> for display.   <code>LinkCategory</code> objects are automatically managed as part of the creation of <code>Link</code> objects. Create operations are therefore not allowed on this object.  You will only able to list, update, and delete <code>LinkCategory</code> objects via the API.</p>
 <h2 id='listing-code-linkcategories-code'>Listing <code>LinkCategories</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">link_category_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/link-categories/'</span>
@@ -2699,27 +2703,22 @@ To retrieve an individual <code>Link</code> object issue a <code>GET</code> requ
 <tr>
 <td>id</td>
 <td>integer</td>
-<td>An unique identifier for your <code>Link</code>.</td>
+<td>An unique identifier for your <code>LinkCategory</code>.</td>
 </tr>
 <tr>
 <td>created_at</td>
 <td>datetime</td>
-<td>Time when this <code>Link</code> was created - UTC.</td>
+<td>Time when this <code>LinkCategory</code> was created - UTC.</td>
 </tr>
 <tr>
-<td>title</td>
+<td>name</td>
 <td>string</td>
-<td>Title that will be displayed in the app.  To change this, please use the _title field.</td>
+<td>Title that will be displayed in the app.  To change this, please use the _name field.</td>
 </tr>
 <tr>
-<td>description</td>
-<td>string/dictionary</td>
-<td>Description that will be displayed in the app.  To change this, please use the _description field.</td>
-</tr>
-<tr>
-<td>category_detail</td>
-<td>dictionary</td>
-<td>Extra metadata on the <code>LinkCategory</code> of this <code>Link</code></td>
+<td>_name</td>
+<td>string</td>
+<td>Used to override default title.</td>
 </tr>
 <tr>
 <td>links</td>
@@ -2732,7 +2731,7 @@ To retrieve an individual <code>Link</code> object issue a <code>GET</code> requ
 <td>integer</td>
 </tr>
 </tbody></table>
-<h3 id='filtering-data-by-code-guide-code-id'>Filtering data by <code>Guide</code> id</h3>
+
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>LinkCategories</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
 
 <p><code>GET https://builder.guidebook.com/open-api/v1/link-categories/?guide=47</code></p>
@@ -2748,7 +2747,8 @@ To retrieve an individual <code>LinkCategory</code> object issue a <code>GET</co
 
 <p>You will only need to include the specific fields you are updating and not a full request body.</p>
 <h2 id='deleting-a-code-linkcategory-code'>Deleting a <code>LinkCategory</code></h2>
-<p>To delete a particular <code>LinkCategory</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>LinkCategory</code> you&#39;d like deleted:</p>
+<p>Deleting the last <code>Link</code> in a <code>LinkCategory</code> will auto delete the <code>LinkCategory</code> so you usually will not to perform this action.
+To delete a particular <code>LinkCategory</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>LinkCategory</code> you&#39;d like deleted:</p>
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/link-categories/71/</code></p>
 <h1 id='attendees'>Attendees</h1><h2 id='creating-an-code-attendee-code'>Creating an <code>Attendee</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
