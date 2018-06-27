@@ -8,6 +8,7 @@ Code                  | Description
 ---------             | --------
 200                   | OK. Request received and processed successfully.
 201                   | Created. The request has been fulfilled and has resulted in one or more new resources being created.
+204                   | No Content.  Standard response when a DELETE operation is successful
 400                   | Bad request. The request is malformed and has not been accepted.
 401                   | Unauthorized. Your API Key was rejected.
 403                   | Forbidden. You do not have permission to perform that action.
