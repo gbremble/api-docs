@@ -13,5 +13,6 @@ Code                  | Description
 401                   | Unauthorized. Your API Key was rejected.
 403                   | Forbidden. You do not have permission to perform that action.
 404                   | Not found. The requested URL is not found on the server.
+405                   | Method not allowed.  Certain Objects only have limited methods allowed.
 429                   | Too many requests. You have hit the Open API too quickly.
 500, 502, 503, 504    | Server error. Something is wrong on Guidebook's end. Please try again later.

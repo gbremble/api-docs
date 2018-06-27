@@ -1,6 +1,6 @@
 # Link Categories
 
-The `LinkCategory` object is used to group together `Links` for display.   `LinkCategory` objects are automatically managed as part of the creation of `Link` objects.  Create operations are therefore not allowed on this object.  You will only able to list, update, and delete `LinkCategory` objects via the API.
+The `LinkCategory` object is used to group together `Links` for display.   `LinkCategory` objects are automatically managed as part of the creation of `Link` objects. Create operations are therefore not allowed on this object.  You will only able to list, update, and delete `LinkCategory` objects via the API.
 
 ## Listing `LinkCategories`
 
@@ -238,16 +238,13 @@ This endpoint can be used to read data on `LinkCategories`.
 
 Parameter       | Type    | Description
 ---------       | ------- | -----------
-id              | integer  | An unique identifier for your `Link`.
-created_at      | datetime | Time when this `Link` was created - UTC.
-title           | string   | Title that will be displayed in the app.  To change this, please use the _title field.
-description     | string/dictionary    | Description that will be displayed in the app.  To change this, please use the _description field.
-category_detail | dictionary | Extra metadata on the `LinkCategory` of this `Link`
+id              | integer  | An unique identifier for your `LinkCategory`.
+created_at      | datetime | Time when this `LinkCategory` was created - UTC.
+name            | string   | Title that will be displayed in the app.  To change this, please use the _name field.
+_name           | string   |  Used to override default title.
 links           | list       | List of the `Link` objects displayed in this category
-rank            | no  | integer  | The order the `LinkCategory` will appear in the `Links` section on the app.  `LinkCategories` are displayed in ascending rank value.  If no rank value is supplied on creation, a default rank is used.
+rank            | no       | integer  | The order the `LinkCategory` will appear in the `Links` section on the app.  `LinkCategories` are displayed in ascending rank value.  If no rank value is supplied on creation, a default rank is used.
 
-
-### Filtering data by `Guide` id
 
 Including a query parameter `guide` allows you to filter for all `LinkCategories` related to a `Guide` you have access to (`Guide` 47 in this example):
 
@@ -270,6 +267,7 @@ You will only need to include the specific fields you are updating and not a ful
 
 ## Deleting a `LinkCategory`
 
+Deleting the last `Link` in a `LinkCategory` will auto delete the `LinkCategory` so you usually will not to perform this action.
 To delete a particular `LinkCategory`, issue a `DELETE` request to the url that points to the specific `LinkCategory` you'd like deleted:
 
 `DELETE https://builder.guidebook.com/open-api/v1/link-categories/71/`

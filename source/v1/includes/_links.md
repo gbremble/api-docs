@@ -1,8 +1,8 @@
 # Links
 
-The `Link` resource is an object that is displayed at the bottom section of either a `Session` object or `CustomListItem` in the Guidebook mobile app.   These objects represent special in-app links that will navigate the app user to the corresponding object in the mobile app.  A common use case of this feature would be a speaker linking to all the panels that the speaker is participating in.
+The `Link` resource is an object that is displayed at the bottom section of either a `Session` object or `CustomListItem` in the Guidebook mobile app.  These objects represent special in-app links that will navigate the app user to the corresponding object in the mobile app.  A common use case of this feature would be a speaker linking to all the panels that the speaker is participating in.
 
-`Link` objects will always contain a source and a target.  In the example with speakers, the source would be the speaker `CustomListItem` and the target object would be a `Session` we want to link to.
+`Link` objects will always contain a source and a target. In the example with speakers, the source would be the speaker `CustomListItem` and the target object would be a `Session` we want to link to.
 
 ## Creating a `Link`
 
