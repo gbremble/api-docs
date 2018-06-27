@@ -75,7 +75,7 @@ target_content_type  | yes | string   | The content type of the target object.  
 source_object_id     | yes | integer  | The id number of the target object.  Not updatable after creation.
 rank                 | no  | integer  | The order the `Link` will appear in the `Links` section on the app.  `Links` are displayed in ascending rank value.  If no rank value is supplied on creation, a default rank is used.
 _title               | no  | string   | Use this field to override the default title of the `Link`.  The default behavior is to derive the title from the target object
-_description         | no  | string   | Use this field to override the default description of the `Link`.  The default behavior is to derive the title from the target object
+_description         | no  | string   | Use this field to override the default description of the `Link`.  The default behavior is to derive the description from the target object
 category             | no  | integer  | `LinkCategory` ID this `Link` will be displayed in.  Most of the logic regarding `LinkCategories` are automatically handled for you so you do not need to supply an category ID.   Use this field to update the category if needed.
 
 
