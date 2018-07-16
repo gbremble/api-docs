@@ -3016,11 +3016,7 @@ To delete a particular <code>LinkCategory</code>, issue a <code>DELETE</code> re
 <td>Integer status code.  0 - Attendee Created, 1 - New Account Created, Email Invite Sent, 2 - Existing Account matched, Email Invite Sent, 3 - Email Invite Accepted/Attendee Logged In.</td>
 </tr>
 </tbody></table>
-<h2 id='sending-invite-emails-to-attendees'>Sending Invite Emails to Attendees</h2>
-<p>Once your attendees are created in Builder, you can send them an invite email to download your guide or mobile app.  A dedicated endpoint for this is located at.</p>
-
-<p><code>POST https://builder.guidebook.com/open-api/v1/guides/&lt;GUIDE_ID&gt;/send-attendee-invite-email/</code></p>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h2 id='sending-invite-emails-to-attendees'>Sending Invite Emails to Attendees</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">attendees_email_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/guides/47/send-attendee-invite-email/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
@@ -3039,6 +3035,10 @@ To delete a particular <code>LinkCategory</code>, issue a <code>DELETE</code> re
     </span><span class="s2">"successful_emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<p>Once your attendees are created in Builder, you can send them an invite email to download your guide or mobile app.  A dedicated endpoint for this is located at.</p>
+
+<p><code>POST https://builder.guidebook.com/open-api/v1/guides/&lt;GUIDE_ID&gt;/send-attendee-invite-email/</code></p>
+
 <p>The example here will attempt to send invite emails to <code>Attendees</code> 1 through 5 on <code>Guide</code> 47.  If you supply <code>Attendee</code> Ids that do not match the <code>Guide</code>, you will receive an error response.  Additionally, this response is limited to a list of 500 Ids per request.  If emails are successfully sent to the the Attendees, they will appear in the success response under the successful_emails key.  Emails are rate limited to once per 24 hours.  This limit is enforce based on the <code>last_email_send</code> field for each <code>Attendee</code>.  In the code sample here, <code>Attendees</code> 4 &amp; 5 had already been sent invite emails in the past 24 hours so they were not sent emails and therefore not in the successful_emails response list.</p>
 <h3 id='filtering-data-by-code-guide-code-id-and-other-fields'>Filtering data by <code>Guide</code> id and other fields</h3>
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>Attendees</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
