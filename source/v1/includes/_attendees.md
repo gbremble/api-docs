@@ -201,10 +201,6 @@ status          | integer  |  Integer status code.  0 - Attendee Created, 1 - Ne
 
 ## Sending Invite Emails to Attendees
 
-Once your attendees are created in Builder, you can send them an invite email to download your guide or mobile app.  A dedicated endpoint for this is located at.
-
-`POST https://builder.guidebook.com/open-api/v1/guides/<GUIDE_ID>/send-attendee-invite-email/`
-
 
 ```python
 import requests
@@ -228,6 +224,10 @@ response = request.post(attendees_email_url, data=post_data, headers={'Authoriza
 }
 ```
 
+
+Once your attendees are created in Builder, you can send them an invite email to download your guide or mobile app.  A dedicated endpoint for this is located at.
+
+`POST https://builder.guidebook.com/open-api/v1/guides/<GUIDE_ID>/send-attendee-invite-email/`
 
 The example here will attempt to send invite emails to `Attendees` 1 through 5 on `Guide` 47.  If you supply `Attendee` Ids that do not match the `Guide`, you will receive an error response.  Additionally, this response is limited to a list of 500 Ids per request.  If emails are successfully sent to the the Attendees, they will appear in the success response under the successful_emails key.  Emails are rate limited to once per 24 hours.  This limit is enforce based on the `last_email_send` field for each `Attendee`.  In the code sample here, `Attendees` 4 & 5 had already been sent invite emails in the past 24 hours so they were not sent emails and therefore not in the successful_emails response list.
 
