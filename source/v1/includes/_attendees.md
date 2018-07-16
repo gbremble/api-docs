@@ -39,7 +39,8 @@ response = request.post(attendees_list_url, data=post_data, headers={'Authorizat
 		"contact_email": ""
 	},
 	"revoked": false,
-	"status": 0
+	"status": 0,
+	"last_email_send": null
 }
 
 ```
@@ -103,7 +104,8 @@ response = request.get(attendees_url, headers={'Authorization': 'JWT ' + api_key
 				"contact_email": ""
 			},
 			"revoked": false,
-			"status": 1
+			"status": 1,
+			"last_email_send": null
 		},
 		{
 			"id": 3,
@@ -122,7 +124,8 @@ response = request.get(attendees_url, headers={'Authorization': 'JWT ' + api_key
 				"contact_email": ""
 			},
 			"revoked": false,
-			"status": 1
+			"status": 1,
+			"last_email_send": null
 		},
 		{
 			"id": 4,
@@ -141,7 +144,8 @@ response = request.get(attendees_url, headers={'Authorization': 'JWT ' + api_key
 				"contact_email": ""
 			},
 			"revoked": false,
-			"status": 1
+			"status": 1,
+			"last_email_send": null
 		},
 		{
 			"id": 5,
@@ -160,7 +164,8 @@ response = request.get(attendees_url, headers={'Authorization': 'JWT ' + api_key
 				"contact_email": ""
 			},
 			"revoked": false,
-			"status": 1
+			"status": 1,
+			"last_email_send": null
 		}
 	]
 }
@@ -181,6 +186,7 @@ Parameter       | Type    | Description
 ---------       | ------- | -----------
 id              | integer  | An unique identifier for your `Attendee`.
 created_at      | datetime | Time when this `Attendee` was created - UTC.
+last_email_send | datetime | Time when an invite email was sent to this `Attendee` - UTC.  Note that this field can be null if no emails have been sent.
 guide_id        | integer  | The specific `Guide` your `Attendee` belongs to.  See section on [Guides](#guides) for more info.
 account_id      | integer  | The unique ID for the `Account` object that this attendee is linked to.
 first_name      | string   | First name of the `Attendee`.
@@ -191,6 +197,37 @@ cover           | string   | URL to the cover (background) image for the `Attend
 app_profile     | dictionary of strings | Contains profile information filed out by the `Attendee`.  Possible keys include `company`, `position`, `contact_email`, `website`.  Note that these keys can change at anytime!
 revoked         | boolean  | Indicates if this `Attendee` still has access to this guide.  This field is only relevant if your `Guide` is using the `invite-only` security option.
 status          | integer  |  Integer status code.  0 - Attendee Created, 1 - New Account Created, Email Invite Sent, 2 - Existing Account matched, Email Invite Sent, 3 - Email Invite Accepted/Attendee Logged In.
+
+
+### Sending Invite Emails to Attendees
+
+Once your attendees are created in Builder, you can send them an invite email to download your guide or mobile app.  A dedicated endpoint for this is located at.
+
+`POST https://builder.guidebook.com/open-api/v1/guides/<GUIDE_ID>/send-attendee-invite-email/`
+
+```python
+import requests
+
+attendees_email_url =  'https://builder.guidebook.com/open-api/v1/guides/47/send-attendee-invite-email/'
+api_key = 'API_KEY'
+
+post_data =
+{
+	"attendees": [1,2,3,4,5]
+}
+response = request.post(attendees_email_url, data=post_data, headers={'Authorization': 'JWT ' + api_key})
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+	"successful_emails": [1,2,3]
+}
+```
+
+The example here will attempt to send invite emails to `Attendees` 1 through 5 on `Guide` 47.  If you supply `Attendee` Ids that do not match the `Guide`, you will receive an error response.  Additionally, this response is limited to a list of 500 Ids per request.  If emails are successfully sent to the the Attendees, they will appear in the success response under the successful_emails key.  Emails are rate limited to once per 24 hours.  This limit is enforce based on the `last_email_send` field for each `Attendee`.  In the code sample here, `Attendees` 4 & 5 had already been sent invite emails in the past 24 hours so they were not sent emails and therefore not in the successful_emails response list.
 
 
 ### Filtering data by `Guide` id and other fields
