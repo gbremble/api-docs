@@ -3040,6 +3040,10 @@ To delete a particular <code>LinkCategory</code>, issue a <code>DELETE</code> re
 <p><code>POST https://builder.guidebook.com/open-api/v1/guides/&lt;GUIDE_ID&gt;/send-attendee-invite-email/</code></p>
 
 <p>The example here will attempt to send invite emails to <code>Attendees</code> 1 through 5 on <code>Guide</code> 47.  If you supply <code>Attendee</code> Ids that do not match the <code>Guide</code>, you will receive an error response.  Additionally, this response is limited to a list of 500 Ids per request.  If emails are successfully sent to the the Attendees, they will appear in the success response under the successful_emails key.  Emails are rate limited to once per 24 hours.  This limit is enforce based on the <code>last_email_send</code> field for each <code>Attendee</code>.  In the code sample here, <code>Attendees</code> 4 &amp; 5 had already been sent invite emails in the past 24 hours so they were not sent emails and therefore not in the successful_emails response list.</p>
+
+<aside class="notice">
+You must publish your `Guide` via the Builder CMS before you can send out invite emails to download your `Guide`.
+</aside>
 <h3 id='filtering-data-by-code-guide-code-id-and-other-fields'>Filtering data by <code>Guide</code> id and other fields</h3>
 <p>Including a query parameter <code>guide</code> allows you to filter for all <code>Attendees</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
 
