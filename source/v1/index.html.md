@@ -26,6 +26,8 @@ includes:
   - custom_list_item_relations
   - links
   - link_categories
+  - inboxes
+  - messages
   - attendees
   - attendee_groups
   - personalized_schedules
