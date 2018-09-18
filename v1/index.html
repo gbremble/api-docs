@@ -450,6 +450,37 @@
               </ul>
           </li>
           <li>
+            <a href="#inboxes" class="toc-h1 toc-link" data-title="Inboxes">Inboxes</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#listing-code-inboxes-code" class="toc-h2 toc-link" data-title="Inboxes">Listing <code>Inboxes</code></a>
+                  </li>
+                  <li>
+                    <a href="#retrieving-an-code-inbox-code" class="toc-h2 toc-link" data-title="Inboxes">Retrieving an <code>Inbox</code></a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#messages" class="toc-h1 toc-link" data-title="Messages">Messages</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#creating-an-code-message-code" class="toc-h2 toc-link" data-title="Messages">Creating an <code>Message</code></a>
+                  </li>
+                  <li>
+                    <a href="#listing-code-messages-code" class="toc-h2 toc-link" data-title="Messages">Listing <code>Messages</code></a>
+                  </li>
+                  <li>
+                    <a href="#retrieving-an-code-message-code" class="toc-h2 toc-link" data-title="Messages">Retrieving an <code>Message</code></a>
+                  </li>
+                  <li>
+                    <a href="#updating-code-message-code-info" class="toc-h2 toc-link" data-title="Messages">Updating <code>Message</code> info</a>
+                  </li>
+                  <li>
+                    <a href="#deleting-an-code-message-code" class="toc-h2 toc-link" data-title="Messages">Deleting an <code>Message</code></a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#attendees" class="toc-h1 toc-link" data-title="Attendees">Attendees</a>
               <ul class="toc-list-h2">
                   <li>
@@ -2754,6 +2785,233 @@ To retrieve an individual <code>LinkCategory</code> object issue a <code>GET</co
 To delete a particular <code>LinkCategory</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>LinkCategory</code> you&#39;d like deleted:</p>
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/link-categories/71/</code></p>
+<h1 id='inboxes'>Inboxes</h1>
+<p><code>Inboxes</code> are used to store <code>Messages</code> to your <code>Attendees</code>.  At this current point in time, only GET operations are allowed for the <code>Inbox</code> object.</p>
+<h2 id='listing-code-inboxes-code'>Listing <code>Inboxes</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">inboxes_list_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/inboxes/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+
+<span class="c"># This will return all inboxes you have access to</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">inboxes_list_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">172</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">395</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test box 1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">395</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test box 2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">174</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">395</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test box 3"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint can be used to list <code>Inbox</code> data. Typically, this endpoint is called with a <code>guide</code> filter such that it returns a list of <code>Inboxes</code> associated to a lone <code>Guide</code> object that is owned by you.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://builder.guidebook.com/open-api/v1/inboxes/</code></p>
+<h3 id='model-fields'>Model Fields</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>An unique identifier for your <code>Inbox</code>.</td>
+</tr>
+<tr>
+<td>guide</td>
+<td>integer</td>
+<td>The specific <code>Guide</code> your <code>Inbox</code> belongs to.  See section on <a href="#guides">Guides</a> for more info.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>A string to identify your <code>Inbox</code> with.</td>
+</tr>
+</tbody></table>
+<h3 id='filtering-data-by-code-guide-code-id'>Filtering data by <code>Guide</code> id</h3>
+<p>Including a query parameter <code>guide</code> allows you to filter for all <code>Inboxes</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/inboxes/?guide=47</code></p>
+<h2 id='retrieving-an-code-inbox-code'>Retrieving an <code>Inbox</code></h2>
+<p>To retrieve an individual <code>Inbox</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/inboxes/71/</code></p>
+
+<p>The above request will fetch data for the <code>Inbox</code> with the id 71.</p>
+<h1 id='messages'>Messages</h1><h2 id='creating-an-code-message-code'>Creating an <code>Message</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">messages_list_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/messages/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">post_data</span> <span class="o">=</span>
+<span class="p">{</span>
+    <span class="s">"guide"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"email"</span><span class="p">:</span> <span class="s">"open_api@example.com"</span><span class="p">,</span>
+    <span class="s">"first_name"</span><span class="p">:</span> <span class="s">"Open API"</span><span class="p">,</span>
+    <span class="s">"last_name"</span><span class="p">:</span> <span class="s">"Example User"</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">attendees_list_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
+
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">415</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"inbox"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title of Message"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message created from the Open API"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T03:54:09.238987+0000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint will create a <code>Message</code> that is in an <code>Inbox</code> that is in your <code>Guide</code>.  You can schedule the timing of when this <code>Message</code> will go live to your attendees.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://builder.guidebook.com/open-api/v1/messages/</code></p>
+<h3 id='model-fields'>Model Fields</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>guide</td>
+<td>yes</td>
+<td>integer</td>
+<td>The specific <code>Guide</code> your <code>Message</code> belongs to.  See section on <a href="#guides">Guides</a> for more info.</td>
+</tr>
+<tr>
+<td>inbox</td>
+<td>yes</td>
+<td>integer</td>
+<td>The specific <code>Inbox</code> your <code>Message</code> belongs to.  See section on <a href="#inboxes">Inboxes</a> for more info.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>yes</td>
+<td>string</td>
+<td>A short title for your <code>Message</code>.  This is the subject line that will be displayed.  Limited to 80 characters.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>no</td>
+<td>string</td>
+<td>Optional long message if you have more info to share.  Limited to 1024 characters.</td>
+</tr>
+<tr>
+<td>scheduled_send_time</td>
+<td>no</td>
+<td>datetime</td>
+<td>Optional timestamp in UTC of when you want this <code>Message</code> to be sent to attendees.  If left blank, it will default to the current time and the message is sent immediately.</td>
+</tr>
+</tbody></table>
+<h2 id='listing-code-messages-code'>Listing <code>Messages</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">messages_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/messages/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+
+<span class="c"># This will return all messages you have access to</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">messages_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">427</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"inbox"</span><span class="p">:</span><span class="w"> </span><span class="mi">219</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message 1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T04:31:41.137633+0000"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">427</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"inbox"</span><span class="p">:</span><span class="w"> </span><span class="mi">219</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message 2"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello Again"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T04:31:41.139402+0000"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">427</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"inbox"</span><span class="p">:</span><span class="w"> </span><span class="mi">219</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message 3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Good Bye"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T04:31:41.141097+0000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint can also be used to read data on <code>Messages</code>.  Typically, this endpoint is called with a <code>guide</code> filter such that it returns a list of <code>Messages</code> associated to a lone <code>Guide</code> object that is owned by you.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://builder.guidebook.com/open-api/v1/messages/</code></p>
+<h3 id='model-fields-2'>Model Fields</h3>
+<p>The fields returned in the <code>GET</code> responses include an additionally field:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>An unique identifier for your <code>Message</code>.</td>
+</tr>
+</tbody></table>
+<h3 id='filtering-data-by-code-guide-code-id-and-other-fields'>Filtering data by <code>Guide</code> id and other fields</h3>
+<p>Including a query parameter <code>guide</code> allows you to filter for all <code>Messages</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in the following example):</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/messages/?guide=47</code></p>
+<h2 id='retrieving-an-code-message-code'>Retrieving an <code>Message</code></h2>
+<p>To retrieve an individual <code>Message</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/messages/71/</code></p>
+
+<p>The above request will fetch data for the <code>Message</code> with the id 71.</p>
+<h2 id='updating-code-message-code-info'>Updating <code>Message</code> info</h2>
+<p>You can update the title and message fields of your <code>Message</code> object.  However, you will lose edit functionality once the <code>scheduled_send_time</code> is passed.  Once your <code>Message</code> is sent out to <code>Attendees</code>, this action can not be undone.</p>
+
+<p>To modify an existing <code>Message</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/messages/71/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body.</p>
+<h2 id='deleting-an-code-message-code'>Deleting an <code>Message</code></h2>
+<p>To delete a particular <code>Message</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>Message</code> you&#39;d like deleted.  Be very careful about deleting <code>Messages</code> that have been sent.  The delete operation only removes the <code>Message</code> on the Guidebook side, users will retain the <code>Messages</code> they have downloaded on their devices.</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/messages/71/</code></p>
 <h1 id='attendees'>Attendees</h1><h2 id='creating-an-code-attendee-code'>Creating an <code>Attendee</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">attendees_list_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/attendees/'</span>
