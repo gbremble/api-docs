@@ -52,15 +52,16 @@ response = requests.get(guides_url, headers={'Authorization': 'JWT ' + api_key})
 
 ### Guide Properties
 
-Property        | Type        | Description
----------       | --------    | --------
-id              | int         | id of the `Guide` object.
-created_at      | datetime    | Time when `Guide` was created -- in UTC.
-name            | str         | Name of the `Guide`.
-start_date      | datetime    | The start date of the `Guide`. For consistency, all timestamps are converted to the UTC timezone.  Leave blank for ongoing `Guides`.
-end_date        | datetime    | The end date of the Guide.  Leave blank for ongoing `Guides`.
-description_html| string      | A description of the `Guide`.  This field supports basic HTML.  See section on [html text](#html-text).
-timezone        | timezone    | `Session` times in this `Guide` will be converted to this timezone.  Check [this list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) for valid timezone strings.
+Property           | Type        | Description
+---------          | --------    | --------
+id                 | int         | id of the `Guide` object.
+created_at         | datetime    | Time when `Guide` was created -- in UTC.
+name               | str         | Name of the `Guide`.
+start_date         | datetime    | The start date of the `Guide`. For consistency, all timestamps are converted to the UTC timezone.  Leave blank for ongoing `Guides`.
+end_date           | datetime    | The end date of the Guide.  Leave blank for ongoing `Guides`.
+attendees_estimate | int         | Estimated attendance of the Guide. Must be filled to publish.
+description_html.  | string      | A description of the `Guide`.  This field supports basic HTML.  See section on [html text](#html-text).
+timezone           | timezone    | `Session` times in this `Guide` will be converted to this timezone.  Check [this list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) for valid timezone strings.
 
 
 ## Retrieving a `Guide`
@@ -81,3 +82,13 @@ You will only need to include the specific fields you are updating and not a ful
 ## Creating/Deleting a `Guide`
 
 We do not allow the `Create` or `Delete` operations for the `Guide` object via the Open API.  To perform these actions, please login to your account on the [Guidebook Builder CMS](https://builder.guidebook.com).
+
+## Publishing a `Guide`
+
+To publish an existing `Guide` object, issue a `POST` request like:
+
+`POST https://builder.guidebook.com/open-api/v1/guides/21/publish/`
+
+A successful request to this endpoint will return a status code of `202 ACCEPTED`
+
+To be successfully published, the guide must currently be on a paid plan and cannot be archived. Note that the act of publishing a Guide does not guarantee that it will appear in your space. Please see the documentation on `Spaces` and `SpaceGuideAssociations` for more information.
