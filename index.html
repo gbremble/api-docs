@@ -281,6 +281,9 @@
                   <li>
                     <a href="#creating-deleting-a-code-guide-code" class="toc-h2 toc-link" data-title="Guides">Creating/Deleting a <code>Guide</code></a>
                   </li>
+                  <li>
+                    <a href="#publishing-a-code-guide-code" class="toc-h2 toc-link" data-title="Guides">Publishing a <code>Guide</code></a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -882,7 +885,12 @@ You must replace <code>API_KEY</code> with your personal API key.
 <td>The end date of the Guide.  Leave blank for ongoing <code>Guides</code>.</td>
 </tr>
 <tr>
-<td>description_html</td>
+<td>attendees_estimate</td>
+<td>int</td>
+<td>Estimated attendance of the Guide. Must be filled to publish.</td>
+</tr>
+<tr>
+<td>description_html.</td>
 <td>string</td>
 <td>A description of the <code>Guide</code>.  This field supports basic HTML.  See section on <a href="#html-text">html text</a>.</td>
 </tr>
@@ -905,6 +913,14 @@ To retrieve an individual <code>Guide</code> object issue a <code>GET</code> req
 <p>You will only need to include the specific fields you are updating and not a full request body.</p>
 <h2 id='creating-deleting-a-code-guide-code'>Creating/Deleting a <code>Guide</code></h2>
 <p>We do not allow the <code>Create</code> or <code>Delete</code> operations for the <code>Guide</code> object via the Open API.  To perform these actions, please login to your account on the <a href="https://builder.guidebook.com">Guidebook Builder CMS</a>.</p>
+<h2 id='publishing-a-code-guide-code'>Publishing a <code>Guide</code></h2>
+<p>To publish an existing <code>Guide</code> object, issue a <code>POST</code> request like:</p>
+
+<p><code>POST https://builder.guidebook.com/open-api/v1/guides/21/publish/</code></p>
+
+<p>A successful request to this endpoint will return a status code of <code>202 ACCEPTED</code></p>
+
+<p>To be successfully published, the guide must currently be on a paid plan and cannot be archived. Note that the act of publishing a Guide does not guarantee that it will appear in your space. Please see the documentation on <code>Spaces</code> and <code>SpaceGuideAssociations</code> for more information.</p>
 <h1 id='sessions'>Sessions</h1>
 <p><code>Sessions</code> can be added to a <code>Guide</code> to build up a schedule for your event. For example, the, &quot;Programmer Conference 2017&quot; event might have a <code>Session</code> for the talk, &quot;Python in a Scientific Environment&quot;, and a <code>Session</code> about, &quot;Off by One Errors.&quot;</p>
 <h2 id='creating-code-session-code'>Creating <code>Session</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
