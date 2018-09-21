@@ -18,6 +18,8 @@ includes:
   - images
   - html_text
   - guides
+  - spaces
+  - space_guide_associations
   - sessions
   - schedule_tracks
   - locations
