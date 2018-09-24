@@ -1,6 +1,6 @@
 # Messages
 
-## Creating an `Message`
+## Creating a `Message`
 
 
 ```python
