@@ -475,6 +475,26 @@
               </ul>
           </li>
           <li>
+            <a href="#quick-info" class="toc-h1 toc-link" data-title="Quick Info">Quick Info</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#creating-code-quickinfo-code" class="toc-h2 toc-link" data-title="Quick Info">Creating <code>QuickInfo</code></a>
+                  </li>
+                  <li>
+                    <a href="#listing-code-quickinfo-code" class="toc-h2 toc-link" data-title="Quick Info">Listing <code>QuickInfo</code></a>
+                  </li>
+                  <li>
+                    <a href="#retrieving-a-code-quickinfo-code" class="toc-h2 toc-link" data-title="Quick Info">Retrieving a <code>QuickInfo</code></a>
+                  </li>
+                  <li>
+                    <a href="#updating-a-code-quickinfo-code" class="toc-h2 toc-link" data-title="Quick Info">Updating a <code>QuickInfo</code></a>
+                  </li>
+                  <li>
+                    <a href="#deleting-a-code-quickinfo-code" class="toc-h2 toc-link" data-title="Quick Info">Deleting a <code>QuickInfo</code></a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#inboxes" class="toc-h1 toc-link" data-title="Inboxes">Inboxes</a>
               <ul class="toc-list-h2">
                   <li>
@@ -2504,7 +2524,7 @@ To retrieve an individual <code>CustomListItem</code> object issue a <code>GET</
 <td>The content type of the target object.  The options are: &quot;schedule.session&quot;, &quot;custom_list.customlistitem&quot;</td>
 </tr>
 <tr>
-<td>source_object_id</td>
+<td>target_object_id</td>
 <td>yes</td>
 <td>integer</td>
 <td>The id number of the target object.  Not updatable after creation.</td>
@@ -2972,6 +2992,182 @@ To retrieve an individual <code>LinkCategory</code> object issue a <code>GET</co
 To delete a particular <code>LinkCategory</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>LinkCategory</code> you&#39;d like deleted:</p>
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/link-categories/71/</code></p>
+<h1 id='quick-info'>Quick Info</h1>
+<p>The <code>QuickInfo</code> resource is an object that is displayed at the top section of a <code>Guide</code>, a <code>Session</code> or a <code>CustomListItem</code>. These objects contain small pieces of information that may be useful to the <code>Guide</code>,<code>Session</code> or <code>CustomListItem</code> they are located on. For example, the WIFI password of a room where a <code>Session</code> is located could easily be displayed by one of these objects. </p>
+
+<p><code>QuickInfo</code> objects will always contain a target. In the example with WIFI, the target object would be the <code>Session</code> the WIFI password applies to. The title could then be WIFI, and content would be the actual password. </p>
+<h2 id='creating-code-quickinfo-code'>Creating <code>QuickInfo</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">quick_info_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/quick-info/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">post_data</span> <span class="o">=</span>
+<span class="p">{</span>
+    <span class="s">"target_object_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"guide"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s">"target_content_type"</span><span class="p">:</span> <span class="s">"custom_list.customlistitem"</span><span class="p">,</span>
+    <span class="s">"title"</span><span class="p">:</span> <span class="s">"Test Title 1"</span><span class="p">,</span>
+    <span class="s">"content"</span><span class="p">:</span> <span class="s">"Test Content 1"</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">quick_info_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+
+</code></pre>
+<blockquote>
+<p>The above commands return JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom_list.customlistitem"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:30:11.015128+0000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Title 1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Content 1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint will create a <code>QuickInfo</code> for your <code>Guide</code>.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://builder.guidebook.com/open-api/v1/quick-info/</code></p>
+<h3 id='model-fields'>Model Fields</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>guide</td>
+<td>yes</td>
+<td>integer</td>
+<td>The specific <code>Guide</code> your <code>QuickInfo</code> belongs to.  See section on <a href="#guides">Guides</a> for more info.</td>
+</tr>
+<tr>
+<td>target_content_type</td>
+<td>yes</td>
+<td>string</td>
+<td>The content type of the target object.  The options are: &quot;guide.guide&quot;, schedule.session&quot;, &quot;custom_list.customlistitem&quot;</td>
+</tr>
+<tr>
+<td>target_object_id</td>
+<td>yes</td>
+<td>integer</td>
+<td>The id number of the target object.  Not updatable after creation.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>no</td>
+<td>string</td>
+<td>The title of the <code>QuickInfo</code>. If not provided, this defaults to &quot;Title&quot;.</td>
+</tr>
+<tr>
+<td>content</td>
+<td>no</td>
+<td>string</td>
+<td>The content of the <code>QuickInfo</code>. If not provided, this defaults to &quot;Content&quot;.</td>
+</tr>
+<tr>
+<td>rank</td>
+<td>no</td>
+<td>integer</td>
+<td>The order the <code>QuickInfo</code> will appear in the <code>QuickInfo</code> section on the app. If no rank value is supplied on creation, a default is used.</td>
+</tr>
+</tbody></table>
+<h2 id='listing-code-quickinfo-code'>Listing <code>QuickInfo</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">quick_info_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/quick-info/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+
+<span class="c"># This will return all `QuickInfo` you have access to</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">quick_info_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:19:05.300403+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Title 1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Content 1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:19:05.310453+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Title 2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Content 2"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guide"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schedule.session"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_object_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-27T15:19:05.319159+0000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Title 3"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Content 3"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint can also be used to read data on <code>QuickInfo</code>.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://builder.guidebook.com/open-api/v1/quick-info/</code></p>
+<h3 id='model-fields-2'>Model Fields</h3>
+<p>Same as the fields used in creation with the addition of the following read-only fields</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>A unique identifier for your <code>QuickInfo</code>.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td>Time when this <code>QuickInfo</code> was created - UTC.</td>
+</tr>
+</tbody></table>
+<h3 id='filtering-data-by-code-guide-code-id'>Filtering data by <code>Guide</code> id</h3>
+<p>Including a query parameter <code>guide</code> allows you to filter for all <code>QuickInfo</code> related to a <code>Guide</code> you have access to (<code>Guide</code> 47 in this example):</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/quick-info/?guide=47</code></p>
+<h2 id='retrieving-a-code-quickinfo-code'>Retrieving a <code>QuickInfo</code></h2>
+<p>In the following examples, we will assume that the id of the <code>QuickInfo</code> we&#39;d like to modify is 71.
+To retrieve an individual <code>QuickInfo</code> object issue a <code>GET</code> request like:</p>
+
+<p><code>GET https://builder.guidebook.com/open-api/v1/quick-info/71/</code></p>
+<h2 id='updating-a-code-quickinfo-code'>Updating a <code>QuickInfo</code></h2>
+<p>To modify an existing <code>QuickInfo</code> object, issue a <code>PATCH</code> request like:</p>
+
+<p><code>PATCH https://builder.guidebook.com/open-api/v1/quick-info/71/</code></p>
+
+<p>You will only need to include the specific fields you are updating and not a full request body.</p>
+<h2 id='deleting-a-code-quickinfo-code'>Deleting a <code>QuickInfo</code></h2>
+<p>To delete a particular <code>QuickInfo</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>QuickInfo</code> you&#39;d like deleted:</p>
+
+<p><code>DELETE https://builder.guidebook.com/open-api/v1/quick-info/71/</code></p>
 <h1 id='inboxes'>Inboxes</h1>
 <p><code>Inboxes</code> are used to store <code>Messages</code> to your <code>Attendees</code>.  At this current point in time, only GET operations are allowed for the <code>Inbox</code> object.</p>
 <h2 id='listing-code-inboxes-code'>Listing <code>Inboxes</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
