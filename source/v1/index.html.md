@@ -28,6 +28,7 @@ includes:
   - custom_list_item_relations
   - links
   - link_categories
+  - cog_details
   - inboxes
   - messages
   - attendees
