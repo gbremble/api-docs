@@ -3264,8 +3264,11 @@ To retrieve an individual <code>QuickInfo</code> object issue a <code>GET</code>
   </span><span class="s2">"inbox"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
   </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title of Message"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message created from the Open API"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T03:54:09.238987+0000"</span><span class="w">
+  </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T03:54:09.238987+0000"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"attachment_object"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"is_push_notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 
 </span></code></pre>
 <p>This endpoint will create a <code>Message</code> that is in an <code>Inbox</code> that is in your <code>Guide</code>.  You can schedule the timing of when this <code>Message</code> will go live to your attendees.</p>
@@ -3310,6 +3313,24 @@ To retrieve an individual <code>QuickInfo</code> object issue a <code>GET</code>
 <td>datetime</td>
 <td>Optional timestamp in UTC of when you want this <code>Message</code> to be sent to attendees.  If left blank, it will default to the current time and the message is sent immediately.</td>
 </tr>
+<tr>
+<td>is_push_notification</td>
+<td>no</td>
+<td>boolean</td>
+<td>Optional boolean to indicate if you want to send the <code>Message</code> as a push notification. If left blank, it will default to false.</td>
+</tr>
+<tr>
+<td>attachment_content_type</td>
+<td>no</td>
+<td>string</td>
+<td>String indicating the content type of the attachment object.  The options are: &quot;schedule.session&quot;, &quot;custom_list.customlistitem&quot;. <code>attachment_object_id</code> must be filled out if this field is provided.</td>
+</tr>
+<tr>
+<td>attachment_object_id</td>
+<td>no</td>
+<td>integer</td>
+<td>The id number of the attachment object.  Not updatable after creation. <code>attachment_content_type</code> must be filled out if this field is provided.</td>
+</tr>
 </tbody></table>
 <h2 id='listing-code-messages-code'>Listing <code>Messages</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
@@ -3333,7 +3354,9 @@ To retrieve an individual <code>QuickInfo</code> object issue a <code>GET</code>
       </span><span class="s2">"inbox"</span><span class="p">:</span><span class="w"> </span><span class="mi">219</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message 1"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T04:31:41.137633+0000"</span><span class="w">
+      </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T04:31:41.137633+0000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"attachment_object"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"is_push_notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
@@ -3341,7 +3364,9 @@ To retrieve an individual <code>QuickInfo</code> object issue a <code>GET</code>
       </span><span class="s2">"inbox"</span><span class="p">:</span><span class="w"> </span><span class="mi">219</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message 2"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello Again"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T04:31:41.139402+0000"</span><span class="w">
+      </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T04:31:41.139402+0000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"attachment_object"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"is_push_notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
@@ -3349,10 +3374,13 @@ To retrieve an individual <code>QuickInfo</code> object issue a <code>GET</code>
       </span><span class="s2">"inbox"</span><span class="p">:</span><span class="w"> </span><span class="mi">219</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message 3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Good Bye"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T04:31:41.141097+0000"</span><span class="w">
+      </span><span class="s2">"scheduled_send_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-13T04:31:41.141097+0000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"attachment_object"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"is_push_notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <p>This endpoint can also be used to read data on <code>Messages</code>.  Typically, this endpoint is called with a <code>guide</code> filter such that it returns a list of <code>Messages</code> associated to a lone <code>Guide</code> object that is owned by you.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
@@ -3371,6 +3399,11 @@ To retrieve an individual <code>QuickInfo</code> object issue a <code>GET</code>
 <td>id</td>
 <td>integer</td>
 <td>An unique identifier for your <code>Message</code>.</td>
+</tr>
+<tr>
+<td>attachment_object</td>
+<td>string</td>
+<td>A string indicating the content type and id of the object. Ex. schedule.session:321</td>
 </tr>
 </tbody></table>
 <h3 id='filtering-data-by-code-guide-code-id-and-other-fields'>Filtering data by <code>Guide</code> id and other fields</h3>
