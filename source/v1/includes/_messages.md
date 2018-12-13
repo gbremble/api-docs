@@ -52,7 +52,7 @@ inbox           | yes | integer  | The specific `Inbox` your `Message` belongs t
 title           | yes  | string  | A short title for your `Message`.  This is the subject line that will be displayed.  Limited to 80 characters.
 message         | no  | string   | Optional long message if you have more info to share.  Limited to 1024 characters.
 scheduled_send_time | no | datetime | Optional timestamp in UTC of when you want this `Message` to be sent to attendees.  If left blank, it will default to the current time and the message is sent immediately.
-is_push_notification | no | boolean | Optional boolean to indicate if you want to send the `Message` as a push notification. If left blank, it will default to false.
+is_push_notification | no | boolean | Optional boolean to indicate if you want to send the `Message` as a push notification. If left blank, it will default to false. Limits apply - See https://support.guidebook.com/hc/en-us/articles/205012050-Send-Notifications-to-Your-Users
 attachment_content_type | no | string | String indicating the content type of the attachment object.  The options are: "schedule.session", "custom_list.customlistitem". `attachment_object_id` must be filled out if this field is provided.
 attachment_object_id | no | integer | The id number of the attachment object.  Not updatable after creation. `attachment_content_type` must be filled out if this field is provided.
 
