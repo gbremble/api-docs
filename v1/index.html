@@ -581,6 +581,17 @@
               </ul>
           </li>
           <li>
+            <a href="#guidebook-id" class="toc-h1 toc-link" data-title="Guidebook ID">Guidebook ID</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#guidebook-id-query-string-properties" class="toc-h2 toc-link" data-title="Guidebook ID">Guidebook ID query string properties</a>
+                  </li>
+                  <li>
+                    <a href="#verifying-guidebook-id-is-issued-by-guidebook" class="toc-h2 toc-link" data-title="Guidebook ID">Verifying Guidebook ID is issued by Guidebook</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#personalizedschedules" class="toc-h1 toc-link" data-title="PersonalizedSchedules">PersonalizedSchedules</a>
               <ul class="toc-list-h2">
                   <li>
@@ -3938,6 +3949,77 @@ Be very cautious with updating <code>import_ids</code>!  If your integration req
 <p>To delete a particular <code>AttendeeGroup</code>, issue a <code>DELETE</code> request to the url that points to the specific <code>AttendeeGroup</code> you&#39;d like deleted:</p>
 
 <p><code>DELETE https://builder.guidebook.com/open-api/v1/attendee-groups/71/</code></p>
+<h1 id='guidebook-id'>Guidebook ID</h1>
+<p>Guidebook ID is a QR code that identifies attendees. It is scannable and holds some attendee information.</p>
+
+<p>The QR code contains a url encoded query string. You will have to decode the query string in order to get the original values.</p>
+<h2 id='guidebook-id-query-string-properties'>Guidebook ID query string properties</h2>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>f</td>
+<td>string</td>
+<td>First name of the attendee. Optional: This can be omitted from the query string</td>
+</tr>
+<tr>
+<td>l</td>
+<td>string</td>
+<td>Last name of the attendee Optional: This can be omitted from the query string</td>
+</tr>
+<tr>
+<td>i</td>
+<td>integer</td>
+<td>The attendee ID</td>
+</tr>
+<tr>
+<td>ii</td>
+<td>string.</td>
+<td>Import id: If the user is imported from an external source, the importer can specify a customized id to append to each user.</td>
+</tr>
+</tbody></table>
+<h2 id='verifying-guidebook-id-is-issued-by-guidebook'>Verifying Guidebook ID is issued by Guidebook</h2>
+<p>This endpoint will verify the QR code query string content is issued by Guidebook.</p>
+
+<p>The verification of the QR code can be checked by the response&#39;s status code and message.</p>
+
+<p>You can get the following response code &amp; related message:
+HTTP 200 - This is a valid Guidebook ID QR code
+HTTP 400 - This is an invalid Guidebook ID QR code
+HTTP 400 - <code>qr_badge</code> is not in the request data.</p>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">verify_guidebook_id_badge_url</span> <span class="o">=</span> <span class="s">'https://builder.guidebook.com/open-api/v1/verify-qr-badge/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">'API_KEY'</span>
+<span class="n">post_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'qr_badge'</span><span class="p">:</span> <span class="s">'QR_BADGE_QUERY_STRING'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">verify_guidebook_id_badge_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'JWT '</span> <span class="o">+</span> <span class="n">api_key</span><span class="p">})</span>
+
+<span class="n">is_valid_guidebook_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+</code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://builder.guidebook.com/open-api/v1/verify-qr-badge/</code></p>
+<h3 id='fields'>Fields</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>qr_badge</td>
+<td>yes</td>
+<td>string</td>
+<td>The query string contained in the Guidebook ID QR code</td>
+</tr>
+</tbody></table>
 <h1 id='personalizedschedules'>PersonalizedSchedules</h1><h2 id='creating-a-code-personalizedschedule-code'>Creating a <code>PersonalizedSchedule</code></h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">personalized_schedule_url</span> <span class="o">=</span>  <span class="s">'https://builder.guidebook.com/open-api/v1/personalized-schedules/'</span>
@@ -4342,6 +4424,10 @@ Note that there is a 5 second delay between Account creation and our metrics ind
 <p><code>MobileApp-UserCheckedIn</code></p>
 
 <p>Standard fields. No additional fields.</p>
+
+<p><code>Builder-GuidePublished</code></p>
+
+<p>Standard fields, No additional fields.</p>
 <h2 id='security'>Security</h2>
 <p>When implementing your Webhook URL, please make sure to confirm that the POST data being sent to your Webhook is coming from Guidebook!!  Each Webhook you set up on Guidebook will have an unique security token.  This token will be visible on your Webhooks setup screen.</p>
 
