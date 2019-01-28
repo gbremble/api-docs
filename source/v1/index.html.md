@@ -33,6 +33,7 @@ includes:
   - messages
   - attendees
   - attendee_groups
+  - guidebook_id
   - personalized_schedules
   - webhooks
 
